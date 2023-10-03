@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6207451515660849896
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      propertyPath: m_Name
+      value: ZurichModel0210_buildingterrain
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fe098548e537b4a16978f5f19b635be8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3468392219559354744}
+  m_SourcePrefab: {fileID: 100100000, guid: fe098548e537b4a16978f5f19b635be8, type: 3}
+--- !u!1 &6549401067961053113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fe098548e537b4a16978f5f19b635be8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6207451515660849896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3468392219559354744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549401067961053113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2707adcb9def54773a9822edf62e8204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spherePrefab: {fileID: 4355474349593257358, guid: cb4320f67def34161936c8dfcf388d62,
+    type: 3}
+  userMaterials:
+  - {fileID: 0}
+  - {fileID: 2100016, guid: a20ea7771cebbda4696ef82ef45481a0, type: 3}
+  - {fileID: 2100000, guid: 49a567f2707bc47eb95ee3efae90189c, type: 2}
+  - {fileID: 2100000, guid: 8aa144ce80e644152b9462716fd99c4b, type: 2}
+  - {fileID: 2100000, guid: fb45f34a10a414be185d625e8b6861e3, type: 2}
+  - {fileID: 2100000, guid: 90f5d90ec992f4983aea366642a31d25, type: 2}
+  - {fileID: 2100000, guid: e62de97909a2840f786ce710f802cf2d, type: 2}
+  - {fileID: 2100000, guid: d80c1a202911a4a37a3da59992876dfc, type: 2}
+  timeSpeedupFactor: 100
+  refLocation: {x: 129.6, y: 7, z: -22.6}
+  modelRef:
+  - 8.47834472749149
+  - 47.38709400665463
+  modelOrigin:
+  - 8.47667632699755
+  - 47.387293832076544
