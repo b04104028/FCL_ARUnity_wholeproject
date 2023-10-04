@@ -1,3 +1,7 @@
+/*ARCHIVE FOR REFERENCE, IT'S THE PREVIOUS PROGRESS OF MOBILITYFLOW.CS, IT AGGREGATE THE MOBILITY DATA 
+ BY UID, AND CAN NAVIGATE THROUGH THE DATA USING KEY OF UID.
+BUT WE NEED TO INSTANTIATE THE SPHERE PREFABS ACCORDING TO TIME, SO THIS FILE IS DISCARD*/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +17,8 @@ public class Mobility : MonoBehaviour
     [SerializeField]public GameObject spherePrefab;
     public Material[] userMaterials;
     public float timeSpeedupFactor = 100.0f;
-    private static string starttime = "2023-07-31T03:59:37.400";
+    private static string starttime = "2023-07-31T05:59:37.400";//"2023-07-31T03:59:37.400";
+    //note: beware of time zone when using DateTime
     DateTime previousTime = Convert.ToDateTime(starttime);
 
     private float currentTime = 0f;
@@ -30,7 +35,6 @@ public class Mobility : MonoBehaviour
     public double[] modelRef = {  8.47834472749149, 47.38709400665463 };
     public double[] modelOrigin = { 8.47667632699755, 47.387293832076544 };
     
-
     double minLat, maxLat, minLon, maxLon;
     List<double> Lats_list = new List<double>();
     List<double> Lons_list = new List<double>();
@@ -39,25 +43,7 @@ public class Mobility : MonoBehaviour
     void Start()
     {
         string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_Mobility.geojson";
-        Debug.Log(path);
         LoadJson(path, IDDict);
-
-        //to test loadjson: 
-        //int testtime = 10;
-        //ShowMobilityData(testtime, IDDict) ;
-
-        minLat = Lats_list.Min();
-        maxLat = Lats_list.Max();
-        minLon = Lons_list.Min();
-        maxLon = Lons_list.Max();
-        Debug.Log("minlat = " + minLat + ", maxlat = " + maxLat);
-
-        //Debug.Log("test lat: " + Lats_list[30]);
-        //Debug.Log("min location " + minLocation.ToString());
-        //Debug.Log("max location " + maxLocation.ToString());
-
-        //Debug.Log(Map(Lats_list[30], minLat, maxLat, minLocation.z, maxLocation.z));
-
 
         //InstantiateSphere(IDDict);
         StartCoroutine(InstantiateSpheresWithTimeDelay());
@@ -66,13 +52,6 @@ public class Mobility : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime * timeSpeedupFactor;
-    }
-    public void testLat(List<double> Lats_list)
-    {
-        foreach (double _lat in Lats_list)
-        {
-            Debug.Log(_lat);
-        }
     }
     public void LoadJson(string path, IDictionary<int, List<Dictionary<string, object>>> IDDict)
     {
@@ -128,7 +107,7 @@ public class Mobility : MonoBehaviour
         }
     }
 
-    public void InstantiateSphere(IDictionary<int, List<Dictionary<string, object>>> aggregatedData)
+    public void ArchiveInstantiateSphere(IDictionary<int, List<Dictionary<string, object>>> aggregatedData)
     {
         float timeDifferenceThreshold = 5.0f; // Time difference threshold in seconds
         int spheresPerGroup = 4; // Number of spheres per group before destroying
@@ -198,36 +177,33 @@ public class Mobility : MonoBehaviour
         return (float)((lonlat - modelorigin) / (modelref - modelorigin) * refloc);
     }
 
-    private IEnumerator InstantiateSpheresWithTimeDelay()
+    private IEnumerator ArchiveInstantiateSpheresWithTimeDelay()
     {
-        Debug.Log("function is called");
         foreach (var kvp in IDDict)
         {
-            Debug.Log("uid loop is called");
             int userId = kvp.Key;
             List<Dictionary<string, object>> userEntries = kvp.Value;
             userSphereCounts[userId] = 0;
 
+            //for each userid 
+            previousTime = (DateTime)userEntries[0]["Time"];
             foreach (var entry in userEntries)
             {
-                Debug.Log("entry loop is called");
                 DateTime timestamp = (DateTime)entry["Time"];
                 
-
                 Debug.Log("timestamp: " + timestamp.ToString());
 
                 // Calculate the time difference between the current timestamp and the currentTime
                 double timeDifference = (timestamp - previousTime).TotalSeconds / timeSpeedupFactor;
-                Debug.Log("minimum value of datetime? " + previousTime.ToString());
+                Debug.Log("previous time? " + previousTime.ToString());
                 Debug.Log("time difference calculated: " + timeDifference);
 
                 // Wait for the specified time difference
                 yield return new WaitForSeconds((float)timeDifference);
-                Debug.Log("after waiting");
+                
                 // Check if a new sphere group needs to be created
                 if (userSphereCounts[userId] % spheresPerGroup == 0)
-                {
-                    Debug.Log("in the sphere group creation if");
+                {                    
                     GameObject sphereGroup = new GameObject("SphereGroup");
                 }
 
@@ -238,11 +214,11 @@ public class Mobility : MonoBehaviour
                 // Map latitude and longitude to the desired range
                 float x = Map(lon, modelOrigin[0], modelRef[0], refLocation.x);
                 float z = Map(lat, modelOrigin[1], modelRef[1], refLocation.z);
-                Debug.Log("x y mapped: " + x + ", " + z);
+                //Debug.Log("x y mapped: " + x + ", " + z);
 
                 Vector3 position = new Vector3(x, 7f, z); // Adjust the Y-coordinate as needed
                 GameObject sphere = Instantiate(spherePrefab, position, Quaternion.identity);
-                Debug.Log("sphere instantiation");
+                
                 // Assign the user's color material to the sphere
                 Renderer sphereRenderer = sphere.GetComponent<Renderer>();
                 if (sphereRenderer != null)
@@ -270,6 +246,178 @@ public class Mobility : MonoBehaviour
 
         // Repeat the instantiation process in a loop
         StartCoroutine(InstantiateSpheresWithTimeDelay());
+    }
+
+    private DateTime? FindOldestTime()
+    {
+        DateTime? oldestTime = null; // Use nullable DateTime to represent the first encountered timestamp
+
+        foreach (var kvp in IDDict)
+        {
+            List<Dictionary<string, object>> userEntries = kvp.Value;
+
+            foreach (var entry in userEntries)
+            {
+                DateTime timestamp = (DateTime)entry["Time"];
+
+                // Initialize oldestTime with the first timestamp encountered
+                if (!oldestTime.HasValue)
+                {
+                    oldestTime = timestamp;
+                }
+                else if (timestamp < oldestTime)
+                {
+                    oldestTime = timestamp; // Update oldestTime if a new earliest timestamp is found
+                }
+            }
+        }
+
+        return oldestTime;
+    }
+
+    private IEnumerator ArchiveNotWorkInstantiateSpheresWithTimeDelay()
+    {
+        DateTime? oldestTime = FindOldestTime(); // Call the FindOldestTime function to get the oldest timestamp
+        Debug.Log("oldest time: " + oldestTime.ToString());
+
+        foreach (var kvp in IDDict)
+        {
+            Debug.Log("you are in the IDDict foreach");
+            int userId = kvp.Key;
+            List<Dictionary<string, object>> userEntries = kvp.Value;
+            userSphereCounts[userId] = 0;
+
+            foreach (var entry in userEntries)
+            {
+                DateTime timestamp = (DateTime)entry["Time"];
+                Debug.Log("time stamp"+timestamp.ToString());
+
+                // Calculate the time difference based on the oldest timestamp
+                double timeDifference = (timestamp - oldestTime.Value).TotalSeconds / timeSpeedupFactor;
+
+                // Wait for the specified time difference
+                yield return new WaitForSeconds((float)timeDifference);
+
+                // Check if a new sphere group needs to be created
+                if (userSphereCounts[userId] % spheresPerGroup == 0)
+                {
+                    GameObject sphereGroup = new GameObject("SphereGroup");
+                }
+
+                // Extract latitude and longitude
+                double lat = (double)entry["Lat"];
+                double lon = (double)entry["Lon"];
+
+                // Map latitude and longitude to the desired range
+                float x = Map(lon, modelOrigin[0], modelRef[0], refLocation.x);
+                float z = Map(lat, modelOrigin[1], modelRef[1], refLocation.z);
+
+                Vector3 position = new Vector3(x, 7f, z); // Adjust the Y-coordinate as needed
+                GameObject sphere = Instantiate(spherePrefab, position, Quaternion.identity);
+
+                // Assign the user's color material to the sphere
+                Renderer sphereRenderer = sphere.GetComponent<Renderer>();
+                if (sphereRenderer != null)
+                {
+                    int colorIndex = userId % userMaterials.Length;
+                    sphereRenderer.material = userMaterials[colorIndex];
+                }
+
+                // Update userSphereCounts
+                userSphereCounts[userId]++;
+
+                // Add the instantiated sphere to the list
+                instantiatedSpheres.Add(sphere);
+
+                // Check if the first sphere needs to be destroyed
+                if (userSphereCounts[userId] > maxSpheresPerUser)
+                {
+                    GameObject firstSphere = instantiatedSpheres.First();
+                    instantiatedSpheres.Remove(firstSphere);
+                    Destroy(firstSphere);
+                }
+            }
+        }
+
+        // Repeat the instantiation process in a loop
+        StartCoroutine(InstantiateSpheresWithTimeDelay());
+    }
+
+    public void InstantiateSphere(int userId, double lat, double lon, DateTime timestamp)
+    {
+        // Calculate the time difference between the current timestamp and the currentTime
+        double timeDifference = (timestamp - previousTime).TotalSeconds / timeSpeedupFactor;
+
+        // Wait for the specified time difference
+        WaitForSeconds wait = new WaitForSeconds((float)timeDifference);
+        StartCoroutine(InstantiateSphereDelayed(userId, lat, lon, wait));
+    }
+
+    private IEnumerator InstantiateSphereDelayed(int userId, double lat, double lon, WaitForSeconds wait)
+    {
+        yield return wait;
+
+        // Map latitude and longitude to the desired range
+        float x = Map(lon, modelOrigin[0], modelRef[0], refLocation.x);
+        float z = Map(lat, modelOrigin[1], modelRef[1], refLocation.z);
+
+        Vector3 position = new Vector3(x, 7f, z); // Adjust the Y-coordinate as needed
+        GameObject sphere = Instantiate(spherePrefab, position, Quaternion.identity);
+
+        // Assign the user's color material to the sphere
+        int colorIndex = userId % userMaterials.Length;
+        Renderer sphereRenderer = sphere.GetComponent<Renderer>();
+        if (sphereRenderer != null)
+        {
+            sphereRenderer.material = userMaterials[colorIndex];
+        }
+
+        // Update userSphereCounts
+        userSphereCounts[userId]++;
+
+        // Add the instantiated sphere to the list
+        instantiatedSpheres.Add(sphere);
+
+        // Check if the first sphere needs to be destroyed
+        if (userSphereCounts[userId] > maxSpheresPerUser)
+        {
+            GameObject firstSphere = instantiatedSpheres.First();
+            instantiatedSpheres.Remove(firstSphere);
+            Destroy(firstSphere);
+        }
+    }
+
+    private IEnumerator InstantiateSpheresWithTimeDelay()
+    {
+        DateTime oldestTime = DateTime.MaxValue;
+
+        foreach (var kvp in IDDict)
+        {
+            int userId = kvp.Key;
+            List<Dictionary<string, object>> userEntries = kvp.Value;
+            userSphereCounts[userId] = 0;
+
+            foreach (var entry in userEntries)
+            {
+                DateTime timestamp = (DateTime)entry["Time"];
+                InstantiateSphere(userId, (double)entry["Lat"], (double)entry["Lon"], timestamp);
+
+                // Find the oldest timestamp among all entries
+                if (timestamp < oldestTime)
+                {
+                    oldestTime = timestamp;
+                }
+            }
+        }
+
+        // Update the previousTime to the oldest timestamp
+        previousTime = oldestTime;
+
+        // Repeat the instantiation process in a loop
+        StartCoroutine(InstantiateSpheresWithTimeDelay());
+
+        // Add the following line to resolve the error
+        yield return null;
     }
 
 }
