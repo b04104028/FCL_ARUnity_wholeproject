@@ -12,15 +12,17 @@ public class MobilityFlow : MonoBehaviour
 {
     List<(double, DateTime, double, double)> dataList = new List<(double, DateTime, double, double)>();
     private Dictionary<double, Color> uidToColor = new Dictionary<double, Color>();
-    [SerializeField]public float prefabStayTime = 50f;
+    [SerializeField]public float prefabStayTime = 5f;
     private List<GameObject> instantiatedSpheres = new List<GameObject>();
 
 
     [SerializeField] public GameObject spherePrefab;
-    public float timeSpeedupFactor = 2000.0f;
+    public float timeSpeedupFactor = 1000.0f;
     //private static string starttime = "2023-07-31T05:59:37.400";//"2023-07-31T03:59:37.400";
     //note: beware of time zone when using DateTime
     private DateTime startTime;
+    private DateTime previousTime;
+    private DateTime endTime;
 
     // Define the scaled latitude and longitude range
     public Vector3 refLocation = new Vector3(129.6f, 7f, -22.6f);
@@ -43,6 +45,7 @@ public class MobilityFlow : MonoBehaviour
         LoadJsonFlat(path);
 
         startTime = dataList.Min(item => item.Item2);
+        endTime = dataList.Max(item => item.Item2);
 
         unityOrigin = spherePrefab.transform.position + new Vector3(0f,7f,0f);
         // Assign colors to each unique uid
@@ -120,17 +123,20 @@ public class MobilityFlow : MonoBehaviour
             double lat = item.Item3;
             double lon = item.Item4;
 
+            if (i == 0) previousTime = startTime;
+
             ShowTime(timestamp);
+
             // Calculate the time difference relative to the startTime
-            double timeDifference = (timestamp - startTime).TotalSeconds / timeSpeedupFactor;
-            
+            double timeDifference = (timestamp - previousTime).TotalSeconds / timeSpeedupFactor;
+       
             // Wait for the specified time difference
             yield return new WaitForSeconds((float)timeDifference);
 
             // Map latitude and longitude to Unity space
             Vector3 position = MapCoordinatesToUnitySpace(lon, lat);
 
-            if (Vector3.Distance(position, unityOrigin) <= Vector3.Distance(refLocation, unityOrigin))
+            if (Vector3.Distance(position, unityOrigin) <= (Vector3.Distance(refLocation, unityOrigin)+6f))
             {
                 // Instantiate the sphere prefab
                 GameObject sphere = Instantiate(spherePrefab, position, Quaternion.identity);
@@ -143,14 +149,15 @@ public class MobilityFlow : MonoBehaviour
                     sphereRenderer.material.color = color;
                 }
                 // Destroy the sphere after n seconds
-                Destroy(sphere, prefabStayTime);
-                Debug.Log("where am i? " + i);
-                Debug.Log("data points within model range: " + instantiatedSpheres.Count);
-                Debug.Log("number of all data points in json: " + dataList.Count);
+                Destroy(sphere, prefabStayTime); 
 
             }
             i++;
+
+            previousTime = timestamp;
         }
+        Debug.Log("data points within model range: " + instantiatedSpheres.Count);//Ans: 2432   
+        Debug.Log("number of all data points in json: " + dataList.Count);//Ans: 25353
     }
     private Vector3 MapCoordinatesToUnitySpace(double lon, double lat)
     {
@@ -166,12 +173,12 @@ public class MobilityFlow : MonoBehaviour
 
     public void ShowTime(DateTime timestamp)
     {
-        //progressBar.handleRect.GetComponentInChildren<TextMeshPro>.text = timestamp.ToString();
-            //GetComponent<Slider>.GetComponentInChildren<Handheld    >
-
         timelineText.text = timestamp.ToString();
-        progressBar.value = currentTime;
-        Debug.Log("time now: " + timestamp);
+
+        progressBar.minValue = 0f;
+        progressBar.maxValue = (float)((endTime - startTime).TotalSeconds);
+        progressBar.value = (float)((timestamp - startTime).TotalSeconds);//float
+        //Debug.Log("time now: " + timestamp);
     }
 
 
