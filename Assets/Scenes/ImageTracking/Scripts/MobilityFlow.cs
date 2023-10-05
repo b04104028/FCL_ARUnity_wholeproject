@@ -140,7 +140,7 @@ public class MobilityFlow : MonoBehaviour
             {
                 // Instantiate the sphere prefab
                 GameObject sphere = Instantiate(spherePrefab, position, Quaternion.identity);
-                instantiatedSpheres.Add(sphere);
+                instantiatedSpheres.Add(sphere);        
                 // Assign the user's color material to the sphere based on uid
                 Renderer sphereRenderer = sphere.GetComponent<Renderer>();
                 if (sphereRenderer != null)
