@@ -47,16 +47,21 @@ public class ColorManager : MonoBehaviour
         //Color[] _colors = new Color[] { Color.blue, Color.cyan, Color.green, Color.yellow, new Color(0.2F, 0.3F, 0.4F), Color.red };
         //float range = (float) 1 / (_colors.Length-1);//why not work?
         float lerp = (float)((load - min_load) / (max_load-min_load));
+        float alpha = 0.5f;
+        Color transparentWhite = new Color(Color.white.r, Color.white.g, Color.white.b, alpha);
+        Color transparaentYellow = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, alpha);
+        Color transparentRed = new Color(Color.red.r, Color.red.g, Color.red.b, alpha);
+
         switch (lerp)
         {
             case <= 0.2f:
-                rend.material.color = Color.Lerp(Color.white, Color.yellow, (float)(lerp/0.2f));
+                rend.material.color = Color.Lerp(transparentWhite, transparaentYellow, (float)(lerp/0.2f));
                 break;
             case <= 1.0f:
-                rend.material.color = Color.Lerp(Color.yellow, Color.red, (float)((lerp - 0.2f) / 0.8f));
+                rend.material.color = Color.Lerp(transparaentYellow, transparentRed, (float)((lerp - 0.2f) / 0.8f));
                 break;
             case > 1.0f:
-                rend.material.color = Color.red;
+                rend.material.color = transparentRed;
                 break;
         }
         //Debug.Log("house " + gameObject.name + "'s PR = " + lerp.ToString() + ", and its real load= " + load.ToString());
