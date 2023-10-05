@@ -6028,7 +6028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Simple AR
+  m_text: Energy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 39867e5449c844cbaa691f241ee9e41d, type: 2}
   m_sharedMaterial: {fileID: 2119413175553802479, guid: 39867e5449c844cbaa691f241ee9e41d,
@@ -7828,7 +7828,7 @@ GameObject:
   - component: {fileID: 1790425534}
   - component: {fileID: 1790425533}
   m_Layer: 5
-  m_Name: Simple AR
+  m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7908,7 +7908,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SimpleAR
+          m_StringArgument: ImageTrackingWithMultiplePrefabs
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1790425530
