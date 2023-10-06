@@ -87,7 +87,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ImageTracking/BasicImageTracking/BasicImageTracking.unity
     guid: e0b018a3c3b5cfd4c8e316706ec0a18c
   - enabled: 1
-    path: Assets/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs/ImageTrackingWithMultiplePrefabs.unity
+    path: Assets/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs/EnergyDemandScene.unity
     guid: a1bf0e7b9cece455f81c1d2731ba76e7
   - enabled: 1
     path: Assets/Scenes/Interaction/Interaction.unity

@@ -48,22 +48,12 @@ MonoBehaviour:
     m_Name: QRCode
     m_Texture: {fileID: 2800000, guid: a6fd8503774c0402aa403884f5b77f39, type: 3}
   - m_SerializedGuid:
-      m_GuidLow: 5493023931081620816
-      m_GuidHigh: 17940934403352987046
-    m_SerializedTextureGuid:
-      m_GuidLow: 8387322636335515182
-      m_GuidHigh: 10678617786341772937
-    m_Size: {x: 0.26694843, y: 0.2}
-    m_SpecifySize: 1
-    m_Name: ZRHModelpeice
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
       m_GuidLow: 5578433061476514638
       m_GuidHigh: 5761112723494970521
     m_SerializedTextureGuid:
-      m_GuidLow: 6055998740340522122
-      m_GuidHigh: 10212796510559285978
-    m_Size: {x: 0.2, y: 0.20168196}
+      m_GuidLow: 7235397110819849473
+      m_GuidHigh: 2205050357319907113
+    m_Size: {x: 0.2, y: 0.19028476}
     m_SpecifySize: 1
-    m_Name: ZurichModelPicNorthDown
+    m_Name: ZurichModelCenter
     m_Texture: {fileID: 0}
