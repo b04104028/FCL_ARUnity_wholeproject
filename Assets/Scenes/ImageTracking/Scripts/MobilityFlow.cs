@@ -25,10 +25,11 @@ public class MobilityFlow : MonoBehaviour
     private DateTime endTime;
 
     // Define the scaled latitude and longitude range
-    public Vector3 refLocation = new Vector3(129.6f, 7f, -22.6f);
-    public Vector3 unityOrigin = new Vector3(0,7,0); 
+    public Vector3 refLocation = new Vector3(1.237F, 0.1F, -0.192F);//F, -17.8F, 0);//(129.6f, 7f, -22.6f);
+    public Vector3 unityOrigin = new Vector3(0, 0.1F, 0);//(0,0,20F);//(0,7,0); 
     public double[] modelRef = { 8.47834472749149, 47.38709400665463 };
     public double[] modelOrigin = { 8.47667632699755, 47.387293832076544 };
+    [SerializeField] public Transform parentTransform;
 
     //progress bar timeline
     [SerializeField]public TextMeshProUGUI timelineText;
