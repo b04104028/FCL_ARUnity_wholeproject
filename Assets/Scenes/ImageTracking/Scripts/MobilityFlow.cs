@@ -34,9 +34,6 @@ public class MobilityFlow : MonoBehaviour
     //progress bar timeline
     [SerializeField]public TextMeshProUGUI timelineText;
     [SerializeField]public Slider progressBar;
-    private RectTransform handleRect;
-
-    private float currentTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +55,7 @@ public class MobilityFlow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
+        //currentTime += Time.deltaTime;
     }
     public void LoadJsonFlat(string path)
     {
