@@ -159,7 +159,7 @@ public class MobilityFlow : MonoBehaviour
 
             previousTime = timestamp;
         }
-        Debug.Log("data points within model range: " + instantiatedSpheres.Count);//Ans: 2432   
+        Debug.Log("data points within model range: " + instantiatedSpheres.Count);//Ans: 2432   //3556
         Debug.Log("number of all data points in json: " + dataList.Count);//Ans: 25353
     }
     private Vector3 MapCoordinatesToUnitySpace(double lon, double lat)
