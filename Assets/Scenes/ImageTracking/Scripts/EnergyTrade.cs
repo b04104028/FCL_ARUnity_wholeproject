@@ -74,8 +74,9 @@ public class EnergyTrade : MonoBehaviour
             Transform fromBuilding = GameObject.Find(fromBuildingName).GetComponentInChildren<Canvas>().transform;
             Transform toBuilding = GameObject.Find(toBuildingName).GetComponentInChildren<Canvas>().transform;
 
-            Vector3 fromPosition = fromBuilding.position;
-            Vector3 toPosition = toBuilding.position;
+            Vector3 fromPosition = fromBuilding.position;// +gameObject.transform.position;
+            Vector3 toPosition = toBuilding.position;// +gameObject.transform.position;
+            targetGO.GetComponent<Renderer>().material.color = Color.white;
 
             if (transmissionValue > 0)
             {
@@ -99,6 +100,51 @@ public class EnergyTrade : MonoBehaviour
     }
 
     public IEnumerator LaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO)
+    {
+        lineRenderers = new LineRenderer[numberOfBombs];
+        trajectoryPoints = CalculateParabolicTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
+
+        Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
+
+        for (int i = 0; i < numberOfBombs; i++)
+        {
+            //GameObject lineRendererObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
+            GameObject lineRendererObject = Instantiate(lineRendererPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+
+            lineRenderers[i] = lineRendererObject.GetComponent<LineRenderer>();
+            lineRenderers[i].positionCount = 2;
+            lineRenderers[i].SetPosition(0, trajectoryPoints[i]);
+            lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1]);
+            lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
+            lineRenderers[i].endWidth = 0f;
+
+            lineRenderers[i].transform.parent = gameObject.transform;
+            //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
+            //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
+        
+
+
+            if (i == (numberOfBombs - 1))
+            {
+                // Set the color and text of targetGO
+                targetGO.GetComponent<Renderer>().material.color = Color.yellow;
+                targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
+            }
+
+            yield return new WaitForSeconds((float)timeDifference);
+            Destroy(lineRenderers[i], prefabStayTime);
+        }
+
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2.0f);
+
+        // Reset the color and text of targetGO
+        targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
+        targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+    }
+
+
+    public IEnumerator ARCHIVELaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO)
     {
         lineRenderers = new LineRenderer[numberOfBombs];
         trajectoryPoints = CalculateParabolicTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
@@ -164,13 +210,41 @@ public class EnergyTrade : MonoBehaviour
             float uu = u * u;
             float ut = u * t;
 
+            float z = (height * (1 - tt) + startPoint.z -height*2)*(-1);
+            if (i < numberOfPoints / 2)
+            {
+                z = (height * (1 - uu) + startPoint.z - height*2)*(-1);
+            }
+            // Calculate the Y-coordinate differently for the X-Z plane
+
+            // Calculate the X and Z coordinates normally
+            float x = uu * startPoint.x + 2 * ut * endPoint.x + tt * endPoint.x;
+            float y = (uu * startPoint.y + 2 * ut * endPoint.y + tt * endPoint.y);// *(-1);
+
+            points[i] = new Vector3(x, y, z);
+        }
+
+        return points;
+    }
+
+    Vector3[] YZORIGINALCalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
+    {
+        Vector3[] points = new Vector3[numberOfPoints];
+
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            float t = i / (float)(numberOfPoints - 1);
+            float u = 1 - t;
+            float tt = t * t;
+            float uu = u * u;
+            float ut = u * t;
+
             float y = height * (1 - tt) + startPoint.y;
             if (i < numberOfPoints / 2)
             {
                 y = height * (1 - uu) + startPoint.y;
             } 
-                // Calculate the Y-coordinate differently for the X-Z plane
-        
+                // Calculate the Y-coordinate differently for the X-Z plane        
             
             // Calculate the X and Z coordinates normally
             float x = uu * startPoint.x + 2 * ut * endPoint.x + tt * endPoint.x;
