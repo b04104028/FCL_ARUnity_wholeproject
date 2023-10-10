@@ -110,8 +110,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 //1809: TO DO: place the prefab at the correct location
                 //INSTANTIATE THE WHOLE ZURICH MODEL WITH 50 INDIVIDUAL HOUSES ALTOGETHER
-                Vector3 model_loc = trackedImage.transform.position+ new Vector3(-0.5f, 0f, 1f);//(-2f, 2f, 0f); //(0.01f,1f,0.01f);
-  
+                Vector3 model_loc = trackedImage.transform.position + new Vector3(-0.5f, 1f, 0f);///new Vector3(-5f, 0, 10f);TooFar(left up above the table)//new Vector3(-0.5f, 0f, 1f);//(-2f, 2f, 0f); //(0.01f,1f,0.01f);
+
                 Debug.Log("I enabled the prefab instantiating");
                 m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, model_loc, trackedImage.transform.rotation * prefab.transform.rotation);// *Quaternion.identity);
                 //transform.rotation * Quaternion.Euler(270f, 180f, 0f));//(0f, 180f, 180f));//Quaternion.identity);
