@@ -33,11 +33,12 @@ public class QCSingColorManager : MonoBehaviour
         rend = GetComponent<Renderer>();
         LoadJson(path, HouseLoadDict);
         AssignLoad(HouseLoadDict);
-        ShowLoad(HouseLoadDict);
-        AssignColor();
-        LoadOnText(load);
+        //ShowLoad(HouseLoadDict);
         max_load = GetMaxLoad(HouseLoadDict);
         min_load = GetMinLoad(HouseLoadDict);
+        AssignColor();
+        LoadOnText(load);
+
     }
 
     public void Update()
@@ -51,8 +52,8 @@ public class QCSingColorManager : MonoBehaviour
         Color transparentWhite = new Color(Color.white.r, Color.white.g, Color.white.b, alpha);
         Color transparaentYellow = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, alpha);
         Color transparentRed = new Color(Color.red.r, Color.red.g, Color.red.b, alpha);
-        if (rend != null)
-        {
+        //if (rend != null)
+        //{
             switch (lerp)
             {
                 case <= 0.2f:
@@ -65,7 +66,7 @@ public class QCSingColorManager : MonoBehaviour
                     rend.material.color = Color.black;
                     break;
             }
-        }
+       // }
         //Debug.Log("house " + gameObject.name + "'s PR = " + lerp.ToString() + ", and its real load= " + load.ToString());
         //rend.material.color = Color.Lerp(colors[index], colors[index + 1], t);
 
@@ -120,21 +121,12 @@ public class QCSingColorManager : MonoBehaviour
         {
             if (kvp.Key == gameObject.name)
             {
-                //Debug.Log("house key "+ kvp.Key + "match the house named " + gameObject.name);
+                Debug.Log("house key "+ kvp.Key + "match the house named " + gameObject.name);
                 //load = float.Parse(kvp.Value, CultureInfo.InvariantCulture.NumberFormat);
                 load = kvp.Value;
-                //Debug.Log("load of " + kvp.Key + "= "+ load.ToString());
+                Debug.Log("load of " + kvp.Key + "= "+ load.ToString());
             }
         }
-        /*
-        for (int index = 1001; index < HouseLoadDict.Count; index++)
-        {
-            string label = "B" + index.ToString();
-            if (label == gameObject.name)
-            {
-                load = HouseLoadDict[index];
-            }
-        }*/
     }
     public void LoadOnText(double load)
     {
