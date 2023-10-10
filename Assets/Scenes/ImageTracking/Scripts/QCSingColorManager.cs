@@ -133,7 +133,7 @@ public class QCSingColorManager : MonoBehaviour
         Canvas _canvas = gameObject.GetComponentInChildren<Canvas>();
         if (_canvas != null)
         {
-            _canvas.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToInt32(load).ToString();
+            _canvas.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToInt32(load).ToString();// + "kWh";
         }
     }
 
