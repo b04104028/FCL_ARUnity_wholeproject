@@ -44,8 +44,8 @@ public class EnergyTrade : MonoBehaviour
     void Start()
     {
         //Debug.Log("start");
-        string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/ZurichEnergyTrade.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
-        //Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json";
+        //string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/ZurichEnergyTrade.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
+        string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json";
 
         LoadJson(jsonFilePath);        
 
@@ -97,6 +97,7 @@ public class EnergyTrade : MonoBehaviour
         trajectoryPoints = CalculateParabolicTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
 
         Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
+        Color originalFromColor = fromGO.GetComponent<Renderer>().material.color;
 
         Debug.Log("start point" + startPoint);
         for (int i = 0; i < numberOfBombs; i++)
@@ -142,6 +143,10 @@ public class EnergyTrade : MonoBehaviour
         // Reset the color and text of targetGO
         targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
         targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+
+        // Reset the color and text of fromGO
+        fromGO.GetComponent<Renderer>().material.color = originalFromColor;
+        fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
 
 
