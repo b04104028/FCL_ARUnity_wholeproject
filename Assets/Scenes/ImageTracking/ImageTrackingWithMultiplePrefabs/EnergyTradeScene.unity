@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 287391695}
-  m_IndirectSpecularColor: {r: 0.18028426, g: 0.22571541, b: 0.30692303, a: 1}
+  m_IndirectSpecularColor: {r: 0.18025646, g: 0.2256669, b: 0.30688226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -67,6 +67,9 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -513,6 +516,9 @@ MonoBehaviour:
     imagePrefab: {fileID: 6090075640048403889, guid: c732feb4e2ca14bc0a4cdcd61f485ce5,
       type: 3}
   - imageGuid: 489a3b4e-9350-4d6a-99a4-e6927f95f34f
+    imagePrefab: {fileID: 6090075640048403889, guid: c732feb4e2ca14bc0a4cdcd61f485ce5,
+      type: 3}
+  - imageGuid: b73342f0-f685-475e-bc9e-d32dc1203d9a
     imagePrefab: {fileID: 6090075640048403889, guid: c732feb4e2ca14bc0a4cdcd61f485ce5,
       type: 3}
   m_ImageLibrary: {fileID: 11400000, guid: c86e375d7e7430442a1104e88fa21f21, type: 2}

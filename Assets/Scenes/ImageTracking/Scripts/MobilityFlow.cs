@@ -136,8 +136,8 @@ public class MobilityFlow : MonoBehaviour
             // Map latitude and longitude to Unity space
             Vector3 position = MapCoordinatesToUnitySpace(lon, lat);
 
-            if (Vector3.Distance(position, unityOrigin.transform.position) <= (Vector3.Distance(unityRefLocation.transform.position, unityOrigin.transform.position)*1.05f))
-            {
+           // if (Vector3.Distance(position, unityOrigin.transform.position) <= (Vector3.Distance(unityRefLocation.transform.position, unityOrigin.transform.position)*1.05f))
+           //{
                 // Instantiate the sphere prefab
                 GameObject sphere = Instantiate(spherePrefab, position, Quaternion.identity);
                 sphere.transform.parent = gameObject.transform;
@@ -154,7 +154,7 @@ public class MobilityFlow : MonoBehaviour
                 // Destroy the sphere after n seconds
                 Destroy(sphere, prefabStayTime); 
 
-            }
+           // }
             i++;
 
             previousTime = timestamp;
@@ -163,13 +163,12 @@ public class MobilityFlow : MonoBehaviour
         Debug.Log("number of all data points in json: " + dataList.Count);//Ans: 25353
     }
     private Vector3 MapCoordinatesToUnitySpace(double lon, double lat)
-    {
-        
+    {        
         //note: longitude經度 =x, latutude緯度 = z {x, z}
         Vector3 position = Vector3.zero;
         position.x = (float)((lon - modelOrigin[0]) / (modelRef[0] - modelOrigin[0]) * (unityRefLocation.transform.position.x- unityOrigin.transform.position.x) + unityOrigin.transform.position.x);
-        position.z = unityRefLocation.transform.position.z;
-        position.y = (float)((lat - modelOrigin[1]) / (modelRef[1] - modelOrigin[1]) * (unityRefLocation.transform.position.y- unityOrigin.transform.position.y) + unityOrigin.transform.position.y);
+        position.y = unityRefLocation.transform.position.y;
+        position.z = (float)((lat - modelOrigin[1]) / (modelRef[1] - modelOrigin[1]) * (unityRefLocation.transform.position.z- unityOrigin.transform.position.z) + unityOrigin.transform.position.z);
 
         //position += offset;
 

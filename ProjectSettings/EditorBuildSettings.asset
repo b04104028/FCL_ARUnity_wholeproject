@@ -45,7 +45,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Camera/CpuImages/CpuImages.unity
     guid: e769916924fd3814ab1d9474de816b22
   - enabled: 1
-    path: Assets/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs/E_EnergyDemandScene
+    path: Assets/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs/archive/E_EnergyDemandScene
       1.unity
     guid: a53175acd42cb49d3bd95cb5a1ed1482
   - enabled: 1

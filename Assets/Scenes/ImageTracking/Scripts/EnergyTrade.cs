@@ -210,10 +210,10 @@ public class EnergyTrade : MonoBehaviour
             float uu = u * u;
             float ut = u * t;
 
-            float z = (height * (1 - tt) + startPoint.z -height*2)*(-1);
+            float z = (height * (1 - tt) + startPoint.z)*(-1); // -height *2
             if (i < numberOfPoints / 2)
             {
-                z = (height * (1 - uu) + startPoint.z - height*2)*(-1);
+                z = (height * (1 - uu) + startPoint.z)*(-1); // -height *2
             }
             // Calculate the Y-coordinate differently for the X-Z plane
 

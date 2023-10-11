@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 287391695}
-  m_IndirectSpecularColor: {r: 0.18028426, g: 0.22571541, b: 0.30692303, a: 1}
+  m_IndirectSpecularColor: {r: 0.18025646, g: 0.2256669, b: 0.30688226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -67,6 +67,9 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -644,13 +647,13 @@ MonoBehaviour:
     imagePrefab: {fileID: 7038220984588547355, guid: 9d914c3d0b1114964b654dbb800f73cd,
       type: 3}
   - imageGuid: aae75228-1973-4dc0-b7a2-53d1566ee402
-    imagePrefab: {fileID: 1922321228195494393, guid: 4c968f294c0704bc0b191ae7cdd42e5a,
+    imagePrefab: {fileID: 4764194314048662783, guid: c5d980145e9be414189ea5f463e974ad,
       type: 3}
   - imageGuid: 489a3b4e-9350-4d6a-99a4-e6927f95f34f
-    imagePrefab: {fileID: 1922321228195494393, guid: 4c968f294c0704bc0b191ae7cdd42e5a,
+    imagePrefab: {fileID: 4764194314048662783, guid: c5d980145e9be414189ea5f463e974ad,
       type: 3}
-  - imageGuid: ee98e8d1-d2cb-47cd-8e62-099c95c88f79
-    imagePrefab: {fileID: 1922321228195494393, guid: 4c968f294c0704bc0b191ae7cdd42e5a,
+  - imageGuid: b73342f0-f685-475e-bc9e-d32dc1203d9a
+    imagePrefab: {fileID: 4764194314048662783, guid: c5d980145e9be414189ea5f463e974ad,
       type: 3}
   m_ImageLibrary: {fileID: 11400000, guid: c86e375d7e7430442a1104e88fa21f21, type: 2}
 --- !u!114 &1099623061
