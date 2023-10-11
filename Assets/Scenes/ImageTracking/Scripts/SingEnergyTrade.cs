@@ -46,7 +46,8 @@ public class SingEnergyTrade : MonoBehaviour
     {
         //Debug.Log("start");
         //string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/ZurichEnergyTrade.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
-        string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/EnergyTradeSingapore.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
+        string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
+        //"/Users/asisstenz/Desktop/PersistantDataPath/EnergyTradeSingapore.json";
 
         //string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json";
 
@@ -107,7 +108,7 @@ public class SingEnergyTrade : MonoBehaviour
         {
             //GameObject lineRendererObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
             GameObject lineRendererObject = Instantiate(lineRendererPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-
+             
             lineRenderers[i] = lineRendererObject.GetComponent<LineRenderer>();
             lineRenderers[i].positionCount = 2;
             lineRenderers[i].SetPosition(0, startPoint);
