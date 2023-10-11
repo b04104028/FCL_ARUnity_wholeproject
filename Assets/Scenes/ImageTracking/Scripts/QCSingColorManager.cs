@@ -36,6 +36,7 @@ public class QCSingColorManager : MonoBehaviour
         //ShowLoad(HouseLoadDict);
         max_load = GetMaxLoad(HouseLoadDict);
         min_load = GetMinLoad(HouseLoadDict);
+        Debug.Log("max_load = " + max_load + ", min_load = " + min_load);
         AssignColor();
         LoadOnText(load);
 
