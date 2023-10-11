@@ -166,9 +166,10 @@ public class MobilityFlow : MonoBehaviour
     {        
         //note: longitude經度 =x, latutude緯度 = z {x, z}
         Vector3 position = Vector3.zero;
-        position.x = (float)((-1) * ((lon - modelOrigin[0]) / (modelRef[0] - modelOrigin[0]) * (unityRefLocation.transform.position.x- unityOrigin.transform.position.x) + unityOrigin.transform.position.x));
+        position.x = (float)(((lon - modelOrigin[0]) / (modelRef[0] - modelOrigin[0]) * (unityRefLocation.transform.position.x- unityOrigin.transform.position.x) + unityOrigin.transform.position.x));
         position.y = unityRefLocation.transform.position.y;
-        position.z = (float)((-1) * ((lat - modelOrigin[1]) / (modelRef[1] - modelOrigin[1]) * (unityRefLocation.transform.position.z- unityOrigin.transform.position.z) + unityOrigin.transform.position.z));
+        position.z = (float)(((lat - modelOrigin[1]) / (modelRef[1] - modelOrigin[1]) * (unityRefLocation.transform.position.z- unityOrigin.transform.position.z) + unityOrigin.transform.position.z));
+        //should x and z both multiply by -1
 
         //position += offset;
 

@@ -18,7 +18,7 @@ public class QCSingColorbar : MonoBehaviour
     {
         SetColorbar();
         double maxloadrounded = RoundToNearest(_colormanager.max_load);
-        LoadOnText(maxloadrounded);
+        //LoadOnText(maxloadrounded); //use default value for now because there's int calculation error
     }
 
     // Update is called once per frame

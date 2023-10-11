@@ -1,3 +1,4 @@
+//string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/EnergyTradeSingapore.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,8 +44,11 @@ public class SingEnergyTrade : MonoBehaviour
 
     void Start()
     {
-        //Debug.Log("start");/Users/asisstenz
+        //Debug.Log("start");
+        //string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/ZurichEnergyTrade.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
         string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/EnergyTradeSingapore.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
+
+        //string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json";
 
         LoadJson(jsonFilePath);
 
@@ -54,6 +58,7 @@ public class SingEnergyTrade : MonoBehaviour
 
         ArrowWidthScale = Vector3.Distance(AnchorpointXZ_1.transform.position, AnchorpointXZ_2.transform.position);
         height = Vector3.Distance(AnchorpointXZ_2.transform.position, AnchorpointXY.transform.position);
+        //Debug.Log("height" + height);
         //StartCoroutine(ContinuousLaunchLineRenderer(fromPos, toPos, 2, targetGO));
         ///StartCoroutine(ContinuousLaunchLineRenderer(fromPos2, toPos2, 11, targetGO));
         StartCoroutine(StartLaunchLineRenderers());
@@ -70,22 +75,84 @@ public class SingEnergyTrade : MonoBehaviour
             ShowTime(T);
 
             GameObject toBDgo = GameObject.Find(toBuildingName);
-            Debug.Log(toBDgo.name);
+            GameObject fromBDgo = GameObject.Find(fromBuildingName);
 
             Transform fromBuilding = GameObject.FindWithTag(fromBuildingName).transform;
+            Debug.Log("from building position " + fromBuilding.position);
             Transform toBuilding = GameObject.FindWithTag(toBuildingName).transform;
+            Debug.Log("to building position" + toBuilding.position);
 
             Vector3 fromPosition = fromBuilding.position;// +gameObject.transform.position;
             Vector3 toPosition = toBuilding.position;// +gameObject.transform.position;
-            //targetGO.GetComponent<Renderer>().material.color = Color.white;
+            targetGO.GetComponent<Renderer>().material.color = Color.white;
 
             if (transmissionValue > 0)
             {
-                yield return StartCoroutine(LaunchLineRenderer(fromPosition, toPosition, transmissionValue, toBDgo));
+                yield return StartCoroutine(TEMPChangeBuildingColor(fromPosition, toPosition, transmissionValue, toBDgo, fromBDgo));
                 //yield return StartCoroutine(ContinuousLaunchLineRenderer(fromPosition, toPosition, transmissionValue, toBDgo));
             }
         }
     }
+
+    public IEnumerator TEMPChangeBuildingColor(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO, GameObject fromGO)
+    {
+        lineRenderers = new LineRenderer[numberOfBombs];
+        trajectoryPoints = CalculateParabolicTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
+
+        Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
+        Color originalFromColor = fromGO.GetComponent<Renderer>().material.color;
+
+        Debug.Log("start point" + startPoint);
+        for (int i = 0; i < numberOfBombs; i++)
+        {
+            //GameObject lineRendererObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
+            GameObject lineRendererObject = Instantiate(lineRendererPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+
+            lineRenderers[i] = lineRendererObject.GetComponent<LineRenderer>();
+            lineRenderers[i].positionCount = 2;
+            lineRenderers[i].SetPosition(0, startPoint);
+            lineRenderers[i].SetPosition(1, endPoint);
+            lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
+            lineRenderers[i].endWidth = 0f;
+            Debug.Log("trajectory point i = " + trajectoryPoints[i]);
+            Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
+            //lineRenderers[i].transform.parent = gameObject.transform;
+            //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
+            //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
+
+            if (i == 0)
+            {
+                fromGO.GetComponent<Renderer>().material.color = Color.blue;
+                targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
+
+            }
+
+            if (i == (numberOfBombs - 1))
+            {
+                // Set the color and text of targetGO
+                targetGO.GetComponent<Renderer>().material.color = Color.yellow;
+                targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
+
+            }
+
+            yield return new WaitForSeconds((float)timeDifference);
+            Destroy(lineRenderers[i], prefabStayTime);
+        }
+        Debug.Log("end point " + endPoint);
+
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2.0f);
+
+        // Reset the color and text of targetGO
+        targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
+        targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+
+        // Reset the color and text of fromGO
+        fromGO.GetComponent<Renderer>().material.color = originalFromColor;
+        fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+    }
+
+
 
     public IEnumerator ContinuousLaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject toBDgo)
     {
@@ -107,6 +174,7 @@ public class SingEnergyTrade : MonoBehaviour
 
         Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
 
+        Debug.Log("start point" + startPoint);
         for (int i = 0; i < numberOfBombs; i++)
         {
             //GameObject lineRendererObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
@@ -118,8 +186,9 @@ public class SingEnergyTrade : MonoBehaviour
             lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1]);
             lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
             lineRenderers[i].endWidth = 0f;
-
-            lineRenderers[i].transform.parent = gameObject.transform;
+            Debug.Log("trajectory point i = " + trajectoryPoints[i]);
+            Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
+            //lineRenderers[i].transform.parent = gameObject.transform;
             //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
             //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
 
@@ -129,15 +198,13 @@ public class SingEnergyTrade : MonoBehaviour
             {
                 // Set the color and text of targetGO
                 targetGO.GetComponent<Renderer>().material.color = Color.yellow;
-                Debug.Log(targetGO.name);
-                Debug.Log(GameObject.FindWithTag(targetGO.name + "Canvas"));
-                GameObject.FindWithTag(targetGO.name + "Canvas").GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
-                //targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
+                targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
             }
 
             yield return new WaitForSeconds((float)timeDifference);
             Destroy(lineRenderers[i], prefabStayTime);
         }
+        Debug.Log("end point " + endPoint);
 
         // Wait for 2 seconds
         yield return new WaitForSeconds(2.0f);
@@ -208,26 +275,28 @@ public class SingEnergyTrade : MonoBehaviour
 
         for (int i = 0; i < numberOfPoints; i++)
         {
-            float t = i / (float)(numberOfPoints - 1);
-            float u = 1 - t;
-            float tt = t * t;
-            float uu = u * u;
-            float ut = u * t;
+            double t = i / (numberOfPoints - 1);
+            double u = 1 - t;
+            double tt = t * t;
+            double uu = u * u;
+            double ut = u * t;
+            Debug.Log("t = " + t);
 
-            float z = (height * (1 - tt) + startPoint.z - height * 2) * (-1);
+            double z = (height * (1 - uu) + startPoint.z); // -height *2)
             if (i < numberOfPoints / 2)
             {
-                z = (height * (1 - uu) + startPoint.z - height * 2) * (-1);
+                z = (height * (1 - tt) + startPoint.z); // -height *2
             }
             // Calculate the Y-coordinate differently for the X-Z plane
 
             // Calculate the X and Z coordinates normally
-            float x = uu * startPoint.x + 2 * ut * endPoint.x + tt * endPoint.x;
-            float y = (uu * startPoint.y + 2 * ut * endPoint.y + tt * endPoint.y);// *(-1);
+            double x = uu * startPoint.x + 2 * ut * endPoint.x + tt * endPoint.x;
+            double y = (uu * startPoint.y + 2 * ut * endPoint.y + tt * endPoint.y);// *(-1);
 
-            points[i] = new Vector3(x, y, z);
+            points[i] = new Vector3((float)x, (float)y, (float)z);
         }
 
+        Debug.Log("in trajectory funciton, startpoint: " + startPoint + ", endpoint: " + endPoint + ", out put point i=0 : " + points[0] + ", output point i = 9: " + points[9]);
         return points;
     }
 
@@ -306,13 +375,12 @@ public class SingEnergyTrade : MonoBehaviour
 
             foreach (DataEnergyTrade et in rootdataEnergyTrade.DataEnergyTrade)
             {
-                string FromBuilding = et.From;
-                string ToBuilding = et.To;
+                string FromBuilding = RemoveDemandCSV(et.From);
+                string ToBuilding = RemoveDemandCSV(et.To);
                 float transmission = et.Transmission;
                 int T = et.T;
 
                 dataList.Add((FromBuilding, ToBuilding, transmission, T));
-                //Debug.Log(FromBuilding + " TO " + ToBuilding + ", TRANS: " +transmission + " AT " + T);
             }
         }
     }
@@ -327,4 +395,3 @@ public class SingEnergyTrade : MonoBehaviour
     }
 
 }
-
