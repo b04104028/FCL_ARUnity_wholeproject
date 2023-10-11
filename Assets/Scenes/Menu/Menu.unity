@@ -3984,8 +3984,8 @@ MonoBehaviour:
 
     2. Select Overlay
 
-    3. Stand in the square and
-    scan from waist height for best alignment
+    3. Scan image straight and
+    from waist height for best results
 
 '
   m_isRightToLeft: 0
@@ -5067,7 +5067,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.00024414062, y: -0.00024414062}
+  m_AnchoredPosition: {x: 0, y: -0.00024414062}
   m_SizeDelta: {x: 1152, y: 2532}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1459382204
@@ -5152,8 +5152,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1141134466}
   m_HandleRect: {fileID: 1141134465}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.7454101
+  m_Value: 0
+  m_Size: 0.7549917
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
