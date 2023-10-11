@@ -44,7 +44,8 @@ public class EnergyTrade : MonoBehaviour
     void Start()
     {
         //Debug.Log("start");
-        string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json";
+        string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/ZurichEnergyTrade.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
+        //Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json";
 
         LoadJson(jsonFilePath);        
 
@@ -54,6 +55,7 @@ public class EnergyTrade : MonoBehaviour
 
         ArrowWidthScale = Vector3.Distance(AnchorpointXZ_1.transform.position, AnchorpointXZ_2.transform.position);
         height = Vector3.Distance(AnchorpointXZ_2.transform.position, AnchorpointXY.transform.position);
+        //Debug.Log("height" + height);
         //StartCoroutine(ContinuousLaunchLineRenderer(fromPos, toPos, 2, targetGO));
         ///StartCoroutine(ContinuousLaunchLineRenderer(fromPos2, toPos2, 11, targetGO));
         StartCoroutine(StartLaunchLineRenderers());
@@ -72,7 +74,9 @@ public class EnergyTrade : MonoBehaviour
             GameObject toBDgo = GameObject.Find(toBuildingName);
 
             Transform fromBuilding = GameObject.Find(fromBuildingName).GetComponentInChildren<Canvas>().transform;
+            Debug.Log("from building position "+fromBuilding.position);
             Transform toBuilding = GameObject.Find(toBuildingName).GetComponentInChildren<Canvas>().transform;
+            Debug.Log("to building position" + toBuilding.position);
 
             Vector3 fromPosition = fromBuilding.position;// +gameObject.transform.position;
             Vector3 toPosition = toBuilding.position;// +gameObject.transform.position;
@@ -106,6 +110,7 @@ public class EnergyTrade : MonoBehaviour
 
         Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
 
+        Debug.Log("start point" + startPoint);
         for (int i = 0; i < numberOfBombs; i++)
         {
             //GameObject lineRendererObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
@@ -117,8 +122,9 @@ public class EnergyTrade : MonoBehaviour
             lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1]);
             lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
             lineRenderers[i].endWidth = 0f;
-
-            lineRenderers[i].transform.parent = gameObject.transform;
+            Debug.Log("trajectory point i = " + trajectoryPoints[i]);
+            Debug.Log("trajectory point i+1 = " + trajectoryPoints[i+1]);
+            //lineRenderers[i].transform.parent = gameObject.transform;
             //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
             //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
         
@@ -134,7 +140,8 @@ public class EnergyTrade : MonoBehaviour
             yield return new WaitForSeconds((float)timeDifference);
             Destroy(lineRenderers[i], prefabStayTime);
         }
-
+        Debug.Log("end point " + endPoint);
+        
         // Wait for 2 seconds
         yield return new WaitForSeconds(2.0f);
 
@@ -210,10 +217,10 @@ public class EnergyTrade : MonoBehaviour
             float uu = u * u;
             float ut = u * t;
 
-            float z = (height * (1 - tt) + startPoint.z)*(-1); // -height *2
+            float z = (height * (1 - uu)+ startPoint.z); // -height *2)
             if (i < numberOfPoints / 2)
             {
-                z = (height * (1 - uu) + startPoint.z)*(-1); // -height *2
+                z = (height * (1 - tt) + startPoint.z); // -height *2
             }
             // Calculate the Y-coordinate differently for the X-Z plane
 
