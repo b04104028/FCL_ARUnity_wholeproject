@@ -129,21 +129,25 @@ public class MobilityFlow : MonoBehaviour
 
             // Calculate the time difference relative to the startTime
             double timeDifference = (timestamp - previousTime).TotalSeconds / timeSpeedupFactor;
-       
+
             // Wait for the specified time difference
             yield return new WaitForSeconds((float)timeDifference);
 
             // Map latitude and longitude to Unity space
             Vector3 position = MapCoordinatesToUnitySpace(lon, lat);
 
-            if (Vector3.Distance(position, unityOrigin.transform.position) <= (Vector3.Distance(unityRefLocation.transform.position, unityOrigin.transform.position)*1.05f))
-           {
-                // Instantiate the sphere prefab
-                GameObject sphere = Instantiate(spherePrefab, position, Quaternion.identity);
+            if (Vector3.Distance(position, unityOrigin.transform.localPosition) <= (Vector3.Distance(unityRefLocation.transform.localPosition, unityOrigin.transform.localPosition) * 1.05f))
+            {
+                GameObject sphere = Instantiate(spherePrefab, transform.position + position, Quaternion.identity);
+
+                //GameObject sphere = Instantiate(spherePrefab, position, Quaternion.identity);
                 sphere.transform.parent = gameObject.transform;
+                sphere.transform.SetParent(gameObject.transform, false);
+                sphere.transform.SetLocalPositionAndRotation(position, Quaternion.identity);
+                sphere.transform.localScale = new Vector3(5f, 5f, 5f);
                 Debug.Log(sphere.ToString());
 
-                instantiatedSpheres.Add(sphere);        
+                instantiatedSpheres.Add(sphere);
                 // Assign the user's color material to the sphere based on uid
                 Renderer sphereRenderer = sphere.GetComponent<Renderer>();
                 if (sphereRenderer != null)
@@ -152,9 +156,10 @@ public class MobilityFlow : MonoBehaviour
                     sphereRenderer.material.color = color;
                 }
                 // Destroy the sphere after n seconds
-                Destroy(sphere, prefabStayTime); 
+                Destroy(sphere, prefabStayTime);
 
             }
+        
             i++;
 
             previousTime = timestamp;
@@ -163,27 +168,25 @@ public class MobilityFlow : MonoBehaviour
         Debug.Log("number of all data points in json: " + dataList.Count);//Ans: 25353
     }
     private Vector3 MapCoordinatesToUnitySpace(double lon, double lat)
-    {        
-        //note: longitude經度 =x, latutude緯度 = z {x, z}
-        Vector3 position = Vector3.zero;
-        position.x = (float)(((lon - modelOrigin[0]) / (modelRef[0] - modelOrigin[0]) * (unityRefLocation.transform.position.x- unityOrigin.transform.position.x) + unityOrigin.transform.position.x));
-        position.y = unityRefLocation.transform.position.y;
-        position.z = (float)(((lat - modelOrigin[1]) / (modelRef[1] - modelOrigin[1]) * (unityRefLocation.transform.position.z- unityOrigin.transform.position.z) + unityOrigin.transform.position.z));
-        //should x and z both multiply by -1
+    {//note: longitude經度 =x, latutude緯度 = z {x, z}
+            Vector3 position = Vector3.zero;
+            position.x = (float)(((lon - modelOrigin[0]) / (modelRef[0] - modelOrigin[0]) * (unityRefLocation.transform.localPosition.x - unityOrigin.transform.localPosition.x) + unityOrigin.transform.localPosition.x));
+            position.z = unityRefLocation.transform.localPosition.z;
+            position.y = (float)(((lat - modelOrigin[1]) / (modelRef[1] - modelOrigin[1]) * (unityRefLocation.transform.localPosition.y - unityOrigin.transform.localPosition.y) + unityOrigin.transform.localPosition.y));
 
-        //position += offset;
+            //position += offset;
 
-        //position = Quaternion.Euler(-90, 0, 0) * position;
-        //worked 
-        //position = Quaternion.Euler(0,0,45) * position;
-        //position = Quaternion.Euler(0, 0, -90) * position;
-        //position = Quaternion.Euler(0, 0, 180) * position;
-        //position = Quaternion.Euler(0, 0, 45) * position;
+            //position = Quaternion.Euler(-90, 0, 0) * position;
+            //worked 
+            //position = Quaternion.Euler(0,0,45) * position;
+            //position = Quaternion.Euler(0, 0, -90) * position;
+            //position = Quaternion.Euler(0, 0, 180) * position;
+            //position = Quaternion.Euler(0, 0, 45) * position;
 
-        //Debug.Log("mapped(x, y, z) = " + position.x + ", " + position.y + ", " + position.z);
+            //Debug.Log("mapped(x, y, z) = " + position.x + ", " + position.y + ", " + position.z);
 
 
-        return position;
+            return position;
     }
 
 
