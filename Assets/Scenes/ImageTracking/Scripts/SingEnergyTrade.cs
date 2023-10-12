@@ -131,7 +131,7 @@ public class SingEnergyTrade : MonoBehaviour
             if (i == 0)
             {
                 fromGO.GetComponent<Renderer>().material.color = Color.blue;
-                targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
+                fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
 
             }
 
@@ -220,7 +220,7 @@ public class SingEnergyTrade : MonoBehaviour
             if (i == 0)
             {
                 fromGO.GetComponent<Renderer>().material.color = Color.blue;
-                targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
+                fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
 
             }
             if (i == (numberOfBombs - 1))
