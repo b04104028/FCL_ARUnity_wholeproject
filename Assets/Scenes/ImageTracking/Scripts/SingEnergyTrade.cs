@@ -58,7 +58,7 @@ public class SingEnergyTrade : MonoBehaviour
         endTime = dataList.Max(item => item.Item4);
 
         ArrowWidthScale = Vector3.Distance(AnchorpointXZ_1.transform.position, AnchorpointXZ_2.transform.position);
-        height = Vector3.Distance(AnchorpointXZ_2.transform.localPosition, AnchorpointXY.transform.localPosition);
+        height = Vector3.Distance(AnchorpointXZ_2.transform.position, AnchorpointXY.transform.position);
         //Debug.Log("height" + height);
         //StartCoroutine(ContinuousLaunchLineRenderer(fromPos, toPos, 2, targetGO));
         ///StartCoroutine(ContinuousLaunchLineRenderer(fromPos2, toPos2, 11, targetGO));
@@ -107,19 +107,26 @@ public class SingEnergyTrade : MonoBehaviour
         for (int i = 0; i < numberOfBombs; i++)
         {
             //GameObject lineRendererObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
-            GameObject lineRendererObject = Instantiate(lineRendererPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-             
-            lineRenderers[i] = lineRendererObject.GetComponent<LineRenderer>();
-            lineRenderers[i].positionCount = 2;
-            lineRenderers[i].SetPosition(0, startPoint);
-            lineRenderers[i].SetPosition(1, endPoint);
-            lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
-            lineRenderers[i].endWidth = 0f;
-            Debug.Log("trajectory point i = " + trajectoryPoints[i]);
-            Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
+            //GameObject lineRendererObject = Instantiate(lineRendererPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+
+            //lineRenderers[i] = lineRendererObject.GetComponent<LineRenderer>();
+            //lineRenderers[i].positionCount = 2;
+            //lineRenderers[i].SetPosition(0, startPoint);
+            //lineRenderers[i].SetPosition(1, endPoint);
+            //lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
+            //lineRenderers[i].endWidth = 0f;
+            //Debug.Log("trajectory point i = " + trajectoryPoints[i]);
+            //Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
             //lineRenderers[i].transform.parent = gameObject.transform;
             //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
             //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
+            GameObject lineRendererObject = Instantiate(lineRendererPrefab, transform);
+            LineRenderer lr = lineRendererObject.GetComponent<LineRenderer>();
+            lr.positionCount = 2;
+            lr.SetPosition(0,startPoint);
+            lr.SetPosition(1,endPoint);
+            lr.startWidth = transmissionValue / maxTrans * ArrowWidthScale;
+            lr.endWidth = 0f;
 
             if (i == 0)
             {
@@ -310,16 +317,16 @@ public class SingEnergyTrade : MonoBehaviour
             double ut = u * t;
             Debug.Log("t = " + t);
 
-            double z = (height * (1 - uu) + startPoint.z); // -height *2)
+            double y = (height * (1 - uu) + startPoint.y); // -height *2)
             if (i < numberOfPoints / 2)
             {
-                z = (height * (1 - tt) + startPoint.z); // -height *2
+                y = (height * (1 - tt) + startPoint.y); // -height *2
             }
             // Calculate the Y-coordinate differently for the X-Z plane
 
             // Calculate the X and Z coordinates normally
             double x = uu * startPoint.x + 2 * ut * endPoint.x + tt * endPoint.x;
-            double y = (uu * startPoint.y + 2 * ut * endPoint.y + tt * endPoint.y);// *(-1);
+            double z = (uu * startPoint.z + 2 * ut * endPoint.z + tt * endPoint.z);// *(-1);
 
             points[i] = new Vector3((float)x, (float)y, (float)z);
         }
