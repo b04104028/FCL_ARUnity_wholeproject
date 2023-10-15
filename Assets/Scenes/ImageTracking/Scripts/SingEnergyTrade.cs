@@ -18,8 +18,8 @@ public class SingEnergyTrade : MonoBehaviour
     private float ArrowWidthScale = 0.4f;//DEFAULT VALUE
     private float height = 0.04F;//DEFAULT VALUE
     private int numberOfBombs = 10;
-    private float timeDifference = 0.05f;//0.2F
-    private float prefabStayTime = 1f;
+    private float timeDifference = 0.1f;//0.2F
+    private float prefabStayTime = 0.8f;
     private LineRenderer[] lineRenderers;
     private Vector3[] trajectoryPoints;
 
@@ -102,6 +102,8 @@ public class SingEnergyTrade : MonoBehaviour
 
         Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
         Color originalFromColor = fromGO.GetComponent<Renderer>().material.color;
+        GameObject targetGoCanvas = GameObject.FindGameObjectWithTag(targetGO.name + "Canvas");
+        GameObject fromGoCanvas = GameObject.FindGameObjectWithTag(fromGO.name + "Canvas");
 
         Debug.Log("start point: " + startPoint);
         for (int i = 0; i < numberOfBombs; i++)
@@ -131,9 +133,12 @@ public class SingEnergyTrade : MonoBehaviour
                 {
                     r.material.color = Color.blue;
                 }
+
+              fromGoCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
+               
                 try
                 {
-                    fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
+                   // fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
                 }
                 catch (Exception e)
                 {
@@ -149,9 +154,12 @@ public class SingEnergyTrade : MonoBehaviour
                 {
                     r.material.color = Color.yellow;
                 }
+
+              targetGoCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
+
                 try
                 {
-                    targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
+                    //targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
                 }
                 catch (Exception e)
                 {
@@ -173,9 +181,11 @@ public class SingEnergyTrade : MonoBehaviour
         {
             r.material.color = originalTargetColor;
         }
+         targetGoCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "";
+
         try
         {
-            targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+           // targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
         }catch(Exception e)
         {
             Debug.Log("cant find canvas under " + targetGO.name);
@@ -187,17 +197,17 @@ public class SingEnergyTrade : MonoBehaviour
         {
             r.material.color = originalFromColor;
         }
+         fromGoCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "";
+
         try
         {
-            fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+            //fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
         catch (Exception e)
         {
             Debug.Log("cant find canvas under " + fromGO.name);
         }
     }
-
-
 
     public IEnumerator ContinuousLaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject toBDgo, GameObject fromGO)
     {
