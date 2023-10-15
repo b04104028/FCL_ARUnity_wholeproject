@@ -25,6 +25,7 @@ TagManager:
   - B117052Canvas
   - B117053Canvas
   - B117054Canvas
+  - checktext
   layers:
   - Default
   - TransparentFX

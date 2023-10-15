@@ -17,8 +17,8 @@ public class EnergyTrade : MonoBehaviour
     private float ArrowWidthScale = 0.4f;//DEFAULT VALUE
     private float height = 0.04F;//DEFAULT VALUE
     private int numberOfBombs = 10;
-    private float timeDifference = 0.2f;
-    private float prefabStayTime = 1f;
+    private float timeDifference = 0.1f;
+    private float prefabStayTime = 0.8f;
     private LineRenderer[] lineRenderers;
     private Vector3[] trajectoryPoints;
 
@@ -94,7 +94,7 @@ public class EnergyTrade : MonoBehaviour
     public IEnumerator TEMPChangeBuildingColor(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO, GameObject fromGO)
     {
         lineRenderers = new LineRenderer[numberOfBombs];
-        trajectoryPoints = CalculateParabolicTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
+        trajectoryPoints = CalculateStraightTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
 
         Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
         Color originalFromColor = fromGO.GetComponent<Renderer>().material.color;
@@ -107,8 +107,8 @@ public class EnergyTrade : MonoBehaviour
 
             lineRenderers[i] = lineRendererObject.GetComponent<LineRenderer>();
             lineRenderers[i].positionCount = 2;
-            lineRenderers[i].SetPosition(0, startPoint);
-            lineRenderers[i].SetPosition(1, endPoint);
+            lineRenderers[i].SetPosition(0, trajectoryPoints[i]);
+            lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1]);
             lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
             lineRenderers[i].endWidth = 0f;
             Debug.Log("trajectory point i = " + trajectoryPoints[i]);
@@ -265,6 +265,25 @@ public class EnergyTrade : MonoBehaviour
         Destroy(lineRenderer.gameObject);
         onComplete?.Invoke();
     }
+
+    Vector3[] CalculateStraightTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
+    {
+        Vector3[] points = new Vector3[numberOfPoints];
+
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            double y = ((endPoint.y - startPoint.y) / (float)numberOfBombs * (float)i) + startPoint.y;
+            double x = ((endPoint.x - startPoint.x) / (float)numberOfBombs * (float)i) + startPoint.x;
+            double z = ((endPoint.z - startPoint.z) / (float)numberOfBombs * (float)i) + startPoint.z;
+       
+            points[i] = new Vector3((float)x, (float)y, (float)z);
+            Debug.Log(",  i= " + i + ", calculated points: " + points[i]);
+        }
+        Debug.Log("in trajectory funciton, startpoint: " + startPoint + ", endpoint: " + endPoint + ", out put point i=0 : " + points[0] + ", output point i = 10: " + points[10]);
+
+        return points;
+    }
+
 
     Vector3[] CalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
     {

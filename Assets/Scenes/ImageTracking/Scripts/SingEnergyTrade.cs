@@ -98,7 +98,7 @@ public class SingEnergyTrade : MonoBehaviour
     public IEnumerator TEMPChangeBuildingColor(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO, GameObject fromGO)
     {
         lineRenderers = new LineRenderer[numberOfBombs];
-        trajectoryPoints = CalculateParabolicTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
+        trajectoryPoints = CalculateStraightTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
 
         Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
         Color originalFromColor = fromGO.GetComponent<Renderer>().material.color;
@@ -348,7 +348,7 @@ public class SingEnergyTrade : MonoBehaviour
         onComplete?.Invoke();
     }
 
-    Vector3[] CalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
+    Vector3[] CalculateStraightTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
     {
         Vector3[] points = new Vector3[numberOfPoints];
 
@@ -361,9 +361,9 @@ public class SingEnergyTrade : MonoBehaviour
             //Vector3 sequenceNum = (startPoint + endPoint) / (float)numberOfBombs * (float)i;
 
             //double y = wideFactor * Math.Pow(sequenceNum.y - middlepoint.y, 2) - height;
-            double y = ((endPoint.y - startPoint.y) / (float)numberOfBombs * (float)i) + startPoint.y;
+            double y = ((endPoint.y - startPoint.y) / (float)numberOfBombs * (float)i) + startPoint.y ;
             double x = ((endPoint.x - startPoint.x) / (float)numberOfBombs * (float)i )+ startPoint.x;
-            double z = ((endPoint.z - startPoint.z) / (float)numberOfBombs * (float)i )+ startPoint.z;
+            double z = ((endPoint.z - startPoint.z) / (float)numberOfBombs * (float)i )+ startPoint.z - ArrowWidthScale * 0.5f;
             // double z = (height * (1 - uu) + startPoint.z); // -height *2)
             //  if (i < numberOfPoints / 2)
             //  {
@@ -387,7 +387,7 @@ public class SingEnergyTrade : MonoBehaviour
         return points;
     }
 
-    Vector3[] YZORIGINALCalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
+    Vector3[] CalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
     {
         Vector3[] points = new Vector3[numberOfPoints];
 
