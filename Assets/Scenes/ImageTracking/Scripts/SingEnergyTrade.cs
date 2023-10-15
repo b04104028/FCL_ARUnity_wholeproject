@@ -18,7 +18,7 @@ public class SingEnergyTrade : MonoBehaviour
     private float ArrowWidthScale = 0.4f;//DEFAULT VALUE
     private float height = 0.04F;//DEFAULT VALUE
     private int numberOfBombs = 10;
-    private float timeDifference = 0.2f;
+    private float timeDifference = 0.05f;//0.2F
     private float prefabStayTime = 1f;
     private LineRenderer[] lineRenderers;
     private Vector3[] trajectoryPoints;
@@ -187,24 +187,21 @@ public class SingEnergyTrade : MonoBehaviour
         for (int i = 0; i < numberOfBombs; i++)
         {
             //GameObject lineRendererObject = Instantiate(lineRendererPrefab, Vector3.zero, Quaternion.identity);
-            GameObject lineRendererObject = Instantiate(lineRendererPrefab, transform);
+            //GameObject lineRendererObject = Instantiate(lineRendererPrefab, transform);
 
-            lineRenderers[i] = lineRendererObject.GetComponent<LineRenderer>();
-            lineRenderers[i].positionCount = 2;
-            lineRenderers[i].SetPosition(0, trajectoryPoints[i]);
-            lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1]);
-            lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
-            lineRenderers[i].endWidth = 0f;
+            //lineRenderers[i] = lineRendererObject.GetComponent<LineRenderer>();
+            //lineRenderers[i].positionCount = 2;
+            //lineRenderers[i].SetPosition(0, trajectoryPoints[i]);
+            //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1]);
+            //lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
+            //lineRenderers[i].endWidth = 0f;
 
-            Vector3 startPosTest = lineRenderers[i].GetPosition(0);
-            Vector3 endPosTest = lineRenderers[i].GetPosition(1);
-            Debug.Log("theoretically local space start point: " + startPosTest + ", end point: " + endPosTest);
-            Debug.Log("trajectory point i = " + trajectoryPoints[i]);
-            Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
-            //lineRenderers[i].transform.parent = gameObject.transform;
-            //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
-            //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
-
+            //Vector3 startPosTest = lineRenderers[i].GetPosition(0);
+            //Vector3 endPosTest = lineRenderers[i].GetPosition(1);
+            //Debug.Log("theoretically local space start point: " + startPosTest + ", end point: " + endPosTest);
+            //Debug.Log("trajectory point i = " + trajectoryPoints[i]);
+            //Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
+            
             /*
              GameObject sphere = Instantiate(spherePrefab, transform.position + position, Quaternion.identity);
 
