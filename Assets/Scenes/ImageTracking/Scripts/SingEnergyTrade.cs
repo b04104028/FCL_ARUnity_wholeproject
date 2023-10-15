@@ -127,6 +127,10 @@ public class SingEnergyTrade : MonoBehaviour
             {
                 fromGO.GetComponent<Renderer>().material.color = Color.blue;
 
+                foreach (Renderer r in fromGO.GetComponentsInChildren<Renderer>())
+                {
+                    r.material.color = Color.blue;
+                }
                 try
                 {
                     fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
@@ -141,6 +145,10 @@ public class SingEnergyTrade : MonoBehaviour
             {
                 // Set the color and text of targetGO
                 targetGO.GetComponent<Renderer>().material.color = Color.yellow;
+                foreach (Renderer r in targetGO.GetComponentsInChildren<Renderer>())
+                {
+                    r.material.color = Color.yellow;
+                }
                 try
                 {
                     targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
@@ -161,6 +169,10 @@ public class SingEnergyTrade : MonoBehaviour
 
         // Reset the color and text of targetGO
         targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
+        foreach (Renderer r in targetGO.GetComponentsInChildren<Renderer>())
+        {
+            r.material.color = originalTargetColor;
+        }
         try
         {
             targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
@@ -171,6 +183,10 @@ public class SingEnergyTrade : MonoBehaviour
 
         // Reset the color and text of fromGO
         fromGO.GetComponent<Renderer>().material.color = originalFromColor;
+        foreach (Renderer r in fromGO.GetComponentsInChildren<Renderer>())
+        {
+            r.material.color = originalFromColor;
+        }
         try
         {
             fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
@@ -336,7 +352,6 @@ public class SingEnergyTrade : MonoBehaviour
 
             //double y = wideFactor * Math.Pow(sequenceNum.y - middlepoint.y, 2) - height;
             double y = ((endPoint.y - startPoint.y) / (float)numberOfBombs * (float)i) + startPoint.y;
-
             double x = ((endPoint.x - startPoint.x) / (float)numberOfBombs * (float)i )+ startPoint.x;
             double z = ((endPoint.z - startPoint.z) / (float)numberOfBombs * (float)i )+ startPoint.z;
             // double z = (height * (1 - uu) + startPoint.z); // -height *2)
