@@ -46,6 +46,7 @@ All sample scenes in this project can be found in the `Assets/Scenes` folder. To
 The annual cooling demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue to indicate the level of demand. Darker shades of blue represent higher cooling demand. Each building displays its annual cooling demand on top of the model, and its color corresponds to the color scale bar to show the level of demand.
 
 | Scripts | Function | Description |
+| :-------------- | :---------- |:---------- |
 | `ColorManager.cs` |  `Loadjson` | Read and load the data from energy demand json file, store the data into dictionary with building id as Key and cooresponding coolding load as Value. | 
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 |                   |`AssignLoad`| Assign the color according to the level of demand of the attached building gameobject. | 
