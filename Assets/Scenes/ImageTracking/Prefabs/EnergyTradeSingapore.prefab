@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 7286116926003474871}
   m_Layer: 0
   m_Name: B117050
-  m_TagString: B117050
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083197052157315000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1828,7 +1828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -2.07, y: 4.35}
+  m_AnchoredPosition: {x: -4.86, y: 4.35}
   m_SizeDelta: {x: 5.949, y: 3.501}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2155267771239854748
@@ -2195,7 +2195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TRIAL
+  m_text: ' '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5330,7 +5330,7 @@ PrefabInstance:
     - target: {fileID: 1932596962637637937, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: B117052
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1936732331680114117, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -5520,7 +5520,7 @@ PrefabInstance:
     - target: {fileID: 2090873966645046042, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: B6327
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2091090657303957266, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -5730,7 +5730,7 @@ PrefabInstance:
     - target: {fileID: 2337235452498079821, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: B117053
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2338116350420187452, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -8170,7 +8170,7 @@ PrefabInstance:
     - target: {fileID: 4920012691774946465, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: B117048
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4924170553255017567, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -9400,7 +9400,7 @@ PrefabInstance:
     - target: {fileID: 6287962418621697820, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: B117051
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6290403199011376065, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -9947,6 +9947,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7020937078563902751, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7024595148538526654, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_Enabled
@@ -10005,7 +10010,7 @@ PrefabInstance:
     - target: {fileID: 7094748749354436859, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: B117049
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7108802174391662056, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -10720,7 +10725,7 @@ PrefabInstance:
     - target: {fileID: 7926404066987953494, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: B117054
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7933712463474780913, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -11750,7 +11755,7 @@ PrefabInstance:
     - target: {fileID: 9031983001786739040, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: B117045
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9037640457904214621, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
