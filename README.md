@@ -1,6 +1,6 @@
-# AR Foundation Samples
+# Interactive Data Visualization and Augmented Reality of Urban Photovoltaic
 
-Example AR scenes that use [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and demonstrate its features. Each feature is used in a minimal sample scene with example code that you can modify or copy into your project.
+The modules are developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html).
 
 This sample project depends on four Unity packages:
 
