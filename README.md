@@ -1,17 +1,17 @@
 # Interactive Data Visualization and Augmented Reality of Urban Photovoltaic
 
-The modules are developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html).
+This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and its demonstration example [AR Foundation Sample Project]
 
-This sample project depends on four Unity packages:
+It depends on four Unity packages:
 
 * [AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html)
 * [Google ARCore XR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.arcore@5.1/manual/index.html) on Android
 * [Apple ARKit XR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.1/manual/index.html) on iOS
 * [OpenXR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.openxr@1.5/manual/index.html) on HoloLens 2
 
-## Which version should I use?
+## Version
 
-The `main` branch of this repository uses AR Foundation 5.1 and is compatible with Unity 2021.2 and later. To access sample scenes for previous versions of AR Foundation, refer to the table below for links to other branches.
+The `ARFoundationAllBackup` branch of this repository uses AR Foundation 5.1 and is compatible with Unity 2021.2 and later. To access sample scenes for previous versions of AR Foundation, refer to the table below for links to other branches.
 
 | Unity Version  | AR Foundation Version |
 | -------------- | --------------------- |
