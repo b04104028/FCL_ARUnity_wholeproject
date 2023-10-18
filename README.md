@@ -1,6 +1,7 @@
 # Interactive Data Visualization and Augmented Reality of Urban Photovoltaic
 ## Introduction
-This project was created for the Future Cities Lab Exhibition, aiming to visualize influencial data of photovoltaic power usage using augmented reality. It utilizes 3D printed models of two sites, Zurich and Singapore, and is composed of three key modules: energy demand, mobility flow (both vehicle and non-vehicle), and energy trading within these regions.
+This project was created for the Future Cities Lab Exhibition, aiming to visualize influencial data of photovoltaic power usage using augmented reality. It utilizes 3D printed models of two sites, Zurich and Singapore, and is composed of three key modules: energy demand(cooling and heating), mobility flow (both vehicle and non-vehicle), and social economics(energy trading within these regions). 
+By inputing these data in a specific format, the project creates a virtual overlay on the physical 3D models, providing a direct and clear view of the real situations in the designated areas.
 
 ## Facts
 This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and its demonstration example [AR Foundation Sample Project](https://github.com/Unity-Technologies/arfoundation-samples).
@@ -53,13 +54,26 @@ The annual cooling demand is measured in kWh, and it's represented by a color ba
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 |                   |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
 |                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
+
 ### Cooling Demand
 The annaul cooling demand data is visualized on both Zurich and Sinagpore models. 
 
 ### Heating Demand
 The annual heating demand data is visualized on Zurich model.  
 
-## Mobility Flow
+## Mobility Flow Module
+The mobility flow of vehicle and non-vehicle are demonstrated on virtual models which includes the terrain and buildings within areas of study. Given the location(latitude, longtitude) and time, each user(a preson/a vehicle) is represented by one dot(a sphere prefab) showing on the models according to time sequence. Based on real time record, the mobility flow is speed up by `timeSpeedupFactor`, which default value is 1000 times faster than real time. 
+
+
+| Scripts | Function | Description |
+| :-------------- | :---------- |:---------- |
+| `MobilityFlow.cs` |`LoadJsonFlat`| Read and load the data from mobility json file, store the data `uid`, `time`, `lon`, `lat` into the list `dataList`. | 
+|                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
+|                   |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
+|                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
+
+
+
 
 At runtime, ARFoundation will generate an `ARTrackedImage` for each detected reference image. This sample uses the [`TrackedImageInfoManager.cs`](https://github.com/Unity-Technologies/arfoundation-samples/blob/master/Assets/Scenes/ImageTracking/BasicImageTracking/TrackedImageInfoManager.cs) script to overlay the original image on top of the detected image, along with some meta data.
 
