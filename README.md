@@ -1,5 +1,8 @@
 # Interactive Data Visualization and Augmented Reality of Urban Photovoltaic
+## Introduction
+This project was created for the Future Cities Lab Exhibition, aiming to visualize influencial data of photovoltaic power usage using augmented reality. It utilizes 3D printed models of two sites, Zurich and Singapore, and is composed of three key modules: energy demand, mobility flow (both vehicle and non-vehicle), and energy trading within these regions.
 
+## Facts
 This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and its demonstration example [AR Foundation Sample Project](https://github.com/Unity-Technologies/arfoundation-samples).
 
 It depends on 2 Unity packages:
@@ -49,20 +52,12 @@ The annual cooling demand is measured in kWh, and it's represented by a color ba
 | `ColorManager.cs` |  `Loadjson` | Read and load the data from energy demand json file, store the data into dictionary with building id as Key and cooresponding coolding load as Value. | 
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 |                   |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
-|                   |`LoadOnText`| Show cooling demand on top of the buiding gameobject by changing the text of its children gameobject: TextMeshPro  | 
+|                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
 ### Cooling Demand
 The annaul cooling demand data is visualized on both Zurich and Sinagpore models. 
 
 ### Heating Demand
-
 The annual heating demand data is visualized on Zurich model.  
-
-
-There are two samples demonstrating image tracking. The image tracking samples are supported on ARCore and ARKit. To enable image tracking, you must first create an `XRReferenceImageLibrary`. This is the set of images to look for in the environment. [Click here](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/features/image-tracking.html) for instructions on creating one.
-
-You can also add images to the reference image library at runtime. This sample includes a button that adds the images `one.png` and `two.png` to the reference image library. See the script `DynamicLibrary.cs` for example code.
-
-Run the sample on an ARCore or ARKit-capable device and point your device at one of the images in [`Assets/Scenes/ImageTracking/Images`](https://github.com/Unity-Technologies/arfoundation-samples/tree/master/Assets/Scenes/ImageTracking/Images). They can be displayed on a computer monitor; they do not need to be printed out.
 
 ## Mobility Flow
 
