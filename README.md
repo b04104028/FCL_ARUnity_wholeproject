@@ -61,12 +61,14 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 |                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
 |   `Colorbar.cs `  |`SetColorbar`| Set the color bar that indicates the level of demand. The highest demand value in this area is rounded to the nearest whole number matches the darkest color, and 0 demand value matches the white color, and the color gradient in between shows the interpolation between min and max value of demand. The maximum value is rounded to a whole number instead of an original value. | 
 |                   |`LoadOnText`| Display the interpolated figure beside color bar.|
+|`House.cs`         |class `Root`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool.|
 
 | Object in Unity project | Zurich Heating | Zurich Cooling | Singapore Cooling |
 | :-------------- | :---------- |:---------- |:---------- |
 | Scene | `EnergyDemandScene.scene` | `QCEnergyDemandScene.scene` |`QCSingaporeEnergyDemandScene.scene`| 
-| Prefabs |`ZRHmodel2809.prefab`|   | 
-| Scripts |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
+| Prefabs |`ZRHmodel2809.prefab`|`ZRHModel_QC.prefab`|`Qc_SingaporeEnergyDemand`|
+| Scripts |`ColorManager.cs`,`Colorbar.cs`| `QCColorManager.cs`,`QCColorbar.cs` |`QCSingColorManager.cs`,`QCSingColorbar.cs`|
+|         |`House.cs`|
 
 ### Cooling Demand
 The annaul cooling demand data is visualized on both Zurich and Sinagpore models. 
