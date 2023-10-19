@@ -64,10 +64,11 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 |`House.cs`         |class `Root`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool.|
 
 | Object in Unity project | Zurich Heating | Zurich Cooling | Singapore Cooling |
-| :-------------- | :---------- |:---------- |:---------- |
-| Scene | `EnergyDemandScene.scene` | `QCEnergyDemandScene.scene` |`QCSingaporeEnergyDemandScene.scene`| 
+| :---------------------- | :------------- |:-------------- |:----------------- |
+| Scene |`EnergyDemandScene.scene`|`QCEnergyDemandScene.scene`|`QCSingaporeEnergyDemandScene.scene`| 
 | Prefabs |`ZRHmodel2809.prefab`|`ZRHModel_QC.prefab`|`Qc_SingaporeEnergyDemand`|
-| Scripts |`ColorManager.cs`,`Colorbar.cs`| `QCColorManager.cs`,`QCColorbar.cs` |`QCSingColorManager.cs`,`QCSingColorbar.cs`|
+| Scripts |`ColorManager.cs`,`Colorbar.cs`|`QCColorManager.cs`,`QCColorbar.cs`|`QCSingColorManager.cs`,`QCSingColorbar.cs`|
+|         |`House.cs`|||
 
 ### Cooling Demand
 The annaul cooling demand data is visualized on both Zurich and Sinagpore models. 
