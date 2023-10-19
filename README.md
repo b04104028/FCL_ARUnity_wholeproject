@@ -56,7 +56,7 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 |                   |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
 |                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
-|   `Colorbar.cs `  |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
+|   `Colorbar.cs `  |`SetColorbar`| Set the color bar that indicates the level of demand. The highest demand value in this area is rounded to the nearest whole number matches the darkest color, and 0 demand value matches the white color, and the color gradient in between shows the interpolation between min and max value of demand. | 
 
 Scene: 
 
@@ -75,10 +75,11 @@ The mobility flow of vehicle and non-vehicle are demonstrated on virtual models 
 | `MobilityFlow.cs` |`LoadJsonFlat`| Read and load the data from mobility json file, store the data `uid`, `time`, `lon`, `lat` into the list `dataList`, and sort out by time from the earliest to the oldest time. | 
 |                   |IEnumerator `InstantiateSpheresWithTimeDelay`|fetch the data from dataList and instantiate sphere prefabs that represent the users according to time. The waiting time is the difference betweeen the previous time spot and the current time spot.| 
 |                   |`MapCoordinatesToUnitySpace`| Map latitude and longitude to their corresponding locations on the model using reference points and their respective coordinates from Google Maps, allowing the calculation of new points on the model. | 
-|                   |`ShowTime`| Show time on the progress bar.  | 
+|                   |`ShowTime`| Display time on the progress bar.  | 
 
 
-## Social Economics (Energy Trade) ModuleThe social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width). 
+## Social Economics (Energy Trade) Module
+The social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width). 
 
 | Scripts | Function | Description |
 | :-------------- | :---------- |:---------- |
