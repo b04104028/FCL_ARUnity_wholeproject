@@ -43,17 +43,22 @@ All sample scenes in this project can be found in the `Assets/Scenes` folder. To
 | [Image tracking](#image-tracking) | Scenes that demonstrate Image tracking |
 
 ## Menu
+The menu scene 
 
 ## Energy Demand Module
 
 The annual cooling demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue to indicate the level of demand. Darker shades of blue represent higher cooling demand. The darkest level matches the highest cooling demand in this model data. Each building displays its annual cooling demand on top of the model, and its color corresponds to the color scale bar to show the level of demand.
 
+The following summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
 | Scripts | Function | Description |
 | :-------------- | :---------- |:---------- |
-| `ColorManager.cs` |  `Loadjson` | Read and load the data from energy demand json file, store the data into dictionary with building id as Key and cooresponding coolding load as Value. | 
+| `ColorManager.cs` | `Loadjson` | Read and load the data from energy demand json file, store the data into dictionary with building id as Key and cooresponding coolding load as Value. | 
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 |                   |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
 |                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
+|   `Colorbar.cs `  |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
+
+Scene: 
 
 ### Cooling Demand
 The annaul cooling demand data is visualized on both Zurich and Sinagpore models. 
