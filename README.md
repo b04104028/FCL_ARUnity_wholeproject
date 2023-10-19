@@ -7,7 +7,6 @@ By inputing these data in a specific format, the project creates a virtual overl
 This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and its demonstration example [AR Foundation Sample Project](https://github.com/Unity-Technologies/arfoundation-samples).
 
 It depends on 2 Unity packages:
-
 * [AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html)
 * [Apple ARKit XR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.1/manual/index.html) on iOS
 
@@ -35,12 +34,15 @@ All sample scenes in this project can be found in the `Assets/Scenes` folder. To
 
 # Table of Contents
 
-| Sample scene(s) | Description |
+| Sample scene(s) | Project Structure |
 | :-------------- | :---------- |
-| [Simple AR](#simple-ar) | Demonstrates basic Plane detection and Raycasting
+| [Debug Image Tracking](#simple-ar) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
 | [Camera](#camera) | Scenes that demonstrate Camera features |
 | [Plane detection](#plane-detection) | Scenes that demonstrate Plane detection |
 | [Image tracking](#image-tracking) | Scenes that demonstrate Image tracking |
+
+## Project Structure
+
 
 ## Menu
 The menu scene 
@@ -49,7 +51,6 @@ The menu scene
 `ReferenceImageLibrary`
 
 ## Energy Demand Module
-
 The annual cooling demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue to indicate the level of demand. Darker shades of blue represent higher cooling demand. The darkest level matches the highest cooling demand in this model data. Each building displays its annual cooling demand on top of the model, and its color corresponds to the color scale bar to show the level of demand.
 
 The following summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
@@ -63,12 +64,12 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 |                   |`LoadOnText`| Display the interpolated figure beside color bar.|
 |`House.cs`         |class `Root`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool.|
 
-| Object in Unity project | Zurich Heating | Zurich Cooling | Singapore Cooling |
+| Unity Assets | Zurich Heating | Zurich Cooling | Singapore Cooling |
 | :---------------------- | :------------- |:-------------- |:----------------- |
 | Scene |`EnergyDemandScene.scene`|`QCEnergyDemandScene.scene`|`QCSingaporeEnergyDemandScene.scene`| 
 | Prefabs |`ZRHmodel2809.prefab`|`ZRHModel_QC.prefab`|`Qc_SingaporeEnergyDemand`|
 | Scripts |`ColorManager.cs`,`Colorbar.cs`|`QCColorManager.cs`,`QCColorbar.cs`|`QCSingColorManager.cs`,`QCSingColorbar.cs`|
-|         |`House.cs`|`House.cs`|`House.cs`|
+| Data Scripts|`House.cs`|`House.cs`|`House.cs`|
 
 ### Cooling Demand
 The annaul cooling demand data is visualized on both Zurich and Sinagpore models. 
@@ -87,6 +88,12 @@ The mobility flow of vehicle and non-vehicle are demonstrated on virtual models 
 |                   |`MapCoordinatesToUnitySpace`| Map latitude and longitude to their corresponding locations on the model using reference points and their respective coordinates from Google Maps, allowing the calculation of new points on the model. | 
 |                   |`ShowTime`| Display time on the progress bar.  | 
 
+| Unity Assets | Zurich | Singapore |
+| :---------------------- | :------------- |:-------------- |
+| Scene |`MobilityScene.scene`|`SingMobilityScene.scene`| 
+| Prefabs |`ZurichModel0210_buildingterrain.prefab`|`SingaporeMobility.prefab`|
+| Scripts |`MobilityFlow.cs`|`SingMobilityFlow.cs`|
+| Data Scripts |`ZurichMobilityJson.cs`|`ZurichMobilityJson.cs`|
 
 ## Social Economics (Energy Trade) Module
 The social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width). 
@@ -98,3 +105,15 @@ The social economics module illustrates energy trading among buildings in the ar
 |                |IEnumerator `TEMPChangeBuildingColor`| Assign "from building" locaiton as the start point of the arrow(line renderer) and "to building" as end point. Change the color to blue for "from building" and yellow for "to building". Arrow width is scaled to fit the model size and indicates the amoudn of transmission electricity. The arrows are destroyed after `prefabStayTime` | 
 |                   |`ShowTime`| Display time on progress bar(slider) | 
 
+| Unity Assets | Zurich | Singapore |
+| :---------------------- | :------------- |:-------------- |
+| Scene |`EnergyTradeScene.scene`|`EnergyTradeSingaporeScene.scene`| 
+| Prefabs |`ZRHmodelEnergyTrade.prefab`|`EnergyTradeSingapore.prefab`|
+| Scripts |`EnergyTrade.cs`|`SingEnergyTrade.cs`|
+| Data Scripts |`DataEnergyTrade.cs`|`DataEnergyTrade.cs`|
+
+## Debug Image Tracking
+| Unity Assets | Content | Description |
+| :---------------------- | :------------- | :------------- |
+| Scene |`BasicImageTracking.scene`| When an image in the `ReferenceImageLibrary` is detected, the information of this image is displayed in virtual space. |
+| Scripts |`TrackedImageInfoManager.cs`||
