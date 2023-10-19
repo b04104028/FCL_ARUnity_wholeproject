@@ -36,13 +36,10 @@ All sample scenes in this project can be found in the `Assets/Scenes` folder. To
 
 | Sample scene(s) | Project Structure |
 | :-------------- | :---------- |
-| [Debug Image Tracking](#simple-ar) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
+| [Debug Image Tracking](#Debug-Image-Tracking) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
 | [Camera](#camera) | Scenes that demonstrate Camera features |
 | [Plane detection](#plane-detection) | Scenes that demonstrate Plane detection |
 | [Image tracking](#image-tracking) | Scenes that demonstrate Image tracking |
-
-## Project Structure
-
 
 ## Menu
 The menu scene 
