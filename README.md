@@ -36,10 +36,12 @@ All sample scenes in this project can be found in the `Assets/Scenes` folder. To
 
 | Sample scene(s) | Project Structure |
 | :-------------- | :---------- |
+| [Menu](#Menu) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
+| [Scenes](#Scenes) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
+| [Energy Demand Module](#Energy-Demand-Module) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
+| [Mobility Flow Module](#Mobility-Flow-Module) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
+| [Social Economics (Energy Trade) Module](#Social-Economics-(Energy-Trade)-Module) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
 | [Debug Image Tracking](#Debug-Image-Tracking) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
-| [Camera](#camera) | Scenes that demonstrate Camera features |
-| [Plane detection](#plane-detection) | Scenes that demonstrate Plane detection |
-| [Image tracking](#image-tracking) | Scenes that demonstrate Image tracking |
 
 ## Menu
 The menu scene 
