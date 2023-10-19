@@ -64,8 +64,8 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 
 | Object in Unity project | Zurich Heating | Zurich Cooling | Singapore Cooling |
 | :-------------- | :---------- |:---------- |:---------- |
-| Scene | `EnergyDemandScene` | `QCEnergyDemandScene` |`QCSingaporeEnergyDemandScene`| 
-| Prefabs |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
+| Scene | `EnergyDemandScene.scene` | `QCEnergyDemandScene.scene` |`QCSingaporeEnergyDemandScene.scene`| 
+| Prefabs |`ZRHmodel2809.prefab`|   | 
 | Scripts |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
 
 ### Cooling Demand
