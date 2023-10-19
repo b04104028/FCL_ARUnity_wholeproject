@@ -68,7 +68,7 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 | Scene |`EnergyDemandScene.scene`|`QCEnergyDemandScene.scene`|`QCSingaporeEnergyDemandScene.scene`| 
 | Prefabs |`ZRHmodel2809.prefab`|`ZRHModel_QC.prefab`|`Qc_SingaporeEnergyDemand`|
 | Scripts |`ColorManager.cs`,`Colorbar.cs`|`QCColorManager.cs`,`QCColorbar.cs`|`QCSingColorManager.cs`,`QCSingColorbar.cs`|
-|         |                                    `House.cs`|||
+|         |`House.cs`|`House.cs`|`House.cs`|
 
 ### Cooling Demand
 The annaul cooling demand data is visualized on both Zurich and Sinagpore models. 
