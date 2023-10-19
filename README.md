@@ -79,6 +79,6 @@ The mobility flow of vehicle and non-vehicle are demonstrated on virtual models 
 | :-------------- | :---------- |:---------- |
 |`EnergyTrade.cs`|`LoadJson`| Read and load data from energy trade json file. `FromBuilding` sells `transmission` amount of electricity to `ToBuilding` at hour `T`, and these data are stored in a list. | 
 |                |IEnumerator `StartLaunchLineRenderers`| Fetch data from dataList and assign coorsponding building on the model, and then pass the data to initiate `TEMPChangeBuildingColor`| 
-|                |IEnumerator `TEMPChangeBuildingColor`| Assign "from building" locaiton as the start point of the arrow(line renderer) and "to building" as end point. Change the color to blue for "from building" and yellow for "to building". | 
+|                |IEnumerator `TEMPChangeBuildingColor`| Assign "from building" locaiton as the start point of the arrow(line renderer) and "to building" as end point. Change the color to blue for "from building" and yellow for "to building". Arrow width is scaled to fit the model size and indicates the amoudn of transmission electricity. The arrows are destroyed after `prefabStayTime` | 
 |                   |`ShowTime`| Map latitude and longitude to their corresponding locations on the model using reference points and their respective coordinates from Google Maps, allowing the calculation of new points on the model. | 
 
