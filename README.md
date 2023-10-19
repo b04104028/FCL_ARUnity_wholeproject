@@ -45,6 +45,9 @@ All sample scenes in this project can be found in the `Assets/Scenes` folder. To
 ## Menu
 The menu scene 
 
+## Scenes
+`ReferenceImageLibrary`
+
 ## Energy Demand Module
 
 The annual cooling demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue to indicate the level of demand. Darker shades of blue represent higher cooling demand. The darkest level matches the highest cooling demand in this model data. Each building displays its annual cooling demand on top of the model, and its color corresponds to the color scale bar to show the level of demand.
@@ -56,11 +59,12 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 |                   |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
 |                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
-|   `Colorbar.cs `  |`SetColorbar`| Set the color bar that indicates the level of demand. The highest demand value in this area is rounded to the nearest whole number matches the darkest color, and 0 demand value matches the white color, and the color gradient in between shows the interpolation between min and max value of demand. | 
+|   `Colorbar.cs `  |`SetColorbar`| Set the color bar that indicates the level of demand. The highest demand value in this area is rounded to the nearest whole number matches the darkest color, and 0 demand value matches the white color, and the color gradient in between shows the interpolation between min and max value of demand. The maximum value is rounded to a whole number instead of an original value. | 
+|                   |`LoadOnText`| Display the interpolated figure beside color bar.|
 
-|                 | Singapore | Zurich |
-| :-------------- | :---------- |:---------- |
-| Scene | `Loadjson` | Read and load the data from energy demand json file, store the data into dictionary with building id as Key and cooresponding coolding load as Value. | 
+| Object in Unity project | Zurich Heating | Zurich Cooling | Singapore Cooling |
+| :-------------- | :---------- |:---------- |:---------- |
+| Scene | `EnergyDemandScene` | `QCEnergyDemandScene` |`QCSingaporeEnergyDemandScene`| 
 | Prefabs |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 | Scripts |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
 
