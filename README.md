@@ -67,7 +67,7 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 
 
 ## Data Format
-Sample data can be found in this repository under folder `PersistantFilePath`  
+Sample data can be found in this repository under folder `PersistantFilePath`. To customize data to visualize, prepare new data in the following format, and follow step9 of previous section [case1](#case1:-Directly-run-on-device-without-modification).
 
 ### Energy Demand
 {
