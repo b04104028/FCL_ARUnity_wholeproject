@@ -8,12 +8,12 @@ The `ARFoundationAllBackup` branch represents the final version of this reposito
 
 This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and its demonstration example [AR Foundation Sample Project](https://github.com/Unity-Technologies/arfoundation-samples).
 
-It depends on 2 Unity packages:
-* [AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html)
-* [Apple ARKit XR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.1/manual/index.html) on iOS
-To check the packages, in unity editor, go to Windows > Packages manager
+It depends on 2 Unity packages:  
+* [AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html)  
+* [Apple ARKit XR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.1/manual/index.html) on iOS  
+To check the packages in unity editor, go to Windows > Packages manager  
 
-To build on iOS mobile devices, it requires an external development environment:
+To build on iOS mobile devices, it requires an external development environment:  
 * [Xcode](https://developer.apple.com/documentation/xcode) available on macOS and developer account
 
 
@@ -25,7 +25,7 @@ This project can be directly built to iOS device providing input data in specifi
 In this case, Unity is not required. Follow the steps below:  
 
 **Xcode part**   
-(See [tutorial video](https://www.youtube.com/watch?v=Z-gija1aAhw) that demonstrates the following steps.)
+(See [tutorial video](https://www.youtube.com/watch?v=Z-gija1aAhw) that demonstrates the following steps.)   
 1. Clone this repository and go to `1610FinalBuild` folder, open `Unity-iPhone.xcodeproj` using Xcode 14.0 or later.
 
 2. Plug in your iOS device (with [developer mode](https://docs.expo.dev/guides/ios-developer-mode/#) enabled) to the compmuter, and select this device on top of the window in Xcode.
@@ -43,7 +43,7 @@ In this case, Unity is not required. Follow the steps below:
 
 8. "[Verify](https://www.youtube.com/watch?v=vsi2MsEW764)" this app in Settings > General > VPN & Device Management 
 
-9. Transfer the data for visualization to the device under App document folder(Example file formats are described [below](#Data-Format)). There are many ways to do this. For example, use 3rd-party iOS file explorers, such as [iMazing](https://imazing.com) or [iExplorer](https://macroplant.com/iexplorer). Navigate to ../Apps/FCL AR Visualization/Developer/Documents, and copy-paste the folder `PersistantFilePath` including the files in it to this path (e.g., the whole file path is: ../Apps/FCL AR Visualization/Developer/Documents/PersistantFilePath/ZurichEnergyTrade.json). For the app document file path, see [Unity Persistant File Path](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html).
+9. Transfer the data for visualization to the device under App document folder(Example file formats are described [below](#Data-Format)). There are many ways to do this. For example, use 3rd-party iOS file explorers, such as [iMazing](https://imazing.com) or [iExplorer](https://macroplant.com/iexplorer). Navigate to ../Apps/FCL AR Visualization/Developer/Documents, and copy-paste the folder `PersistantFilePath` including the files in it to this path (i.e., the whole file path can be: ../Apps/FCL AR Visualization/Developer/Documents/PersistantFilePath/ZurichEnergyTrade.json). For the app document file path, see [Unity Persistant File Path](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html).
 
 12. The app is ready to use. 
 
@@ -67,7 +67,7 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 
 
 ## Data Format
-Sample data can be found in this repository under folder `PersistantFilePath`. To customize data to visualize, prepare new data in the following format, and follow step9 of previous section [case1](#case1:-Directly-run-on-device-without-modification).
+Sample data can be found in this repository under folder `PersistantFilePath`. To customize data to visualize, prepare new data in the following format, and follow step#9 of previous section [case1](#case1:-Directly-run-on-device-without-modification).
 
 ### Energy Demand
 {
@@ -109,7 +109,7 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
 # Table of Contents
 
 | Sample scene(s) | Location in project |
-| :-------------- | :---------- |
+| :-------------- | :------------------ |
 | [Menu](#Menu) | ../Asset/Scenes/ImageTracking/Menu |
 | [Images](#Scenes) | ../Asset/Scenes/ImageTracking/Images |
 | [Energy Demand Module](#Energy-Demand-Module) | ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs|
@@ -124,8 +124,11 @@ The menu scene is the start page of the app. It allows users (1)select the city,
 ## Image
  ../Asset/Scenes/ImageTracking/Images   
 `ReferenceImageLibrary.asset` manages the images that can be detected in physical world. Use this to modify or add new images.
-After modifying images, add the cooresponding prefabs that will be instantiated when the new image is detected under: (A module's scene, eg., EnergyDemandScene.unity)>>
-More detail explanation of the code can be found on [AR Foundation Image Tracking package documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/features/image-tracking.html)
+After modifying images, add the cooresponding prefabs that will be instantiated when the new image is detected under: (A module's scene, eg., EnergyDemandScene.unity) > Hierarchy > gameobject `ARF XR Origin Set Up` > gameobject `XR Origin` > Inspector > component `PrefabImagePairManager(Script)` > `PrefabList`
+
+### Instantiate module prefabs
+The matched prefabs are instantiated in virtual world when the coorseponding image is detected in physical world. The location and rotation is set by function`AssignPrefab` in the script`PrefabImagePairManager.cs`. 
+Detail explanation can be found in [AR Foundation Image Tracking package documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/features/image-tracking.html)
 
 ## Data Visualization Modules
 Prefabs location: ../Asset/Scenes/ImageTracking/Prefabs    
@@ -134,18 +137,18 @@ Scripts location: ../Asset/Scenes/ImageTracking/Scripts
 
 ### Energy Demand Module
 
-The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized on Zurich model.  
+The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized only on Zurich model.  
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
 | Scripts | Function | Description |
 | :-------------- | :---------- |:---------- | 
 | `ColorManager.cs` | `Start` | Set the file path: `string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_QH_total.json"` , and call all functions. | 
-|                   | `Loadjson` | Read and load the data from energy demand json file.  Store the data into dictionary with building id as Key and cooresponding coolding load as Value. | 
+|                   | `Loadjson` | Read and load the data from energy demand json file.  Store the data into dictionary with building id as Key and coolding load as Value. | 
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 |                   |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
 |                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
-|   `Colorbar.cs `  |`SetColorbar`| Set the color bar that indicates the level of demand. The highest demand value in this area is rounded to the nearest whole number matches the darkest color, and 0 demand value matches the white color, and the color gradient in between shows the interpolation between min and max value of demand. The maximum value is rounded to a whole number instead of an original value. | 
-|                   |`LoadOnText`| Display the interpolated figure beside color bar.|
+|   `Colorbar.cs `  |`SetColorbar`| Set the color bar that indicates the level of demand. The highest demand value in this area is rounded to the nearest whole number. This number matches the darkest color, and 0 demand value matches the white color. The color gradient in between shows the interpolation between min and max value of demand. | 
+|                   |`LoadOnText`| Display the interpolated figures beside color bar.|
 |`House.cs`         |class `Root`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool.|
 
 | Unity Assets | Zurich Heating | Zurich Cooling | Singapore Cooling |
@@ -158,7 +161,8 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 
 
 ### Mobility Flow Module
-The mobility flow of vehicle and non-vehicle are demonstrated on virtual models which includes the terrain and buildings within areas of study. Given the location(latitude, longtitude) and time, each user(a preson/a vehicle) is represented by one dot(a sphere prefab) showing on the models according to time sequence. Based on real time record, the mobility flow is speed up by `timeSpeedupFactor`, which default value is 1000 times faster than real time. 
+
+The mobility flow of vehicle and non-vehicle is demonstrated on virtual models which includes the terrain and buildings within areas of study. Given the location(latitude, longtitude) and time, each user(a preson/a vehicle) is represented by one dot(a sphere prefab) showing on the models according to time sequence. Based on real time record, the mobility flow is speeded up by `timeSpeedupFactor`, which default value is 1000 times faster than real-time. 
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
 | Scripts | Function | Description |
@@ -180,6 +184,7 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 | Data Files |`Zurich_Mobility.geojson`|`Singapore_Mobility.json`|
 
 ### Social Economics (Energy Trade) Module
+
 The social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width). 
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
@@ -202,7 +207,8 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 
 ## Debug Image Tracking
  ../Asset/Scenes/ImageTracking/BasicImageTracking  
-This scene is used for checking the image detection works. It is disabled by default. To enable this function, go to `menu.unity` scene, find Debug buttom under Canvas, and check the box in Inspector. 
+This scene is used for checking the image detection works. It is disabled by default. To enable this function, go to `menu.unity` scene, find Debug buttom under Canvas, and check the box in Inspector.  
+
 | Unity Assets | Content | Description |
 | :---------------------- | :------------- | :------------- |
 | Scene |`BasicImageTracking.unity`| When an image in the `ReferenceImageLibrary.asset` is detected, the information of this image is displayed in virtual space. |
