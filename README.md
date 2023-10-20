@@ -42,9 +42,9 @@ In this case, Unity is not required. Follow the steps below:
 
 8. "[Verify](https://www.youtube.com/watch?v=vsi2MsEW764)" this app in Settings > General > VPN & Device Management 
 
-9. Transfer the data for visualization to the device under App document folder(Example file formats are described [below](#Data-Format)). There are many ways to do this. For example, using [iMazing](https://imazing.com) or [iExplorer](https://macroplant.com/iexplorer), navigate to ../Apps/AR-Foundation/Developer/Documents and put the files in this folder. For the app document file path, see [Unity Persistant File Path](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html).
+9. Transfer the data for visualization to the device under App document folder(Example file formats are described [below](#Data-Format)). There are many ways to do this. For example, use 3rd-party iOS file explorers, such as [iMazing](https://imazing.com) or [iExplorer](https://macroplant.com/iexplorer). Navigate to ../Apps/FCL AR Visualization/Developer/Documents, and copy-paste the folder `PersistantFilePath` including the files in it to this path (e.g., the whole file path is: ../Apps/FCL AR Visualization/Developer/Documents/PersistantFilePath/ZurichEnergyTrade.json). For the app document file path, see [Unity Persistant File Path](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html).
 
-10. The app is ready to use. 
+12. The app is ready to use. 
 
 ### case 2: Modify project before building to device
 
@@ -54,7 +54,7 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 
 2. Clone this repository and open the Unity project at the root of this repository.
 
-3. Modify the projects as needed
+3. Modify the projects as needed.
 
 4. Go to [Build Settings](https://docs.unity3d.com/Manual/BuildSettings.html), select a target platform([iOS](https://docs.unity3d.com/Manual/iphone-BuildProcess.html) in this sample), and build this project in a new folder. In this way, unity automatically build a Xcode project. 
 [Xcode part]
@@ -65,6 +65,7 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 
 
 ## Data Format
+Sample data can be found in this repository.
 ### Energy Demand
 {
 "houses":
@@ -78,9 +79,29 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
         "load": "0"
     },...
     ]}
+    
 ### Mobility
-### Energy Trade
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "uid": 0.0, "Time": "2023-07-31T02:23:32.083", "Lat": 1.3906850104627779, "Lon": 103.89404394884859, "is_vehicle": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 103.894043948848591, 1.390685010462778 ] } },
+{ "type": "Feature", "properties": { "uid": 0.0, "Time": "2023-07-31T02:23:32.083", "Lat": 1.3906829774271761, "Lon": 103.89404762958823, "is_vehicle": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 103.894047629588229, 1.390682977427176 ] } },...]}
 
+### Energy Trade
+{
+"DataEnergyTrade":[
+    {
+        "From": "B1082_demand.csv",
+        "To": "B1030_demand.csv",
+        "Transmission": "4",
+        "T": "12"
+    },
+    {
+        "From": "B1108_demand.csv",
+        "To": "B1047_demand.csv",
+        "Transmission": "1",
+        "T": "12"
+    },...]}
 
 # Table of Contents
 
@@ -112,10 +133,11 @@ Scripts location: ../Asset/Scenes/ImageTracking/Scripts
 
 The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized on Zurich model.  
 
-The following summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
+The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
 | Scripts | Function | Description |
-| :-------------- | :---------- |:---------- |
-| `ColorManager.cs` | `Loadjson` | Read and load the data from energy demand json file, store the data into dictionary with building id as Key and cooresponding coolding load as Value. | 
+| :-------------- | :---------- |:---------- | 
+| `ColorManager.cs` | `Start` | Set the file path: `string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_QH_total.json"` , and call all functions. | 
+|                   | `Loadjson` | Read and load the data from energy demand json file.  Store the data into dictionary with building id as Key and cooresponding coolding load as Value. | 
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
 |                   |`AssignColor`| Assign the color according to the level of demand of the attached building gameobject. | 
 |                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
@@ -129,16 +151,17 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 | Prefabs |`ZRHmodel2809.prefab`|`ZRHModel_QC.prefab`|`Qc_SingaporeEnergyDemand.prefab`|
 | Scripts |`ColorManager.cs`,`Colorbar.cs`|`QCColorManager.cs`,`QCColorbar.cs`|`QCSingColorManager.cs`,`QCSingColorbar.cs`|
 | Data Scripts|`House.cs`|`House.cs`|`House.cs`|
-|Data Files| | | |
+| Data Files|`Zurich_QH_total.json`| `Zurich_QC_total.json`| `Sing_QC_total.json`|
 
 
 ### Mobility Flow Module
 The mobility flow of vehicle and non-vehicle are demonstrated on virtual models which includes the terrain and buildings within areas of study. Given the location(latitude, longtitude) and time, each user(a preson/a vehicle) is represented by one dot(a sphere prefab) showing on the models according to time sequence. Based on real time record, the mobility flow is speed up by `timeSpeedupFactor`, which default value is 1000 times faster than real time. 
 
-
+The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
 | Scripts | Function | Description |
 | :-------------- | :---------- |:---------- |
-| `MobilityFlow.cs` |`LoadJsonFlat`| Read and load the data from mobility json file, store the data `uid`, `time`, `lon`, `lat` into the list `dataList`, and sort out by time from the earliest to the oldest time. | 
+| `MobilityFlow.cs` | `Start` | Set the file path: `string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_Mobility.geojson"` , and call all functions. | 
+|                   |`LoadJsonFlat`| Read and load the data from mobility json file, store the data `uid`, `time`, `lon`, `lat` into the list `dataList`, and sort out by time from the earliest to the oldest time. | 
 |                   |IEnumerator `InstantiateSpheresWithTimeDelay`|fetch the data from dataList and instantiate sphere prefabs that represent the users according to time. The waiting time is the difference betweeen the previous time spot and the current time spot.| 
 |                   |`MapCoordinatesToUnitySpace`| Map latitude and longitude to their corresponding locations on the model using reference points and their respective coordinates from Google Maps, allowing the calculation of new points on the model. | 
 |                   |`ShowTime`| Display time on the progress bar.  | 
@@ -149,13 +172,16 @@ The mobility flow of vehicle and non-vehicle are demonstrated on virtual models 
 | Prefabs |`ZurichModel0210_buildingterrain.prefab`|`SingaporeMobility.prefab`|
 | Scripts |`MobilityFlow.cs`|`SingMobilityFlow.cs`|
 | Data Scripts |`ZurichMobilityJson.cs`|`ZurichMobilityJson.cs`|
+| Data Files |`Zurich_Mobility.geojson`|`Singapore_Mobility.json`|
 
 ### Social Economics (Energy Trade) Module
 The social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width). 
 
+The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
 | Scripts | Function | Description |
 | :-------------- | :---------- |:---------- |
-|`EnergyTrade.cs`|`LoadJson`| Read and load data from energy trade json file. `FromBuilding` sells `transmission` amount of electricity to `ToBuilding` at hour `T`, and these data are stored in a list. | 
+| `EnergyTrade.cs`| `Start` | Set the file path: `string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json"` , and call all functions. | 
+|                 |`LoadJson`| Read and load data from energy trade json file. `FromBuilding` sells `transmission` amount of electricity to `ToBuilding` at hour `T`, and these data are stored in a list. | 
 |                |IEnumerator `StartLaunchLineRenderers`| Fetch data from dataList and assign coorsponding building on the model, and then pass the data to initiate `TEMPChangeBuildingColor`| 
 |                |IEnumerator `TEMPChangeBuildingColor`| Assign "from building" locaiton as the start point of the arrow(line renderer) and "to building" as end point. Change the color to blue for "from building" and yellow for "to building". Arrow width is scaled to fit the model size and indicates the amoudn of transmission electricity. The arrows are destroyed after `prefabStayTime` | 
 |                   |`ShowTime`| Display time on progress bar(slider) | 
@@ -166,8 +192,11 @@ The social economics module illustrates energy trading among buildings in the ar
 | Prefabs |`ZRHmodelEnergyTrade.prefab`|`EnergyTradeSingapore.prefab`|
 | Scripts |`EnergyTrade.cs`|`SingEnergyTrade.cs`|
 | Data Scripts |`DataEnergyTrade.cs`|`DataEnergyTrade.cs`|
+| Data Files | `ZurichEnergyTrade.json` | `EnergyTradeSingapore.json` |
 
 ## Debug Image Tracking
+ ../Asset/Scenes/ImageTracking/BasicImageTracking  
+This scene is used for checking the image detection works. It is disabled by default. To enable this function, go to `menu.unity` scene, find Debug buttom under Canvas, and check the box in Inspector. 
 | Unity Assets | Content | Description |
 | :---------------------- | :------------- | :------------- |
 | Scene |`BasicImageTracking.unity`| When an image in the `ReferenceImageLibrary.asset` is detected, the information of this image is displayed in virtual space. |
