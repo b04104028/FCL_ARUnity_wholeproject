@@ -1,56 +1,84 @@
 # Interactive Data Visualization and Augmented Reality of Urban Photovoltaic
 ## Introduction
-This project was created for the Future Cities Lab Exhibition, aiming to visualize influencial data of photovoltaic power usage using augmented reality. It utilizes 3D printed models of two sites, Zurich and Singapore, and is composed of three key modules: energy demand(cooling and heating), mobility flow (both vehicle and non-vehicle), and social economics(energy trading within these regions). 
+This project is an iPad mobile app created for the Future Cities Lab Exhibition 2023 at ETH Zurich, aiming to visualize influencial data of photovoltaic power usage using augmented reality. It utilizes 3D printed models of two sites, Zurich and Singapore, and is composed of three key modules: energy demand(cooling and heating), mobility flow (both vehicle and non-vehicle), and social economics(energy trading within these regions). 
 By inputing these data in a specific format, the project creates a virtual overlay on the physical 3D models, providing a direct and clear view of the real situations in the designated areas.
 
-## Facts
+## Environment and dependencies
+The `ARFoundationAllBackup` branch represents the final version of this repository. It is compatible with [Unity](https://unity.com/download) 2021.2 and later.
+
 This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and its demonstration example [AR Foundation Sample Project](https://github.com/Unity-Technologies/arfoundation-samples).
 
 It depends on 2 Unity packages:
 * [AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html)
 * [Apple ARKit XR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.1/manual/index.html) on iOS
 
-## Version
+To build on iOS mobile devices, it requires an external development environment:
+* [Xcode](https://developer.apple.com/documentation/xcode) available on macOS and developer account
 
-The `ARFoundationAllBackup` branch of this repository uses AR Foundation 5.1 and is compatible with Unity 2021.2 and later.
 
 ## How to use 
 
-### Build and run on device
+### case1: Directly run on device without modification
+This project can be directly built to iOS device providing sample input data. 
+In this case, Unity is not required. Follow the steps below:
+[Xcode part] 
+(See [tutorial video](https://www.youtube.com/watch?v=Z-gija1aAhw) that demonstrates the following steps.)
+1. Clone this repository and go to `1610FinalBuild` folder, open `Unity-iPhone.xcodeproj` using Xcode 14.0 or later.
+2. Plug in your iOS device (with [developer mode](https://docs.expo.dev/guides/ios-developer-mode/#) enabled) to the compmuter, and select this device on top of the window in Xcode.
+3. In Xcode, click on "Unity-iPhone" on folder hierarchy on the top left, and then "Signing & Capabilities" in the middle.
+4. In "Signing & Capabilities" page, check "automatically manages signing"
+5. "Add an account" under "Team" selection options, and then choose your account for Team.
+6. Run the project by clicking the triangle "run" button on top left. This way Xcode builds the app to your device. 
+[Device part]
+7. On your iOS device, sign in to the Apple developer account the same as "Team"
+8. "[Verify](https://www.youtube.com/watch?v=vsi2MsEW764)" this app in Settings > General > VPN & Device Management 
+9. Transfer the data files to the device under App document folder. There are many ways to do this. For example, using [iMazing](https://imazing.com) or [iExplorer](https://macroplant.com/iexplorer), navigate to ../Apps/AR-Foundation/Developer/Documents and put the files in this folder. For the app document file path, see [Unity Persistant File Path](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html).
+10. The app is ready to use. 
 
-You can build the AR Foundation Samples project directly to device, which can be a helpful introduction to using AR Foundation features for the first time.
-
+### case 2: Change input data or modify
 To build to device, follow the steps below:
+[Unity part]
+1. Install [Unity Hub](https://unity.com/download). In Unity Hub, go to "Install" to install Unity 2021.2 or later, add 2 modules: "Visual Studio for Mac" and "iOS Build Support".  
+2. Clone this repository and open the Unity project at the root of this repository.
+3. Go to [Build Settings](https://docs.unity3d.com/Manual/BuildSettings.html), select a target platform([iOS](https://docs.unity3d.com/Manual/iphone-BuildProcess.html) in this sample), and build this project in a new folder. In this way, unity automatically 
+[Xcode part]
+4. After finishing building, go to that new folder and open `Unity-iPhone.xcodeproj` using Xcode 14.0 or later.
+5. Follow the steps of [case1](#case1:-Directly-run-on-device-without-modification)
 
-1. Install Unity 2021.2 or later and clone this repository.
 
-2. Open the Unity project at the root of this repository.
+## Data Format
+### Energy
 
-3. As with any other Unity project, go to [Build Settings](https://docs.unity3d.com/Manual/BuildSettings.html), select your target platform, and build this project.
-
-### Understand the sample code
-
-All sample scenes in this project can be found in the `Assets/Scenes` folder. To learn more about the AR Foundation components used in each scene, see the [AR Foundation Documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html). Each scene is explained in more detail below.
 
 # Table of Contents
 
-| Sample scene(s) | Project Structure |
+| Sample scene(s) | Location in project |
 | :-------------- | :---------- |
-| [Menu](#Menu) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
-| [Scenes](#Scenes) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
-| [Energy Demand Module](#Energy-Demand-Module) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
-| [Mobility Flow Module](#Mobility-Flow-Module) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
-| [Social Economics (Energy Trade) Module](#Social-Economics-(Energy-Trade)-Module) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
+| [Menu](#Menu) | ../Asset/Scenes/ImageTracking/Menu |
+| [Images](#Scenes) | ../Asset/Scenes/ImageTracking/Images |
+| [Energy Demand Module](#Energy-Demand-Module) | ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs|
+| [Mobility Flow Module](#Mobility-Flow-Module) | ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs |
+| [Social Economics (Energy Trade) Module](#Social-Economics-(Energy-Trade)-Module) | ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs |
 | [Debug Image Tracking](#Debug-Image-Tracking) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
 
 ## Menu
-The menu scene 
+ ../Asset/Scenes/ImageTracking/Menu
+The menu scene is the start page of the app. It allows users (1)select the city, then (2)select the data module.
 
-## Scenes
-`ReferenceImageLibrary`
+## Image
+ ../Asset/Scenes/ImageTracking/Images
+`ReferenceImageLibrary.asset` manages the images that can be detected in physical world. Use this to modify or add new images.
+After modifying images, add the cooresponding prefabs that will be instantiated when the new image is detected under: (A module's scene, eg., EnergyDemandScene.unity)>>
+More detail explanation of the code can be found on [AR Foundation Image Tracking package documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/features/image-tracking.html)
 
-## Energy Demand Module
-The annual cooling demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue to indicate the level of demand. Darker shades of blue represent higher cooling demand. The darkest level matches the highest cooling demand in this model data. Each building displays its annual cooling demand on top of the model, and its color corresponds to the color scale bar to show the level of demand.
+## Data Visualization Modules
+Prefabs location: ../Asset/Scenes/ImageTracking/Prefabs
+Scenes location: ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs
+Scripts location: ../Asset/Scenes/ImageTracking/Scripts
+
+### Energy Demand Module
+
+The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized on Zurich model.  
 
 The following summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
 | Scripts | Function | Description |
@@ -65,18 +93,14 @@ The following summarizes the code for Zurich case, the Sinagpore case shares the
 
 | Unity Assets | Zurich Heating | Zurich Cooling | Singapore Cooling |
 | :---------------------- | :------------- |:-------------- |:----------------- |
-| Scene |`EnergyDemandScene.scene`|`QCEnergyDemandScene.scene`|`QCSingaporeEnergyDemandScene.scene`| 
-| Prefabs |`ZRHmodel2809.prefab`|`ZRHModel_QC.prefab`|`Qc_SingaporeEnergyDemand`|
+| Scene |`EnergyDemandScene.unity`|`QCEnergyDemandScene.unity`|`QCSingaporeEnergyDemandScene.unity`| 
+| Prefabs |`ZRHmodel2809.prefab`|`ZRHModel_QC.prefab`|`Qc_SingaporeEnergyDemand.prefab`|
 | Scripts |`ColorManager.cs`,`Colorbar.cs`|`QCColorManager.cs`,`QCColorbar.cs`|`QCSingColorManager.cs`,`QCSingColorbar.cs`|
 | Data Scripts|`House.cs`|`House.cs`|`House.cs`|
+|Data Files| | | |
 
-### Cooling Demand
-The annaul cooling demand data is visualized on both Zurich and Sinagpore models. 
 
-### Heating Demand
-The annual heating demand data is visualized on Zurich model.  
-
-## Mobility Flow Module
+### Mobility Flow Module
 The mobility flow of vehicle and non-vehicle are demonstrated on virtual models which includes the terrain and buildings within areas of study. Given the location(latitude, longtitude) and time, each user(a preson/a vehicle) is represented by one dot(a sphere prefab) showing on the models according to time sequence. Based on real time record, the mobility flow is speed up by `timeSpeedupFactor`, which default value is 1000 times faster than real time. 
 
 
@@ -89,12 +113,12 @@ The mobility flow of vehicle and non-vehicle are demonstrated on virtual models 
 
 | Unity Assets | Zurich | Singapore |
 | :---------------------- | :------------- |:-------------- |
-| Scene |`MobilityScene.scene`|`SingMobilityScene.scene`| 
+| Scene |`MobilityScene.unity`|`SingMobilityScene.unity`| 
 | Prefabs |`ZurichModel0210_buildingterrain.prefab`|`SingaporeMobility.prefab`|
 | Scripts |`MobilityFlow.cs`|`SingMobilityFlow.cs`|
 | Data Scripts |`ZurichMobilityJson.cs`|`ZurichMobilityJson.cs`|
 
-## Social Economics (Energy Trade) Module
+### Social Economics (Energy Trade) Module
 The social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width). 
 
 | Scripts | Function | Description |
@@ -106,7 +130,7 @@ The social economics module illustrates energy trading among buildings in the ar
 
 | Unity Assets | Zurich | Singapore |
 | :---------------------- | :------------- |:-------------- |
-| Scene |`EnergyTradeScene.scene`|`EnergyTradeSingaporeScene.scene`| 
+| Scene |`EnergyTradeScene.unity`|`EnergyTradeSingaporeScene.unity`| 
 | Prefabs |`ZRHmodelEnergyTrade.prefab`|`EnergyTradeSingapore.prefab`|
 | Scripts |`EnergyTrade.cs`|`SingEnergyTrade.cs`|
 | Data Scripts |`DataEnergyTrade.cs`|`DataEnergyTrade.cs`|
@@ -114,5 +138,5 @@ The social economics module illustrates energy trading among buildings in the ar
 ## Debug Image Tracking
 | Unity Assets | Content | Description |
 | :---------------------- | :------------- | :------------- |
-| Scene |`BasicImageTracking.scene`| When an image in the `ReferenceImageLibrary` is detected, the information of this image is displayed in virtual space. |
+| Scene |`BasicImageTracking.unity`| When an image in the `ReferenceImageLibrary.asset` is detected, the information of this image is displayed in virtual space. |
 | Scripts |`TrackedImageInfoManager.cs`||
