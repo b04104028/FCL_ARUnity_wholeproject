@@ -26,31 +26,58 @@ In this case, Unity is not required. Follow the steps below:
 [Xcode part]   
 (See [tutorial video](https://www.youtube.com/watch?v=Z-gija1aAhw) that demonstrates the following steps.)
 1. Clone this repository and go to `1610FinalBuild` folder, open `Unity-iPhone.xcodeproj` using Xcode 14.0 or later.
+
 2. Plug in your iOS device (with [developer mode](https://docs.expo.dev/guides/ios-developer-mode/#) enabled) to the compmuter, and select this device on top of the window in Xcode.
+
 3. In Xcode, click on "Unity-iPhone" on folder hierarchy on the top left, and then "Signing & Capabilities" in the middle.
+
 4. In "Signing & Capabilities" page, check "automatically manages signing"
+
 5. "Add an account" under "Team" selection options, and then choose your account for Team.
+
 6. Run the project by clicking the triangle "run" button on top left. This way Xcode builds the app to your device. 
+
 [Device part]  
 7. On your iOS device, sign in to the Apple developer account the same as "Team"
+
 8. "[Verify](https://www.youtube.com/watch?v=vsi2MsEW764)" this app in Settings > General > VPN & Device Management 
+
 9. Transfer the data for visualization to the device under App document folder(Example file formats are described [below](#Data-Format)). There are many ways to do this. For example, using [iMazing](https://imazing.com) or [iExplorer](https://macroplant.com/iexplorer), navigate to ../Apps/AR-Foundation/Developer/Documents and put the files in this folder. For the app document file path, see [Unity Persistant File Path](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html).
+
 10. The app is ready to use. 
 
 ### case 2: Modify project before building to device
+
 To modify project on models, scenes, scripts,...,etc, follow the steps below:  
 [Unity part]  
 1. Install [Unity Hub](https://unity.com/download). In Unity Hub, go to "Install" to install Unity 2021.2 or later, add 2 modules: "Visual Studio for Mac" and "iOS Build Support".  
+
 2. Clone this repository and open the Unity project at the root of this repository.
+
 3. Modify the projects as needed
+
 4. Go to [Build Settings](https://docs.unity3d.com/Manual/BuildSettings.html), select a target platform([iOS](https://docs.unity3d.com/Manual/iphone-BuildProcess.html) in this sample), and build this project in a new folder. In this way, unity automatically build a Xcode project. 
 [Xcode part]
+
 5. After finishing building, go to that new folder and open `Unity-iPhone.xcodeproj` using Xcode 14.0 or later.
+
 6. Follow the steps of [case1](#case1:-Directly-run-on-device-without-modification)
 
 
 ## Data Format
 ### Energy Demand
+{
+"houses":
+[
+    {
+        "id": "B6327",
+        "load": "227630.1"
+    },
+    {
+        "id": "B117045",
+        "load": "0"
+    },...
+    ]}
 ### Mobility
 ### Energy Trade
 
@@ -67,19 +94,19 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 | [Debug Image Tracking](#Debug-Image-Tracking) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
 
 ## Menu
- ../Asset/Scenes/ImageTracking/Menu
+ ../Asset/Scenes/ImageTracking/Menu   
 The menu scene is the start page of the app. It allows users (1)select the city, then (2)select the data module.
 
 ## Image
- ../Asset/Scenes/ImageTracking/Images
+ ../Asset/Scenes/ImageTracking/Images   
 `ReferenceImageLibrary.asset` manages the images that can be detected in physical world. Use this to modify or add new images.
 After modifying images, add the cooresponding prefabs that will be instantiated when the new image is detected under: (A module's scene, eg., EnergyDemandScene.unity)>>
 More detail explanation of the code can be found on [AR Foundation Image Tracking package documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/features/image-tracking.html)
 
 ## Data Visualization Modules
-Prefabs location: ../Asset/Scenes/ImageTracking/Prefabs
-Scenes location: ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs
-Scripts location: ../Asset/Scenes/ImageTracking/Scripts
+Prefabs location: ../Asset/Scenes/ImageTracking/Prefabs    
+Scenes location: ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs    
+Scripts location: ../Asset/Scenes/ImageTracking/Scripts    
 
 ### Energy Demand Module
 
