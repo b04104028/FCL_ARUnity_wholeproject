@@ -11,6 +11,7 @@ This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/
 It depends on 2 Unity packages:
 * [AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html)
 * [Apple ARKit XR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.1/manual/index.html) on iOS
+To check the packages, in unity editor, go to Windows > Packages manager
 
 To build on iOS mobile devices, it requires an external development environment:
 * [Xcode](https://developer.apple.com/documentation/xcode) available on macOS and developer account
@@ -46,6 +47,7 @@ In this case, Unity is not required. Follow the steps below:
 
 12. The app is ready to use. 
 
+
 ### case 2: Modify project before building to device
 
 To modify project on models, scenes, scripts,...,etc, follow the steps below:  
@@ -65,7 +67,8 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 
 
 ## Data Format
-Sample data can be found in this repository.
+Sample data can be found in this repository under folder `PersistantFilePath`  
+
 ### Energy Demand
 {
 "houses":
@@ -165,6 +168,8 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 |                   |IEnumerator `InstantiateSpheresWithTimeDelay`|fetch the data from dataList and instantiate sphere prefabs that represent the users according to time. The waiting time is the difference betweeen the previous time spot and the current time spot.| 
 |                   |`MapCoordinatesToUnitySpace`| Map latitude and longitude to their corresponding locations on the model using reference points and their respective coordinates from Google Maps, allowing the calculation of new points on the model. | 
 |                   |`ShowTime`| Display time on the progress bar.  | 
+|`ZurichMobilityJson.cs`|class `ZurichMobilityJson`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool according to json file structure.|
+
 
 | Unity Assets | Zurich | Singapore |
 | :---------------------- | :------------- |:-------------- |
@@ -185,6 +190,7 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 |                |IEnumerator `StartLaunchLineRenderers`| Fetch data from dataList and assign coorsponding building on the model, and then pass the data to initiate `TEMPChangeBuildingColor`| 
 |                |IEnumerator `TEMPChangeBuildingColor`| Assign "from building" locaiton as the start point of the arrow(line renderer) and "to building" as end point. Change the color to blue for "from building" and yellow for "to building". Arrow width is scaled to fit the model size and indicates the amoudn of transmission electricity. The arrows are destroyed after `prefabStayTime` | 
 |                   |`ShowTime`| Display time on progress bar(slider) | 
+|`ZurichMobilityJson.cs`|class `ZurichMobilityJson`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool according to json file structure.|
 
 | Unity Assets | Zurich | Singapore |
 | :---------------------- | :------------- |:-------------- |
