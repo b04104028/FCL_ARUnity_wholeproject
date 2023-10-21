@@ -136,7 +136,7 @@ Scenes location: ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs
 Scripts location: ../Asset/Scenes/ImageTracking/Scripts    
 
 ### Energy Demand Module
-
+![Zurich Cooling Demand](hover-over-color.gif)
 The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized only on Zurich model.  
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
