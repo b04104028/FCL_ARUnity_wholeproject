@@ -73,43 +73,45 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
 
 ### Energy Demand
 
-{
-"houses":
-[
-    {
-        "id": "B6327",
-        "load": "227630.1"
-    },
-    {
-        "id": "B117045",
-        "load": "0"
-    },...
-    ]}
+{  
+"houses":  
+[  
+    {  
+        "id": "B6327",  
+        "load": "227630.1"  
+    },  
+    {  
+        "id": "B117045",  
+        "load": "0"  
+    },...  
+    ]}  
     
 ### Mobility
 
-{
-"type": "FeatureCollection",
-"features": [
-{ "type": "Feature", "properties": { "uid": 0.0, "Time": "2023-07-31T02:23:32.083", "Lat": 1.3906850104627779, "Lon": 103.89404394884859, "is_vehicle": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 103.894043948848591, 1.390685010462778 ] } },
-{ "type": "Feature", "properties": { "uid": 0.0, "Time": "2023-07-31T02:23:32.083", "Lat": 1.3906829774271761, "Lon": 103.89404762958823, "is_vehicle": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 103.894047629588229, 1.390682977427176 ] } },...]}
+{  
+"type": "FeatureCollection",  
+"features": [  
+{ "type": "Feature", "properties": { "uid": 0.0, "Time": "2023-07-31T02:23:32.083", "Lat": 1.3906850104627779, "Lon": 103.89404394884859, "is_vehicle": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 103.894043948848591, 1.390685010462778 ] } },  
+{ "type": "Feature", "properties": { "uid": 0.0, "Time": "2023-07-31T02:23:32.083", "Lat": 1.3906829774271761, "Lon": 103.89404762958823, "is_vehicle": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 103.894047629588229, 1.390682977427176 ] } },  
+...]}  
 
 ### Energy Trade
 
-{
-"DataEnergyTrade":[
-    {
-        "From": "B1082_demand.csv",
-        "To": "B1030_demand.csv",
-        "Transmission": "4",
-        "T": "12"
-    },
-    {
-        "From": "B1108_demand.csv",
-        "To": "B1047_demand.csv",
-        "Transmission": "1",
-        "T": "12"
-    },...]}
+{  
+"DataEnergyTrade":[  
+    {  
+        "From": "B1082_demand.csv",  
+        "To": "B1030_demand.csv",    
+        "Transmission": "4",  
+        "T": "12"  
+    },  
+    {  
+        "From": "B1108_demand.csv",  
+        "To": "B1047_demand.csv",  
+        "Transmission": "1",  
+        "T": "12"  
+    },  
+    ...]}  
 
 # Table of Contents
 
@@ -150,7 +152,7 @@ Scripts location: ../Asset/Scenes/ImageTracking/Scripts
 
 ### Energy Demand Module
 
-![Zurich Cooling Demand](RESULT/ZurichCooling.gif)  
+![Zurich Cooling Demand](RESULTS/ZurichCooling.gif)  
 
 The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized only on Zurich model.  
 
