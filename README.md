@@ -1,12 +1,12 @@
 # Interactive Data Visualization and Augmented Reality of Urban Photovoltaic
-## Introduction
+## Introduction  
 
 This project is an iPad mobile app created for the Future Cities Lab Exhibition 2023 at ETH Zurich, aiming to visualize influencial data of photovoltaic power usage using augmented reality. It utilizes 3D printed models of two sites, Zurich and Singapore, and is composed of three key modules: energy demand(cooling and heating), mobility flow (both vehicle and non-vehicle), and social economics(energy trading within these regions). 
 By inputing these data in a specific format, the project creates a virtual overlay on the physical 3D models, providing a direct and clear view of the real situations in the designated areas.
 
-## Environment and dependencies
+## Environment and dependencies  
 
-The `ARFoundationAllBackup` branch represents the final version of this repository. It is compatible with [Unity](https://unity.com/download) 2021.2 and later.
+The `ARFoundationAllBackup` branch represents the final version of this repository. It is compatible with [Unity](https://unity.com/download) 2021.2 and later.  
 
 This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and its demonstration example [AR Foundation Sample Project](https://github.com/Unity-Technologies/arfoundation-samples).
 
@@ -15,8 +15,8 @@ It depends on 2 Unity packages:
 * [Apple ARKit XR Plug-in](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.1/manual/index.html) on iOS  
 To check the packages in unity editor, go to Windows > Packages manager  
 
-To build on iOS mobile devices, it requires an external development environment:  
-* [Xcode](https://developer.apple.com/documentation/xcode) available on macOS and developer account
+To build on iOS mobile devices, it requires an external development environment:    
+* [Xcode](https://developer.apple.com/documentation/xcode) available on macOS and developer account  
 
 
 ## How to use 
@@ -24,10 +24,10 @@ To build on iOS mobile devices, it requires an external development environment:
 ### case1: Directly run on device without modification
 
 This project can be directly built to iOS device providing input data in specific formats.   
-In this case, Unity is not required. Follow the steps below:  
+In this case, Unity is not required. Follow the steps below:   
 
-**Xcode part**   
-(See [tutorial video](https://www.youtube.com/watch?v=Z-gija1aAhw) that demonstrates the following steps.)   
+**Xcode part**     
+(See [tutorial video](https://www.youtube.com/watch?v=Z-gija1aAhw) that demonstrates the following steps.)    
 1. Clone this repository and go to `1610FinalBuild` folder, open `Unity-iPhone.xcodeproj` using Xcode 14.0 or later.
 
 2. Plug in your iOS device (with [developer mode](https://docs.expo.dev/guides/ios-developer-mode/#) enabled) to the compmuter, and select this device on top of the window in Xcode.
@@ -40,7 +40,7 @@ In this case, Unity is not required. Follow the steps below:
 
 6. Run the project by clicking the triangle "run" button on top left. This way Xcode builds the app to your device. 
 
-**Device part**  
+**Device part**    
 7. On your iOS device, sign in to the Apple developer account the same as "Team"
 
 8. "[Verify](https://www.youtube.com/watch?v=vsi2MsEW764)" this app in Settings > General > VPN & Device Management 
@@ -50,10 +50,10 @@ In this case, Unity is not required. Follow the steps below:
 12. The app is ready to use. 
 
 
-### case 2: Modify project before building to device
+### case 2: Modify project before building to device  
 
-To modify project on models, scenes, scripts,...,etc, follow the steps below:  
-**Unity part**  
+To modify project on models, scenes, scripts,...,etc, follow the steps below:   
+**Unity part**    
 1. Install [Unity Hub](https://unity.com/download). In Unity Hub, go to "Install" to install Unity 2021.2 or later, add 2 modules: "Visual Studio for Mac" and "iOS Build Support".  
 
 2. Clone this repository and open the Unity project at the root of this repository.
@@ -62,16 +62,16 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 
 4. Go to [Build Settings](https://docs.unity3d.com/Manual/BuildSettings.html), select a target platform([iOS](https://docs.unity3d.com/Manual/iphone-BuildProcess.html) in this sample), and build this project in a new folder. In this way, unity automatically build a Xcode project. 
 
-**Xcode part**
+**Xcode part**    
 5. After finishing building, go to that new folder and open `Unity-iPhone.xcodeproj` using Xcode 14.0 or later.
 
 6. Follow the steps of [case1](#case1:-Directly-run-on-device-without-modification)
 
 
-## Data Format
-Sample data can be found in this repository under folder `PersistantFilePath`. To customize data to visualize, prepare new data in the following format, update the file name in code,and follow step#9 of previous section [case1](#case1:-Directly-run-on-device-without-modification).
+## Data Format   
+Sample data can be found in this repository under folder `PersistantFilePath`. To customize data to visualize, prepare new data in the following format, update the file name in code,and follow step#9 of previous section [case1](#case1:-Directly-run-on-device-without-modification).   
 
-### Energy Demand
+### Energy Demand   
 
 {  
 "houses":  
@@ -86,7 +86,7 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
     },...  
     ]}  
     
-### Mobility
+### Mobility   
 
 {  
 "type": "FeatureCollection",  
@@ -95,7 +95,7 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
 { "type": "Feature", "properties": { "uid": 0.0, "Time": "2023-07-31T02:23:32.083", "Lat": 1.3906829774271761, "Lon": 103.89404762958823, "is_vehicle": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 103.894047629588229, 1.390682977427176 ] } },  
 ...]}  
 
-### Energy Trade
+### Energy Trade   
 
 {  
 "DataEnergyTrade":[  
@@ -113,7 +113,7 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
     },  
     ...]}  
 
-# Table of Contents
+# Table of Contents   
 
 | Sample scene(s) | Location in project |
 | :----------------------------- | :------------------ |
@@ -124,32 +124,34 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
 | [Social Economics (Energy Trade) Module](#Social-Economics-(Energy-Trade)-Module) | ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs |
 | [Debug Image Tracking](#Debug-Image-Tracking) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
 
-## Menu
+## Menu   
 
  ../Asset/Scenes/ImageTracking/Menu   
  
-The menu scene is the start page of the app. It allows users (1)select the city, then (2)select the data module.
+The menu scene is the start page of the app. It allows users (1)select the city, then (2)select the data module.   
 
-## Image
+## Image   
 
  ../Asset/Scenes/ImageTracking/Images   
  
-`ReferenceImageLibrary.asset` manages the images that can be detected in physical world. Use this to modify or add new images.
+`ReferenceImageLibrary.asset` manages the images that can be detected in physical world. Use this to modify or add new images.   
 After modifying images, add the cooresponding prefabs that will be instantiated when the new image is detected under: (A module's scene, eg., EnergyDemandScene.unity) > Hierarchy > gameobject `ARF XR Origin Set Up` > gameobject `XR Origin` > Inspector > component `PrefabImagePairManager(Script)` > `PrefabList`
 
-### Instantiate module prefabs
+ 
+### Instantiate module prefabs   
 
-The matched prefabs are instantiated in virtual world when the coorseponding image is detected in physical world. The location and rotation is set by function`AssignPrefab` in the script`PrefabImagePairManager.cs`.  
+The matched prefabs are instantiated in virtual world when the coorseponding image is detected in physical world. The location and rotation is set by function`AssignPrefab` in the script`PrefabImagePairManager.cs`.    
 
-Detail explanation can be found in [AR Foundation Image Tracking package documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/features/image-tracking.html)
+Detail explanation can be found in [AR Foundation Image Tracking package documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/features/image-tracking.html).   
 
-## Data Visualization Modules
+   
+## Data Visualization Modules   
 
 Prefabs location: ../Asset/Scenes/ImageTracking/Prefabs    
 Scenes location: ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs    
 Scripts location: ../Asset/Scenes/ImageTracking/Scripts    
 
-### Energy Demand Module
+### Energy Demand Module   
 
 **Zurich Cooling Demand**    
 ![Zurich Cooling Demand](RESULTS/ZurichCooling.gif)    
@@ -160,11 +162,11 @@ Scripts location: ../Asset/Scenes/ImageTracking/Scripts
 **Singapore Cooling Demand**    
 ![Singapore Cooling Demand](RESULTS/SingaporeCooling.gif)   
 
-The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized only on Zurich model.  
+The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized only on Zurich model.   
 
-The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
+The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure.   
 | Scripts | Function | Description |
-| :-------------- | :---------- |:---------- | 
+| :---------------- | :------------- |:---------- | 
 | `ColorManager.cs` | `Start` | Set the file path: `string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_QH_total.json"` , and call all functions. | 
 |                   | `Loadjson` | Read and load the data from energy demand json file.  Store the data into dictionary with building id as Key and coolding load as Value. | 
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
@@ -172,7 +174,7 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 |                   |`LoadOnText`| Show cooling demand on top of the building gameobject by changing the text of its children gameobject: TextMeshPro  | 
 |   `Colorbar.cs `  |`SetColorbar`| Set the color bar that indicates the level of demand. The highest demand value in this area is rounded to the nearest whole number. This number matches the darkest color, and 0 demand value matches the white color. The color gradient in between shows the interpolation between min and max value of demand. | 
 |                   |`LoadOnText`| Display the interpolated figures beside color bar.|
-|`House.cs`         |class `Root`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool.|
+|`House.cs`         |class `Root`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool.| 
 
 | Unity Assets | Zurich Heating | Zurich Cooling | Singapore Cooling |
 | :---------------------- | :------------- |:-------------- |:----------------- |
@@ -183,17 +185,17 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 | Data Files|`Zurich_QH_total.json`| `Zurich_QC_total.json`| `Sing_QC_total.json`|
 
 
-### Mobility Flow Module
+### Mobility Flow Module   
 
-**Zurich Mobility Flow**     
+**Zurich Mobility Flow**       
 ![Zurich Mobility Flow](RESULTS/ZurichMobility.gif)     
 
 **Singapore Mobility Flow**   
 ![Singapore Mobility Flow](RESULTS/SingaporeMobility.gif)    
 
-The mobility flow of vehicle and non-vehicle is demonstrated on virtual models which includes the terrain and buildings within areas of study. Given the location(latitude, longtitude) and time, each user(a preson/a vehicle) is represented by one dot(a sphere prefab) showing on the models according to time sequence. Based on real time record, the mobility flow is speeded up by `timeSpeedupFactor`, which default value is 1000 times faster than real-time. 
+The mobility flow of vehicle and non-vehicle is demonstrated on virtual models which includes the terrain and buildings within areas of study. Given the location(latitude, longtitude) and time, each user(a preson/a vehicle) is represented by one dot(a sphere prefab) showing on the models according to time sequence. Based on real time record, the mobility flow is speeded up by `timeSpeedupFactor`, which default value is 1000 times faster than real-time.    
 
-The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
+The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure.   
 | Scripts | Function | Description |
 | :-------------- | :---------- |:---------- |
 | `MobilityFlow.cs` | `Start` | Set the file path: `string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_Mobility.geojson"` , and call all functions. | 
@@ -212,7 +214,7 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 | Data Scripts |`ZurichMobilityJson.cs`|`ZurichMobilityJson.cs`|
 | Data Files |`Zurich_Mobility.geojson`|`Singapore_Mobility.json`|
 
-### Social Economics (Energy Trade) Module
+### Social Economics (Energy Trade) Module   
 
 **Zurich Energy Trade**     
 ![Zurich Energy Trade](RESULTS/ZurichEnergyTrade.gif)   
@@ -220,9 +222,9 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 **Singapore Energy Trade**   
 ![Singapore Energy Trade](RESULTS/SingaporeEnergyTrade.gif)   
 
-The social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width). 
+The social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width).   
 
-The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
+The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure.   
 | Scripts | Function | Description |
 | :-------------- | :---------- |:---------- |
 | `EnergyTrade.cs`| `Start` | Set the file path: `string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json"` , and call all functions. | 
@@ -240,9 +242,9 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 | Data Scripts |`DataEnergyTrade.cs`|`DataEnergyTrade.cs`|
 | Data Files | `ZurichEnergyTrade.json` | `EnergyTradeSingapore.json` |
 
-## Debug Image Tracking
- ../Asset/Scenes/ImageTracking/BasicImageTracking  
-This scene is used for checking the image detection works. It is disabled by default. To enable this function, go to `menu.unity` scene, find Debug buttom under Canvas, and check the box in Inspector.  
+## Debug Image Tracking   
+ ../Asset/Scenes/ImageTracking/BasicImageTracking    
+This scene is used for checking the image detection works. It is disabled by default. To enable this function, go to `menu.unity` scene, find Debug buttom under Canvas, and check the box in Inspector.    
 
 | Unity Assets | Content | Description |
 | :---------------------- | :------------- | :------------- |
