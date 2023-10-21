@@ -151,13 +151,13 @@ Scripts location: ../Asset/Scenes/ImageTracking/Scripts
 
 ### Energy Demand Module
 
-Zurich Cooling Demand  
+**Zurich Cooling Demand**  
 ![Zurich Cooling Demand](RESULTS/ZurichCooling.gif)  
 
-Zurich Heating Demand  
+**Zurich Heating Demand**  
 ![Zurich Heating Demand](RESULTS/ZurichHeating.gif)  
 
-Singapore Cooling Demand  
+**Singapore Cooling Demand**  
 ![Singapore Cooling Demand](RESULTS/SingaporeCooling.gif)
 
 The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized only on Zurich model.  
@@ -185,10 +185,10 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 
 ### Mobility Flow Module
 
-Zurich Mobility Flow   
+**Zurich Mobility Flow**   
 ![Zurich Mobility Flow](RESULTS/ZurichMobility.gif)   
 
-Singapore Mobility Flow 
+**Singapore Mobility Flow** 
 ![Singapore Mobility Flow](RESULTS/SingaporeMobility.gif)  
 
 The mobility flow of vehicle and non-vehicle is demonstrated on virtual models which includes the terrain and buildings within areas of study. Given the location(latitude, longtitude) and time, each user(a preson/a vehicle) is represented by one dot(a sphere prefab) showing on the models according to time sequence. Based on real time record, the mobility flow is speeded up by `timeSpeedupFactor`, which default value is 1000 times faster than real-time. 
@@ -214,10 +214,10 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 
 ### Social Economics (Energy Trade) Module
 
-Zurich Energy Trade   
+**Zurich Energy Trade**   
 ![Zurich Energy Trade](RESULTS/ZurichEnergyTrade.gif)
 
-Singapore Energy Trade 
+**Singapore Energy Trade** 
 ![Singapore Energy Trade](RESULTS/SingaporeEnergyTrade.gif)
 
 The social economics module illustrates energy trading among buildings in the area over the course of a day. When a building's PV panel generates surplus electricity, it trades it with neighboring buildings. Buildings turn blue when selling excess energy, displaying the amount in kWh above them, while those purchasing electricity turn yellow, showing the electricity they receive. Arrows indicate the trading direction and amount (indicated by arrow width). 
