@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -7,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
+using System.Collections;
 
 namespace UnityEngine.XR.ARFoundation.Samples
 {
@@ -46,7 +48,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [Tooltip("Reference Image Library")]
         XRReferenceImageLibrary m_ImageLibrary;
 
-
+        //[SerializeField]public TextMeshPro textMeshPro;
+        private float activeDuration = 3.0f;
+        public GameObject checkScanGO;
 
         /// <summary>
         /// Get the <c>XRReferenceImageLibrary</c>
@@ -74,10 +78,17 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_PrefabsDictionary.Add(Guid.Parse(entry.imageGuid), entry.imagePrefab);
             }
         }
-
+        void Start()
+        {
+            checkScanGO = GameObject.Find("CheckText");
+            if (checkScanGO == null) checkScanGO = GameObject.FindGameObjectWithTag("checktext");
+            //TextMeshProUGUI CheckScanText = checkScanGO.GetComponent<TextMeshProUGUI>();
+            checkScanGO.SetActive(false);
+        }
         void Awake()
         {
             m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
+
         }
 
         void OnEnable()
@@ -100,23 +111,51 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 AssignPrefab(trackedImage);
             }
         }
+
+        IEnumerator ActivateTextForDuration()
+        {
+            //GameObject checkScanGO = GameObject.Find("CheckText");
+            //if(checkScanGO == null) checkScanGO = GameObject.FindGameObjectWithTag("checktext");
+            //TextMeshProUGUI CheckScanText = checkScanGO.GetComponent<TextMeshProUGUI>();
+            checkScanGO.SetActive(true);
+
+            // Activate the TextMeshPro
+            //textMeshPro.gameObject.SetActive(true);
+
+            // Wait for the specified duration
+            yield return new WaitForSeconds(activeDuration);
+
+            // Deactivate the TextMeshPro after the duration
+            checkScanGO.SetActive(false);
+            //textMeshPro.gameObject.SetActive(false);
+        }
         /// <summary>
         /// MY NOTE: CHANGE THIS METHOD TO DEFINE POP UP PREFAB
         /// </summary>
         /// <param name="trackedImage"></param>
         void AssignPrefab(ARTrackedImage trackedImage)
         {
+            
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
             {
                 //1809: TO DO: place the prefab at the correct location
                 //INSTANTIATE THE WHOLE ZURICH MODEL WITH 50 INDIVIDUAL HOUSES ALTOGETHER
                 Vector3 model_loc = trackedImage.transform.position + new Vector3(-0.2f, 0, 0.6f);//+ new Vector3(-0.5f, 1f, 0f);flyingabove///new Vector3(-5f, 0, 10f);TooFar(left up above the table)//new Vector3(-0.5f, 0f, 1f);//(-2f, 2f, 0f); //(0.01f,1f,0.01f);
+                               
 
                 Debug.Log("I enabled the prefab instantiating");
                 m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, model_loc, trackedImage.transform.rotation * prefab.transform.rotation);// *Quaternion.identity);
-                //transform.rotation * Quaternion.Euler(270f, 180f, 0f));//(0f, 180f, 180f));//Quaternion.identity);
+                                                                                                                                                               //transform.rotation * Quaternion.Euler(270f, 180f, 0f));//(0f, 180f, 180f));//Quaternion.identity);
 
                 //m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
+                GameObject.Find("ScanIndicatorPanel").SetActive(false);
+
+                StartCoroutine(ActivateTextForDuration());
+                //GameObject checkScanGO = GameObject.FindGameObjectWithTag("checktext");
+                //TextMeshProUGUI CheckScanText = checkScanGO.GetComponent<TextMeshProUGUI>();
+                //CheckScanText.text = "Scan Succeed!";
+              
+
             }
         }
 
