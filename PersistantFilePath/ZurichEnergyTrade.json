@@ -1,0 +1,262 @@
+{
+"DataEnergyTrade":[
+    {
+        "From": "B1082_demand.csv",
+        "To": "B1030_demand.csv",
+        "Transmission": "4",
+        "T": "12"
+    },
+    {
+        "From": "B1108_demand.csv",
+        "To": "B1047_demand.csv",
+        "Transmission": "1",
+        "T": "12"
+    },
+    {
+        "From": "B1108_demand.csv",
+        "To": "B1074_demand.csv",
+        "Transmission": "3",
+        "T": "12"
+    },
+    {
+        "From": "B1110_demand.csv",
+        "To": "B1047_demand.csv",
+        "Transmission": "11",
+        "T": "12"
+    },
+    {
+        "From": "B1116_demand.csv",
+        "To": "B1043_demand.csv",
+        "Transmission": "1",
+        "T": "12"
+    },
+    {
+        "From": "B1116_demand.csv",
+        "To": "B1045_demand.csv",
+        "Transmission": "2",
+        "T": "12"
+    },
+    {
+        "From": "B1049_demand.csv",
+        "To": "B1045_demand.csv",
+        "Transmission": "3",
+        "T": "13"
+    },
+    {
+        "From": "B1108_demand.csv",
+        "To": "B1030_demand.csv",
+        "Transmission": "5",
+        "T": "13"
+    },
+    {
+        "From": "B1108_demand.csv",
+        "To": "B1043_demand.csv",
+        "Transmission": "2",
+        "T": "13"
+    },
+    {
+        "From": "B1110_demand.csv",
+        "To": "B1074_demand.csv",
+        "Transmission": "2",
+        "T": "13"
+    },
+    {
+        "From": "B1049_demand.csv",
+        "To": "B1024_demand.csv",
+        "Transmission": "3",
+        "T": "14"
+    },
+    {
+        "From": "B1049_demand.csv",
+        "To": "B1030_demand.csv",
+        "Transmission": "4",
+        "T": "14"
+    },
+    {
+        "From": "B1082_demand.csv",
+        "To": "B1023_demand.csv",
+        "Transmission": "2",
+        "T": "14"
+    },
+    {
+        "From": "B1082_demand.csv",
+        "To": "B1042_demand.csv",
+        "Transmission": "4",
+        "T": "14"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1022_demand.csv",
+        "Transmission": "3",
+        "T": "14"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1043_demand.csv",
+        "Transmission": "1",
+        "T": "14"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1045_demand.csv",
+        "Transmission": "2",
+        "T": "14"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1060_demand.csv",
+        "Transmission": "3",
+        "T": "14"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1074_demand.csv",
+        "Transmission": "3",
+        "T": "14"
+    },
+    {
+        "From": "B1110_demand.csv",
+        "To": "B1023_demand.csv",
+        "Transmission": "1",
+        "T": "14"
+    },
+    {
+        "From": "B1110_demand.csv",
+        "To": "B1047_demand.csv",
+        "Transmission": "5",
+        "T": "14"
+    },
+    {
+        "From": "B1049_demand.csv",
+        "To": "B1025_demand.csv",
+        "Transmission": "6",
+        "T": "15"
+    },
+    {
+        "From": "B1049_demand.csv",
+        "To": "B1030_demand.csv",
+        "Transmission": "7",
+        "T": "15"
+    },
+    {
+        "From": "B1082_demand.csv",
+        "To": "B1074_demand.csv",
+        "Transmission": "3",
+        "T": "15"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1023_demand.csv",
+        "Transmission": "1",
+        "T": "15"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1025_demand.csv",
+        "Transmission": "1",
+        "T": "15"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1026_demand.csv",
+        "Transmission": "7",
+        "T": "15"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1043_demand.csv",
+        "Transmission": "4",
+        "T": "15"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1045_demand.csv",
+        "Transmission": "4",
+        "T": "15"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1060_demand.csv",
+        "Transmission": "7",
+        "T": "15"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1074_demand.csv",
+        "Transmission": "4",
+        "T": "15"
+    },
+    {
+        "From": "B1096_demand.csv",
+        "To": "B1094_demand.csv",
+        "Transmission": "4",
+        "T": "15"
+    },
+    {
+        "From": "B1108_demand.csv",
+        "To": "B1094_demand.csv",
+        "Transmission": "5",
+        "T": "15"
+    },
+    {
+        "From": "B1110_demand.csv",
+        "To": "B1042_demand.csv",
+        "Transmission": "7",
+        "T": "15"
+    },
+{
+        "From": "B1049_demand.csv",
+        "To": "B1030_demand.csv",
+        "Transmission": "3",
+        "T": "16"
+    },
+    {
+        "From": "B1082_demand.csv",
+        "To": "B1021_demand.csv",
+        "Transmission": "5",
+        "T": "16"
+    },
+    {
+        "From": "B1082_demand.csv",
+        "To": "B1043_demand.csv",
+        "Transmission": "1",
+        "T": "16"
+    },
+    {
+        "From": "B1083_demand.csv",
+        "To": "B1045_demand.csv",
+        "Transmission": "1",
+        "T": "16"
+    },
+    {
+        "From": "B1108_demand.csv",
+        "To": "B1042_demand.csv",
+        "Transmission": "1",
+        "T": "16"
+    },
+    {
+        "From": "B1108_demand.csv",
+        "To": "B1094_demand.csv",
+        "Transmission": "11",
+        "T": "16"
+    },
+    {
+        "From": "B1110_demand.csv",
+        "To": "B1047_demand.csv",
+        "Transmission": "2",
+        "T": "16"
+    },
+    {
+        "From": "B1110_demand.csv",
+        "To": "B1060_demand.csv",
+        "Transmission": "1",
+        "T": "16"
+    },
+    {
+        "From": "B1110_demand.csv",
+        "To": "B1074_demand.csv",
+        "Transmission": "2",
+        "T": "16"
+    }
+]
+}

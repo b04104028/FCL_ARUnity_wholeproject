@@ -1,0 +1,334 @@
+{
+"DataEnergyTrade":[
+    {
+        "From": "B6327",
+        "To": "B117049",
+        "Transmission": "14",
+        "T": "9"
+    },
+    {
+        "From": "B117048",
+        "To": "B117045",
+        "Transmission": "68",
+        "T": "10"
+    },
+    {
+        "From": "B117051",
+        "To": "B117050",
+        "Transmission": "35",
+        "T": "10"
+    },
+    {
+        "From": "B117052",
+        "To": "B117045",
+        "Transmission": "32",
+        "T": "10"
+    },
+    {
+        "From": "B117053",
+        "To": "B117045",
+        "Transmission": "12",
+        "T": "10"
+    },
+    {
+        "From": "B117054",
+        "To": "B117050",
+        "Transmission": "17",
+        "T": "10"
+    },
+    {
+        "From": "B6327",
+        "To": "B117050",
+        "Transmission": "50",
+        "T": "10"
+    },
+    {
+        "From": "B117048",
+        "To": "B117045",
+        "Transmission": "199",
+        "T": "11"
+    },
+    {
+        "From": "B117051",
+        "To": "B117050",
+        "Transmission": "73",
+        "T": "11"
+    },
+    {
+        "From": "B117052",
+        "To": "B117045",
+        "Transmission": "75",
+        "T": "11"
+    },
+    {
+        "From": "B117053",
+        "To": "B117045",
+        "Transmission": "191",
+        "T": "11"
+    },
+    {
+        "From": "B117054",
+        "To": "B117050",
+        "Transmission": "179",
+        "T": "11"
+    },
+    {
+        "From": "B6327",
+        "To": "B117050",
+        "Transmission": "85",
+        "T": "11"
+    },
+    {
+        "From": "B117048",
+        "To": "B117045",
+        "Transmission": "158",
+        "T": "12"
+    },
+    {
+        "From": "B117051",
+        "To": "B117050",
+        "Transmission": "94",
+        "T": "12"
+    },
+    {
+        "From": "B117052",
+        "To": "B117045",
+        "Transmission": "79",
+        "T": "12"
+    },
+    {
+        "From": "B117053",
+        "To": "B117045",
+        "Transmission": "93",
+        "T": "12"
+    },
+    {
+        "From": "B117054",
+        "To": "B117050",
+        "Transmission": "107",
+        "T": "12"
+    },
+    {
+        "From": "B6327",
+        "To": "B117050",
+        "Transmission": "121",
+        "T": "12"
+    },
+    {
+        "From": "B117048",
+        "To": "B117045",
+        "Transmission": "178",
+        "T": "13"
+    },
+    {
+        "From": "B117051",
+        "To": "B117050",
+        "Transmission": "71",
+        "T": "13"
+    },
+    {
+        "From": "B117052",
+        "To": "B117045",
+        "Transmission": "96",
+        "T": "13"
+    },
+    {
+        "From": "B117054",
+        "To": "B117050",
+        "Transmission": "45",
+        "T": "13"
+    },
+    {
+        "From": "B6327",
+        "To": "B117050",
+        "Transmission": "109",
+        "T": "13"
+    },
+    {
+        "From": "B117048",
+        "To": "B117045",
+        "Transmission": "140",
+        "T": "14"
+    },
+    {
+        "From": "B117049",
+        "To": "B117045",
+        "Transmission": "43",
+        "T": "14"
+    },
+    {
+        "From": "B117051",
+        "To": "B117050",
+        "Transmission": "84",
+        "T": "14"
+    },
+    {
+        "From": "B117052",
+        "To": "B117045",
+        "Transmission": "87",
+        "T": "14"
+    },
+    {
+        "From": "B117053",
+        "To": "B117045",
+        "Transmission": "107",
+        "T": "14"
+    },
+    {
+        "From": "B117054",
+        "To": "B117050",
+        "Transmission": "120",
+        "T": "14"
+    },
+    {
+        "From": "B6327",
+        "To": "B117050",
+        "Transmission": "130",
+        "T": "14"
+    },
+    {
+        "From": "B117048",
+        "To": "B117045",
+        "Transmission": "105",
+        "T": "15"
+    },
+    {
+        "From": "B117049",
+        "To": "B117045",
+        "Transmission": "54",
+        "T": "15"
+    },
+    {
+        "From": "B117051",
+        "To": "B117050",
+        "Transmission": "72",
+        "T": "15"
+    },
+    {
+        "From": "B117052",
+        "To": "B117045",
+        "Transmission": "76",
+        "T": "15"
+    },
+    {
+        "From": "B117053",
+        "To": "B117045",
+        "Transmission": "89",
+        "T": "15"
+    },
+    {
+        "From": "B117054",
+        "To": "B117050",
+        "Transmission": "100",
+        "T": "15"
+    },
+    {
+        "From": "B6327",
+        "To": "B117050",
+        "Transmission": "129",
+        "T": "15"
+    },
+    {
+        "From": "B117048",
+        "To": "B117045",
+        "Transmission": "76",
+        "T": "16"
+    },
+    {
+        "From": "B117051",
+        "To": "B117050",
+        "Transmission": "60",
+        "T": "16"
+    },
+    {
+        "From": "B117052",
+        "To": "B117045",
+        "Transmission": "64",
+        "T": "16"
+    },
+    {
+        "From": "B117053",
+        "To": "B117045",
+        "Transmission": "68",
+        "T": "16"
+    },
+    {
+        "From": "B117054",
+        "To": "B117050",
+        "Transmission": "76",
+        "T": "16"
+    },
+    {
+        "From": "B6327",
+        "To": "B117050",
+        "Transmission": "127",
+        "T": "16"
+    },
+    {
+        "From": "B117048",
+        "To": "B117045",
+        "Transmission": "97",
+        "T": "17"
+    },
+    {
+        "From": "B117049",
+        "To": "B117045",
+        "Transmission": "131",
+        "T": "17"
+    },
+    {
+        "From": "B117051",
+        "To": "B117050",
+        "Transmission": "45",
+        "T": "17"
+    },
+    {
+        "From": "B117052",
+        "To": "B117045",
+        "Transmission": "50",
+        "T": "17"
+    },
+    {
+        "From": "B117053",
+        "To": "B117045",
+        "Transmission": "86",
+        "T": "17"
+    },
+    {
+        "From": "B117054",
+        "To": "B117050",
+        "Transmission": "65",
+        "T": "17"
+    },
+    {
+        "From": "B6327",
+        "To": "B117050",
+        "Transmission": "108",
+        "T": "17"
+    },
+    {
+        "From": "B6327",
+        "To": "B117049",
+        "Transmission": "9",
+        "T": "18"
+    },
+    {
+        "From": "B117050",
+        "To": "B117049",
+        "Transmission": "159",
+        "T": "21"
+    },
+    {
+        "From": "B117050",
+        "To": "B117049",
+        "Transmission": "101",
+        "T": "24"
+    },
+    {
+        "From": "B6327",
+        "To": "B117049",
+        "Transmission": "1",
+        "T": "24"
+    }
+]
+}
