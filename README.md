@@ -135,7 +135,7 @@ The menu scene is the start page of the app. It allows users (1)select the city,
  ../Asset/Scenes/ImageTracking/Images   
  
 `ReferenceImageLibrary.asset` manages the images that can be detected in physical world. Use this to modify or add new images.   
-After modifying images, add the cooresponding prefabs that will be instantiated when the new image is detected under: (A module's scene, eg., EnergyDemandScene.unity) > Hierarchy > gameobject `ARF XR Origin Set Up` > gameobject `XR Origin` > Inspector > component `PrefabImagePairManager(Script)` > `PrefabList`
+After modifying images, add the cooresponding prefabs that will be instantiated when the new image is detected under: (A module's scene, eg., EnergyDemandScene.unity) > Hierarchy > gameobject `ARF XR Origin Set Up` > gameobject `XR Origin` > Inspector > component `PrefabImagePairManager(Script)` > `PrefabList`.
 
  
 ### Instantiate module prefabs   
@@ -166,7 +166,7 @@ The annual energy demand is measured in kWh, and it's represented by a color bar
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure.   
 | Scripts | Function | Description |
-| :---------------- | :------------- |:---------- | 
+| :------------ | :--------- |:---------- | 
 | `ColorManager.cs` | `Start` | Set the file path: `string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_QH_total.json"` , and call all functions. | 
 |                   | `Loadjson` | Read and load the data from energy demand json file.  Store the data into dictionary with building id as Key and coolding load as Value. | 
 |                   |`AssignLoad`| Assign the cooling load on the attached building gameobject.  | 
@@ -177,7 +177,7 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 |`House.cs`         |class `Root`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool.| 
 
 | Unity Assets | Zurich Heating | Zurich Cooling | Singapore Cooling |
-| :---------------------- | :------------- |:-------------- |:----------------- |
+| :--------- | :------------- |:-------------- |:----------------- |
 | Scene |`EnergyDemandScene.unity`|`QCEnergyDemandScene.unity`|`QCSingaporeEnergyDemandScene.unity`| 
 | Prefabs |`ZRHmodel2809.prefab`|`ZRHModel_QC.prefab`|`Qc_SingaporeEnergyDemand.prefab`|
 | Scripts |`ColorManager.cs`,`Colorbar.cs`|`QCColorManager.cs`,`QCColorbar.cs`|`QCSingColorManager.cs`,`QCSingColorbar.cs`|
@@ -197,7 +197,7 @@ The mobility flow of vehicle and non-vehicle is demonstrated on virtual models w
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure.   
 | Scripts | Function | Description |
-| :-------------- | :---------- |:---------- |
+| :------------ | :--------- |:---------- |
 | `MobilityFlow.cs` | `Start` | Set the file path: `string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_Mobility.geojson"` , and call all functions. | 
 |                   |`LoadJsonFlat`| Read and load the data from mobility json file, store the data `uid`, `time`, `lon`, `lat` into the list `dataList`, and sort out by time from the earliest to the oldest time. | 
 |                   |IEnumerator `InstantiateSpheresWithTimeDelay`|fetch the data from dataList and instantiate sphere prefabs that represent the users according to time. The waiting time is the difference betweeen the previous time spot and the current time spot.| 
@@ -207,7 +207,7 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 
 
 | Unity Assets | Zurich | Singapore |
-| :---------------------- | :------------- |:-------------- |
+| :-------- | :------------- |:-------------- |
 | Scene |`MobilityScene.unity`|`SingMobilityScene.unity`| 
 | Prefabs |`ZurichModel0210_buildingterrain.prefab`|`SingaporeMobility.prefab`|
 | Scripts |`MobilityFlow.cs`|`SingMobilityFlow.cs`|
@@ -226,7 +226,7 @@ The social economics module illustrates energy trading among buildings in the ar
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure.   
 | Scripts | Function | Description |
-| :-------------- | :---------- |:---------- |
+| :------------ | :--------- |:---------- |
 | `EnergyTrade.cs`| `Start` | Set the file path: `string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json"` , and call all functions. | 
 |                 |`LoadJson`| Read and load data from energy trade json file. `FromBuilding` sells `transmission` amount of electricity to `ToBuilding` at hour `T`, and these data are stored in a list. | 
 |                |IEnumerator `StartLaunchLineRenderers`| Fetch data from dataList and assign coorsponding building on the model, and then pass the data to initiate `TEMPChangeBuildingColor`| 
@@ -235,7 +235,7 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 |`ZurichMobilityJson.cs`|class `ZurichMobilityJson`| Transferred data from json files using [JSON2CSHARP](https://json2csharp.com) online tool according to json file structure.|
 
 | Unity Assets | Zurich | Singapore |
-| :---------------------- | :------------- |:-------------- |
+| :------ | :------------- |:-------------- |
 | Scene |`EnergyTradeScene.unity`|`EnergyTradeSingaporeScene.unity`| 
 | Prefabs |`ZRHmodelEnergyTrade.prefab`|`EnergyTradeSingapore.prefab`|
 | Scripts |`EnergyTrade.cs`|`SingEnergyTrade.cs`|
@@ -247,6 +247,6 @@ The following table summarizes the code for Zurich case, the Sinagpore case shar
 This scene is used for checking the image detection works. It is disabled by default. To enable this function, go to `menu.unity` scene, find Debug buttom under Canvas, and check the box in Inspector.    
 
 | Unity Assets | Content | Description |
-| :---------------------- | :------------- | :------------- |
+| :----- | :------------- | :------------- |
 | Scene |`BasicImageTracking.unity`| When an image in the `ReferenceImageLibrary.asset` is detected, the information of this image is displayed in virtual space. |
 | Scripts |`TrackedImageInfoManager.cs`||
