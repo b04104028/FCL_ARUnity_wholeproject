@@ -41,6 +41,7 @@ In this case, Unity is not required. Follow the steps below:
 6. Run the project by clicking the triangle "run" button on top left. This way Xcode builds the app to your device. 
 
 **Device part**    
+
 7. On your iOS device, sign in to the Apple developer account the same as "Team"
 
 8. "[Verify](https://www.youtube.com/watch?v=vsi2MsEW764)" this app in Settings > General > VPN & Device Management 
@@ -53,6 +54,7 @@ In this case, Unity is not required. Follow the steps below:
 ### case 2: Modify project before building to device  
 
 To modify project on models, scenes, scripts,...,etc, follow the steps below:   
+
 **Unity part**    
 1. Install [Unity Hub](https://unity.com/download). In Unity Hub, go to "Install" to install Unity 2021.2 or later, add 2 modules: "Visual Studio for Mac" and "iOS Build Support".  
 
@@ -63,6 +65,7 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 4. Go to [Build Settings](https://docs.unity3d.com/Manual/BuildSettings.html), select a target platform([iOS](https://docs.unity3d.com/Manual/iphone-BuildProcess.html) in this sample), and build this project in a new folder. In this way, unity automatically build a Xcode project. 
 
 **Xcode part**    
+
 5. After finishing building, go to that new folder and open `Unity-iPhone.xcodeproj` using Xcode 14.0 or later.
 
 6. Follow the steps of [case1](#case1:-Directly-run-on-device-without-modification)
@@ -197,7 +200,7 @@ The mobility flow of vehicle and non-vehicle is demonstrated on virtual models w
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure.   
 | Scripts | Function | Description |
-| :------------ | :--------- |:---------- |
+| :------------ | :--------- |:---------- | 
 | `MobilityFlow.cs` | `Start` | Set the file path: `string path = Application.persistentDataPath + "/PersistantFilePath/" + "Zurich_Mobility.geojson"` , and call all functions. | 
 |                   |`LoadJsonFlat`| Read and load the data from mobility json file, store the data `uid`, `time`, `lon`, `lat` into the list `dataList`, and sort out by time from the earliest to the oldest time. | 
 |                   |IEnumerator `InstantiateSpheresWithTimeDelay`|fetch the data from dataList and instantiate sphere prefabs that represent the users according to time. The waiting time is the difference betweeen the previous time spot and the current time spot.| 
@@ -226,7 +229,7 @@ The social economics module illustrates energy trading among buildings in the ar
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure.   
 | Scripts | Function | Description |
-| :------------ | :--------- |:---------- |
+| :------------ | :--------- |:---------- | 
 | `EnergyTrade.cs`| `Start` | Set the file path: `string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json"` , and call all functions. | 
 |                 |`LoadJson`| Read and load data from energy trade json file. `FromBuilding` sells `transmission` amount of electricity to `ToBuilding` at hour `T`, and these data are stored in a list. | 
 |                |IEnumerator `StartLaunchLineRenderers`| Fetch data from dataList and assign coorsponding building on the model, and then pass the data to initiate `TEMPChangeBuildingColor`| 
