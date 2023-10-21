@@ -1,9 +1,11 @@
 # Interactive Data Visualization and Augmented Reality of Urban Photovoltaic
 ## Introduction
+
 This project is an iPad mobile app created for the Future Cities Lab Exhibition 2023 at ETH Zurich, aiming to visualize influencial data of photovoltaic power usage using augmented reality. It utilizes 3D printed models of two sites, Zurich and Singapore, and is composed of three key modules: energy demand(cooling and heating), mobility flow (both vehicle and non-vehicle), and social economics(energy trading within these regions). 
 By inputing these data in a specific format, the project creates a virtual overlay on the physical 3D models, providing a direct and clear view of the real situations in the designated areas.
 
 ## Environment and dependencies
+
 The `ARFoundationAllBackup` branch represents the final version of this repository. It is compatible with [Unity](https://unity.com/download) 2021.2 and later.
 
 This project is developed based on [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and its demonstration example [AR Foundation Sample Project](https://github.com/Unity-Technologies/arfoundation-samples).
@@ -67,9 +69,10 @@ To modify project on models, scenes, scripts,...,etc, follow the steps below:
 
 
 ## Data Format
-Sample data can be found in this repository under folder `PersistantFilePath`. To customize data to visualize, prepare new data in the following format, and follow step#9 of previous section [case1](#case1:-Directly-run-on-device-without-modification).
+Sample data can be found in this repository under folder `PersistantFilePath`. To customize data to visualize, prepare new data in the following format, update the file name in code,and follow step#9 of previous section [case1](#case1:-Directly-run-on-device-without-modification).
 
 ### Energy Demand
+
 {
 "houses":
 [
@@ -84,6 +87,7 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
     ]}
     
 ### Mobility
+
 {
 "type": "FeatureCollection",
 "features": [
@@ -91,6 +95,7 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
 { "type": "Feature", "properties": { "uid": 0.0, "Time": "2023-07-31T02:23:32.083", "Lat": 1.3906829774271761, "Lon": 103.89404762958823, "is_vehicle": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 103.894047629588229, 1.390682977427176 ] } },...]}
 
 ### Energy Trade
+
 {
 "DataEnergyTrade":[
     {
@@ -109,7 +114,7 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
 # Table of Contents
 
 | Sample scene(s) | Location in project |
-| :-------------- | :------------------ |
+| :----------------------------- | :------------------ |
 | [Menu](#Menu) | ../Asset/Scenes/ImageTracking/Menu |
 | [Images](#Scenes) | ../Asset/Scenes/ImageTracking/Images |
 | [Energy Demand Module](#Energy-Demand-Module) | ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs|
@@ -118,25 +123,35 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
 | [Debug Image Tracking](#Debug-Image-Tracking) | ../Asset/Scenes/ImageTracking/BasicImageTracking |
 
 ## Menu
+
  ../Asset/Scenes/ImageTracking/Menu   
+ 
 The menu scene is the start page of the app. It allows users (1)select the city, then (2)select the data module.
 
 ## Image
+
  ../Asset/Scenes/ImageTracking/Images   
+
+ 
 `ReferenceImageLibrary.asset` manages the images that can be detected in physical world. Use this to modify or add new images.
 After modifying images, add the cooresponding prefabs that will be instantiated when the new image is detected under: (A module's scene, eg., EnergyDemandScene.unity) > Hierarchy > gameobject `ARF XR Origin Set Up` > gameobject `XR Origin` > Inspector > component `PrefabImagePairManager(Script)` > `PrefabList`
 
 ### Instantiate module prefabs
-The matched prefabs are instantiated in virtual world when the coorseponding image is detected in physical world. The location and rotation is set by function`AssignPrefab` in the script`PrefabImagePairManager.cs`. 
+
+The matched prefabs are instantiated in virtual world when the coorseponding image is detected in physical world. The location and rotation is set by function`AssignPrefab` in the script`PrefabImagePairManager.cs`.  
+
 Detail explanation can be found in [AR Foundation Image Tracking package documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/features/image-tracking.html)
 
 ## Data Visualization Modules
+
 Prefabs location: ../Asset/Scenes/ImageTracking/Prefabs    
 Scenes location: ../Asset/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs    
 Scripts location: ../Asset/Scenes/ImageTracking/Scripts    
 
 ### Energy Demand Module
-![Zurich Cooling Demand](hover-over-color.gif)
+
+![Zurich Cooling Demand](RESULT/ZurichCooling.gif)  
+
 The annual energy demand is measured in kWh, and it's represented by a color bar on the right. This bar uses different shades of blue(for cooling)/red(for heating) to indicate the level of demand. Darker shades of blue/red represent higher demand. The darkest level matches the highest demand within the area of study. Each building displays its annual demand on top of the model, and its color corresponds to the color scale bar to show the level of demand. The annaul cooling demand data is visualized on both Zurich and Sinagpore models; the annual heating demand data is visualized only on Zurich model.  
 
 The following table summarizes the code for Zurich case, the Sinagpore case shares the same structure. 
