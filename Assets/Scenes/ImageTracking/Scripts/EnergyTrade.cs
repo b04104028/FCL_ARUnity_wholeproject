@@ -28,23 +28,13 @@ public class EnergyTrade : MonoBehaviour
     int startTime = 11;//default value for zurich case
     int endTime = 16;//default value for zurich case
 
-    //private GameObject targetGO;
-
     List<(string, string, float, int)> dataList = new List<(string, string, float, int)>();
     public float maxTrans;
-
-    //THESE POINTS ARE FOR TESTING 
-    private Vector3 fromPos = new Vector3(0.04f, 0.02f, -0.16f)- new Vector3(0, 0.02f, 0);
-    private Vector3 toPos = new Vector3(0.05f, 0.03f, -0.11f)- new Vector3(0, 0.01f, 0);
-    private Vector3 fromPos2 = new Vector3(0.01f, 0.02f, -0.16f) - new Vector3(0, 0.02f, 0);
-    private Vector3 toPos2 = new Vector3(0.01f, 0.03f, -0.11f) - new Vector3(0, 0.01f, 0);
 
     public GameObject targetGO;
 
     void Start()
     {
-        //Debug.Log("start");
-        //string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/ZurichEnergyTrade.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
         string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json";
 
         LoadJson(jsonFilePath);        
@@ -56,8 +46,7 @@ public class EnergyTrade : MonoBehaviour
         ArrowWidthScale = Vector3.Distance(AnchorpointXZ_1.transform.position, AnchorpointXZ_2.transform.position);
         height = Vector3.Distance(AnchorpointXZ_2.transform.position, AnchorpointXY.transform.position);
         //Debug.Log("height" + height);
-        //StartCoroutine(ContinuousLaunchLineRenderer(fromPos, toPos, 2, targetGO));
-        ///StartCoroutine(ContinuousLaunchLineRenderer(fromPos2, toPos2, 11, targetGO));
+
         StartCoroutine(StartLaunchLineRenderers());
     }
 
@@ -79,7 +68,7 @@ public class EnergyTrade : MonoBehaviour
             Transform toBuilding = GameObject.Find(toBuildingName).GetComponentInChildren<Canvas>().transform;
             Debug.Log("to building position" + toBuilding.position);
 
-            Vector3 fromPosition = fromBuilding.position;// +gameObject.transform.position;
+            Vector3 fromPosition = fromBuilding.position;// +gameObject.transform.position; //(0,0,0)
             Vector3 toPosition = toBuilding.position;// +gameObject.transform.position;
             targetGO.GetComponent<Renderer>().material.color = Color.white;
 
@@ -94,7 +83,7 @@ public class EnergyTrade : MonoBehaviour
     public IEnumerator TEMPChangeBuildingColor(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO, GameObject fromGO)
     {
         lineRenderers = new LineRenderer[numberOfBombs];
-        trajectoryPoints = CalculateParabolicTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
+        //trajectoryPoints = CalculateParabolicTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
 
         Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
         Color originalFromColor = fromGO.GetComponent<Renderer>().material.color;
@@ -111,8 +100,8 @@ public class EnergyTrade : MonoBehaviour
             lineRenderers[i].SetPosition(1, endPoint);
             lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
             lineRenderers[i].endWidth = 0f;
-            Debug.Log("trajectory point i = " + trajectoryPoints[i]);
-            Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
+            //Debug.Log("trajectory point i = " + trajectoryPoints[i]);
+            //Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
             //lineRenderers[i].transform.parent = gameObject.transform;
             //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
             //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
@@ -149,12 +138,51 @@ public class EnergyTrade : MonoBehaviour
         fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
 
+    public void ShowTime(int T)
+    {
+        timelineText.text = T.ToString() + "h";
+        progressBar.minValue = 0f;
+        progressBar.maxValue = (float)(endTime - startTime);
+        progressBar.value = (float)(T- startTime);//int to float
+        Debug.Log("time now: " + T);
+    }
+
+    public void LoadJson(string path)
+    {
+        using (StreamReader r = new StreamReader(path))
+        {
+            string jsonString = r.ReadToEnd();
+
+            rootDataEnergyTrade rootdataEnergyTrade = JsonUtility.FromJson<rootDataEnergyTrade>(jsonString);
+
+            foreach (DataEnergyTrade et in rootdataEnergyTrade.DataEnergyTrade)
+            {
+                string FromBuilding = RemoveDemandCSV(et.From);
+                string ToBuilding = RemoveDemandCSV(et.To);
+                float transmission = et.Transmission;
+                int T = et.T;
+                
+                    dataList.Add((FromBuilding, ToBuilding, transmission, T));
+            }
+        }
+    }
+
+    //because there's _demand.csv after building names in json file.
+    private string RemoveDemandCSV(string text)
+    {
+        if (text.EndsWith("_demand.csv"))
+        {
+            return text.Substring(0, text.Length - "_demand.csv".Length);
+        }
+        return text;
+    }
 
 
+    // launch line renderer doesnt work so cant use this
     public IEnumerator ContinuousLaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject toBDgo)
     {
         int i = 0;
-        while (i<5)//(true)//i < 5)
+        while (i < 5)//(true)//i < 5)
         {
             StartCoroutine(LaunchLineRenderer(startPoint, endPoint, transmissionValue, toBDgo));
 
@@ -163,7 +191,7 @@ public class EnergyTrade : MonoBehaviour
             i++;
         }
     }
-
+    //doesnt work: paroblic trajectory doesnt work well due to local and global position ambiguity...
     public IEnumerator LaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO)
     {
         lineRenderers = new LineRenderer[numberOfBombs];
@@ -184,11 +212,11 @@ public class EnergyTrade : MonoBehaviour
             lineRenderers[i].startWidth = transmissionValue / maxTrans * ArrowWidthScale;
             lineRenderers[i].endWidth = 0f;
             Debug.Log("trajectory point i = " + trajectoryPoints[i]);
-            Debug.Log("trajectory point i+1 = " + trajectoryPoints[i+1]);
+            Debug.Log("trajectory point i+1 = " + trajectoryPoints[i + 1]);
             //lineRenderers[i].transform.parent = gameObject.transform;
             //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
             //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
-        
+
 
 
             if (i == (numberOfBombs - 1))
@@ -202,7 +230,7 @@ public class EnergyTrade : MonoBehaviour
             Destroy(lineRenderers[i], prefabStayTime);
         }
         Debug.Log("end point " + endPoint);
-        
+
         // Wait for 2 seconds
         yield return new WaitForSeconds(2.0f);
 
@@ -210,8 +238,7 @@ public class EnergyTrade : MonoBehaviour
         targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
         targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
-
-
+    //archive
     public IEnumerator ARCHIVELaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO)
     {
         lineRenderers = new LineRenderer[numberOfBombs];
@@ -255,17 +282,18 @@ public class EnergyTrade : MonoBehaviour
             yield return new WaitForSeconds((float)timeDifference);
             //Destroy(lineRenderers[i], prefabStayTime);
         }
-       // targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
-       // targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+        // targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
+        // targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
 
     }
+    //discarded because launch line renderer doesnt work. but this works well. destroy the arrow after indication process has done
     private IEnumerator DestroyLineRenderer(LineRenderer lineRenderer, float delay, Action onComplete)
     {
         yield return new WaitForSeconds(delay);
         Destroy(lineRenderer.gameObject);
         onComplete?.Invoke();
     }
-
+    //discarded
     Vector3[] CalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
     {
         Vector3[] points = new Vector3[numberOfPoints];
@@ -273,13 +301,13 @@ public class EnergyTrade : MonoBehaviour
         for (int i = 0; i < numberOfPoints; i++)
         {
             double t = i / (numberOfPoints - 1);
-            double  u = 1 - t;
+            double u = 1 - t;
             double tt = t * t;
             double uu = u * u;
             double ut = u * t;
             Debug.Log("t = " + t);
 
-            double z = (height * (1 - uu)+ startPoint.z); // -height *2)
+            double z = (height * (1 - uu) + startPoint.z); // -height *2)
             if (i < numberOfPoints / 2)
             {
                 z = (height * (1 - tt) + startPoint.z); // -height *2
@@ -297,6 +325,7 @@ public class EnergyTrade : MonoBehaviour
         return points;
     }
 
+    //doesnt work well. discarded.
     Vector3[] YZORIGINALCalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
     {
         Vector3[] points = new Vector3[numberOfPoints];
@@ -313,9 +342,9 @@ public class EnergyTrade : MonoBehaviour
             if (i < numberOfPoints / 2)
             {
                 y = height * (1 - uu) + startPoint.y;
-            } 
-                // Calculate the Y-coordinate differently for the X-Z plane        
-            
+            }
+            // Calculate the Y-coordinate differently for the X-Z plane        
+
             // Calculate the X and Z coordinates normally
             float x = uu * startPoint.x + 2 * ut * endPoint.x + tt * endPoint.x;
             float z = uu * startPoint.z + 2 * ut * endPoint.z + tt * endPoint.z;
@@ -325,20 +354,6 @@ public class EnergyTrade : MonoBehaviour
 
         return points;
     }
-
-    public void ShowTime(int T)
-    {
-        timelineText.text = T.ToString() + "h";
-        ///if (T >= 12)
-        //{
-        //    timelineText.text = (T-12).ToString() + "PM";
-        //}
-        progressBar.minValue = 0f;
-        progressBar.maxValue = (float)(endTime - startTime);
-        progressBar.value = (float)(T- startTime);//int to float
-        Debug.Log("time now: " + T);
-    }
-
 
     Vector3[] ARCHIVECalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
     {
@@ -362,33 +377,5 @@ public class EnergyTrade : MonoBehaviour
         return points;
     }
 
-    public void LoadJson(string path)
-    {
-        using (StreamReader r = new StreamReader(path))
-        {
-            string jsonString = r.ReadToEnd();
-
-            rootDataEnergyTrade rootdataEnergyTrade = JsonUtility.FromJson<rootDataEnergyTrade>(jsonString);
-
-            foreach (DataEnergyTrade et in rootdataEnergyTrade.DataEnergyTrade)
-            {
-                string FromBuilding = RemoveDemandCSV(et.From);
-                string ToBuilding = RemoveDemandCSV(et.To);
-                float transmission = et.Transmission;
-                int T = et.T;
-                
-                    dataList.Add((FromBuilding, ToBuilding, transmission, T));
-            }
-        }
-    }
-
-    private string RemoveDemandCSV(string text)
-    {
-        if (text.EndsWith("_demand.csv"))
-        {
-            return text.Substring(0, text.Length - "_demand.csv".Length);
-        }
-        return text;
-    }
 
 }
