@@ -130,6 +130,9 @@ Sample data can be found in this repository under folder `PersistantFilePath`. T
 ## Menu   
 
  ../Asset/Scenes/ImageTracking/Menu   
+
+ **Menu**   
+ ![Menu](RESULTS/Menu.gif)  
  
 The menu scene is the start page of the app. It allows users (1)select the city, then (2)select the data module.   
 
