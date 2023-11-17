@@ -329,9 +329,9 @@ public class SingEnergyTrade : MonoBehaviour
             //Vector3 sequenceNum = (startPoint + endPoint) / (float)numberOfBombs * (float)i;
 
             //double y = wideFactor * Math.Pow(sequenceNum.y - middlepoint.y, 2) - height;
-            double y = ((endPoint.y - startPoint.y) / (float)numberOfBombs * (float)i) + startPoint.y;// + ArrowWidthScale * 0.5f;
+            double y = ((endPoint.y - startPoint.y) / (float)numberOfBombs * (float)i) + startPoint.y + ArrowWidthScale * 0.5f;
             double x = ((endPoint.x - startPoint.x) / (float)numberOfBombs * (float)i) + startPoint.x;
-            double z = ((endPoint.z - startPoint.z) / (float)numberOfBombs * (float)i) + startPoint.z - ArrowWidthScale * 0.3f; 
+            double z = ((endPoint.z - startPoint.z) / (float)numberOfBombs * (float)i) + startPoint.z;// + ArrowWidthScale * 0.3f; 
             // double z = (height * (1 - uu) + startPoint.z); // -height *2)
             //  if (i < numberOfPoints / 2)
             //  {
