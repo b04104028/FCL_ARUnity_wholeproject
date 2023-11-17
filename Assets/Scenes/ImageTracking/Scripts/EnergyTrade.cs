@@ -18,8 +18,9 @@ public class EnergyTrade : MonoBehaviour
     private float height = 0.04F;//DEFAULT VALUE
     private int numberOfBombs = 10;
     private float timeDifference = 0.1f;
-    private float prefabStayTime = 0.8f;
+    //private float prefabStayTime = 2f;//0.8f;
     private LineRenderer[] lineRenderers;
+    private List<LineRenderer[]> lineRenderersList = new List<LineRenderer[]>();
     private Vector3[] trajectoryPoints;
 
     //progress bar timeline
@@ -28,18 +29,21 @@ public class EnergyTrade : MonoBehaviour
     int startTime = 11;//default value for zurich case
     int endTime = 16;//default value for zurich case
 
+
     //private GameObject targetGO;
 
-    List<(string, string, float, int)> dataList = new List<(string, string, float, int)>();
-    public float maxTrans;
+    List< List<(string, string, float, int)>> dataList = new List<List<(string, string, float, int)>>();
+    public float maxTrans = 0;
 
-    //THESE POINTS ARE FOR TESTING 
+    /*//THESE POINTS ARE FOR TESTING 
     private Vector3 fromPos = new Vector3(0.04f, 0.02f, -0.16f)- new Vector3(0, 0.02f, 0);
     private Vector3 toPos = new Vector3(0.05f, 0.03f, -0.11f)- new Vector3(0, 0.01f, 0);
     private Vector3 fromPos2 = new Vector3(0.01f, 0.02f, -0.16f) - new Vector3(0, 0.02f, 0);
     private Vector3 toPos2 = new Vector3(0.01f, 0.03f, -0.11f) - new Vector3(0, 0.01f, 0);
-
+    */
     public GameObject targetGO;
+
+    private Color lightBlue = new Color(0.2f, 0.5f, 1.0f, 1.0f);
 
     void Start()
     {
@@ -47,11 +51,7 @@ public class EnergyTrade : MonoBehaviour
         //string jsonFilePath = "/Users/asisstenz/Desktop/PersistantDataPath/ZurichEnergyTrade.json";//Application.persistentDataPath + "/PersistantFilePath/" + "EnergyTradeSingapore.json";
         string jsonFilePath = Application.persistentDataPath + "/PersistantFilePath/" + "ZurichEnergyTrade.json";
 
-        LoadJson(jsonFilePath);        
-
-        maxTrans = dataList.Max(item => item.Item3);
-        startTime = dataList.Min(item => item.Item4);
-        endTime = dataList.Max(item => item.Item4);
+        LoadJson(jsonFilePath);                
 
         ArrowWidthScale = Vector3.Distance(AnchorpointXZ_1.transform.position, AnchorpointXZ_2.transform.position);
         height = Vector3.Distance(AnchorpointXZ_2.transform.position, AnchorpointXY.transform.position);
@@ -61,43 +61,144 @@ public class EnergyTrade : MonoBehaviour
         StartCoroutine(StartLaunchLineRenderers());
     }
 
-    private IEnumerator StartLaunchLineRenderers()
+    public void LoadJson(string path)
     {
-        foreach (var item in dataList)
+        using (StreamReader r = new StreamReader(path))
         {
-            string fromBuildingName = item.Item1;
-            string toBuildingName = item.Item2;
-            float transmissionValue = item.Item3;
-            int T = item.Item4;
-            ShowTime(T);
+            string jsonString = r.ReadToEnd();
 
-            GameObject toBDgo = GameObject.Find(toBuildingName);
-            GameObject fromBDgo = GameObject.Find(fromBuildingName);
+            rootDataEnergyTrade rootdataEnergyTrade = JsonUtility.FromJson<rootDataEnergyTrade>(jsonString);
 
-            Transform fromBuilding = GameObject.Find(fromBuildingName).GetComponentInChildren<Canvas>().transform;
-            Debug.Log("from building position "+fromBuilding.position);
-            Transform toBuilding = GameObject.Find(toBuildingName).GetComponentInChildren<Canvas>().transform;
-            Debug.Log("to building position" + toBuilding.position);
+            // Group items by T using LINQ
+            var groupedData = rootdataEnergyTrade.DataEnergyTrade
+                .Select(et => new
+                {
+                    FromBuilding = RemoveDemandCSV(et.From),
+                    ToBuilding = RemoveDemandCSV(et.To),
+                    Transmission = et.Transmission,
+                    T = et.T
+                })
+                .GroupBy(item => item.T)
+                .ToList();
 
-            Vector3 fromPosition = fromBuilding.position;// +gameObject.transform.position;
-            Vector3 toPosition = toBuilding.position;// +gameObject.transform.position;
-            targetGO.GetComponent<Renderer>().material.color = Color.white;
+            // Clear the existing dataList
+            dataList.Clear();
 
-            if (transmissionValue > 0)
+            // Iterate through the groups and aggregate the items
+            foreach (var group in groupedData)
             {
-                yield return StartCoroutine(TEMPChangeBuildingColor(fromPosition, toPosition, transmissionValue, toBDgo, fromBDgo));
-                //yield return StartCoroutine(ContinuousLaunchLineRenderer(fromPosition, toPosition, transmissionValue, toBDgo));
+                // Aggregate the items in each group into a new list
+                var aggregatedList = group.Select(item => (item.FromBuilding, item.ToBuilding, item.Transmission, item.T)).ToList();
+
+                // Add the aggregated list to dataList
+                dataList.Add(aggregatedList);
             }
         }
     }
 
-    public IEnumerator TEMPChangeBuildingColor(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO, GameObject fromGO)
+    private string RemoveDemandCSV(string text)
+    {
+        if (text.EndsWith("_demand.csv"))
+        {
+            return text.Substring(0, text.Length - "_demand.csv".Length);
+        }
+        return text;
+    }
+
+    public void ShowTime(int T)
+    {
+        timelineText.text = T.ToString() + "h";
+        ///if (T >= 12)
+        //{
+        //    timelineText.text = (T-12).ToString() + "PM";
+        //}
+        progressBar.minValue = 0f;
+        progressBar.maxValue = (float)(endTime - startTime);
+        progressBar.value = (float)(T - startTime);//int to float
+        Debug.Log("time now: " + T);
+    }
+
+    private IEnumerator StartLaunchLineRenderers()
+    {
+        foreach (var grouplist in dataList)
+        {
+            foreach (var item in grouplist)
+            {
+                string fromBuildingName = item.Item1;
+                string toBuildingName = item.Item2;
+                float transmissionValue = item.Item3;
+                int T = item.Item4;
+                ShowTime(T);
+
+                if(maxTrans < grouplist.Max(item => item.Item3))
+                {
+                    maxTrans = grouplist.Max(item => item.Item3);
+                }
+                if (startTime > grouplist.Min(item => item.Item4))
+                {
+                    startTime = grouplist.Min(item => item.Item4);
+                }
+                if (endTime < grouplist.Max(item => item.Item4))
+                {
+                    endTime = grouplist.Max(item => item.Item4);
+                }
+
+                GameObject toBDgo = GameObject.Find(toBuildingName);
+                GameObject fromBDgo = GameObject.Find(fromBuildingName);
+
+                Transform fromBuilding = GameObject.Find(fromBuildingName).GetComponentInChildren<Canvas>().transform;
+                Debug.Log("from building position " + fromBuilding.position);
+                Transform toBuilding = GameObject.Find(toBuildingName).GetComponentInChildren<Canvas>().transform;
+                Debug.Log("to building position" + toBuilding.position);
+
+                Vector3 fromPosition = fromBuilding.position;// +gameObject.transform.position;
+                Vector3 toPosition = toBuilding.position;// +gameObject.transform.position;
+                targetGO.GetComponent<Renderer>().material.color = Color.white;
+
+                if (transmissionValue > 0)
+                {
+                    //TEMPChangeBuildingColor(fromPosition, toPosition, transmissionValue, toBDgo, fromBDgo, T);
+                    yield return StartCoroutine(TEMPChangeBuildingColor(fromPosition, toPosition, transmissionValue, toBDgo, fromBDgo, T));
+                    //yield return StartCoroutine(ContinuousLaunchLineRenderer(fromPosition, toPosition, transmissionValue, toBDgo));
+                }
+            }
+
+            yield return new WaitForSeconds(2.0f);
+
+            foreach (var item in grouplist) {
+                string fromBuildingName = item.Item1;
+                string toBuildingName = item.Item2;
+
+                GameObject toBDgo = GameObject.Find(toBuildingName);
+                GameObject fromBDgo = GameObject.Find(fromBuildingName);
+
+                // Reset the color and text of targetGO
+                toBDgo.GetComponent<Renderer>().material.color = Color.white;
+                toBDgo.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+
+                // Reset the color and text of fromGO
+                fromBDgo.GetComponent<Renderer>().material.color = Color.white;
+                fromBDgo.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+            }
+
+            foreach (LineRenderer[] lrgroup in lineRenderersList)
+            {
+                foreach (LineRenderer lr in lrgroup)
+                {
+                    Destroy(lr);
+                }
+            }
+
+        }
+    }
+
+    public IEnumerator TEMPChangeBuildingColor(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject targetGO, GameObject fromGO, int T)
     {
         lineRenderers = new LineRenderer[numberOfBombs];
         trajectoryPoints = CalculateStraightTrajectory(startPoint, endPoint, height, numberOfBombs + 1);
 
-        Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
-        Color originalFromColor = fromGO.GetComponent<Renderer>().material.color;
+        //Color originalTargetColor = targetGO.GetComponent<Renderer>().material.color;
+        //Color originalFromColor = fromGO.GetComponent<Renderer>().material.color;
 
         Debug.Log("start point" + startPoint);
         for (int i = 0; i < numberOfBombs; i++)
@@ -117,11 +218,10 @@ public class EnergyTrade : MonoBehaviour
             //lineRenderers[i].SetPosition(0, trajectoryPoints[i] + gameObject.transform.position);
             //lineRenderers[i].SetPosition(1, trajectoryPoints[i + 1] + gameObject.transform.position);
 
-            if( i == 0)
+            if(i == 0)
             {
-                fromGO.GetComponent<Renderer>().material.color = Color.blue;
+                fromGO.GetComponent<Renderer>().material.color = lightBlue;// Color.blue;
                 fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "-" + transmissionValue.ToString() + "kWh";
-
             }
 
             if (i == (numberOfBombs - 1))
@@ -129,29 +229,51 @@ public class EnergyTrade : MonoBehaviour
                 // Set the color and text of targetGO
                 targetGO.GetComponent<Renderer>().material.color = Color.yellow;
                 targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "+" + transmissionValue.ToString() + "kWh";
-
             }
 
             yield return new WaitForSeconds((float)timeDifference);
-            Destroy(lineRenderers[i], prefabStayTime);
+            //Destroy(lineRenderers[i], prefabStayTime);
         }
+
+        lineRenderersList.Add(lineRenderers);
         Debug.Log("end point " + endPoint);
 
         // Wait for 2 seconds
-        yield return new WaitForSeconds(2.0f);
+        //if (currentT != T)
+        //{
+            //yield return new WaitForSeconds(2.0f);
+           // Debug.Log("Wait for next hour");
+           // currentT = T;
+        //}
 
         // Reset the color and text of targetGO
-        targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
-        targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+        //targetGO.GetComponent<Renderer>().material.color = originalTargetColor;
+        //targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
 
         // Reset the color and text of fromGO
-        fromGO.GetComponent<Renderer>().material.color = originalFromColor;
-        fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
+        //fromGO.GetComponent<Renderer>().material.color = originalFromColor;
+        //fromGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
 
+    Vector3[] CalculateStraightTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
+    {
+        Vector3[] points = new Vector3[numberOfPoints];
 
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            double y = ((endPoint.y - startPoint.y) / (float)numberOfBombs * (float)i) + startPoint.y;
+            double x = ((endPoint.x - startPoint.x) / (float)numberOfBombs * (float)i) + startPoint.x;
+            double z = ((endPoint.z - startPoint.z) / (float)numberOfBombs * (float)i) + startPoint.z;
 
-    public IEnumerator ContinuousLaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject toBDgo)
+            points[i] = new Vector3((float)x, (float)y, (float)z);
+            Debug.Log(",  i= " + i + ", calculated points: " + points[i]);
+        }
+        Debug.Log("in trajectory funciton, startpoint: " + startPoint + ", endpoint: " + endPoint + ", out put point i=0 : " + points[0] + ", output point i = 10: " + points[10]);
+
+        return points;
+    }
+
+    /*public IEnumerator ContinuousLaunchLineRenderer(Vector3 startPoint, Vector3 endPoint, float transmissionValue, GameObject toBDgo)
     {
         int i = 0;
         while (i<5)//(true)//i < 5)
@@ -259,30 +381,13 @@ public class EnergyTrade : MonoBehaviour
        // targetGO.GetComponentInChildren<Canvas>().GetComponentInChildren<TextMeshProUGUI>().text = "";
 
     }
+
     private IEnumerator DestroyLineRenderer(LineRenderer lineRenderer, float delay, Action onComplete)
     {
         yield return new WaitForSeconds(delay);
         Destroy(lineRenderer.gameObject);
         onComplete?.Invoke();
-    }
-
-    Vector3[] CalculateStraightTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
-    {
-        Vector3[] points = new Vector3[numberOfPoints];
-
-        for (int i = 0; i < numberOfPoints; i++)
-        {
-            double y = ((endPoint.y - startPoint.y) / (float)numberOfBombs * (float)i) + startPoint.y;
-            double x = ((endPoint.x - startPoint.x) / (float)numberOfBombs * (float)i) + startPoint.x;
-            double z = ((endPoint.z - startPoint.z) / (float)numberOfBombs * (float)i) + startPoint.z;
-       
-            points[i] = new Vector3((float)x, (float)y, (float)z);
-            Debug.Log(",  i= " + i + ", calculated points: " + points[i]);
-        }
-        Debug.Log("in trajectory funciton, startpoint: " + startPoint + ", endpoint: " + endPoint + ", out put point i=0 : " + points[0] + ", output point i = 10: " + points[10]);
-
-        return points;
-    }
+    }    
 
 
     Vector3[] CalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
@@ -345,18 +450,7 @@ public class EnergyTrade : MonoBehaviour
         return points;
     }
 
-    public void ShowTime(int T)
-    {
-        timelineText.text = T.ToString() + "h";
-        ///if (T >= 12)
-        //{
-        //    timelineText.text = (T-12).ToString() + "PM";
-        //}
-        progressBar.minValue = 0f;
-        progressBar.maxValue = (float)(endTime - startTime);
-        progressBar.value = (float)(T- startTime);//int to float
-        Debug.Log("time now: " + T);
-    }
+
 
 
     Vector3[] ARCHIVECalculateParabolicTrajectory(Vector3 startPoint, Vector3 endPoint, float height, int numberOfPoints)
@@ -381,7 +475,7 @@ public class EnergyTrade : MonoBehaviour
         return points;
     }
 
-    public void LoadJson(string path)
+    public void ARCHIVELoadJson(string path)
     {
         using (StreamReader r = new StreamReader(path))
         {
@@ -395,19 +489,11 @@ public class EnergyTrade : MonoBehaviour
                 string ToBuilding = RemoveDemandCSV(et.To);
                 float transmission = et.Transmission;
                 int T = et.T;
-                
-                    dataList.Add((FromBuilding, ToBuilding, transmission, T));
+
+                //temporarily comment out this to use new loadjson function
+                //dataList.Add((FromBuilding, ToBuilding, transmission, T));
             }
         }
-    }
-
-    private string RemoveDemandCSV(string text)
-    {
-        if (text.EndsWith("_demand.csv"))
-        {
-            return text.Substring(0, text.Length - "_demand.csv".Length);
-        }
-        return text;
-    }
+    }*/
 
 }

@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8301457250088351727}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: B117049
+  m_TagString: B117049Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 7286116926003474871}
   m_Layer: 0
   m_Name: B117050
-  m_TagString: Untagged
+  m_TagString: B117050
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5330,7 +5330,7 @@ PrefabInstance:
     - target: {fileID: 1932596962637637937, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B117052
       objectReference: {fileID: 0}
     - target: {fileID: 1936732331680114117, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -5520,7 +5520,7 @@ PrefabInstance:
     - target: {fileID: 2090873966645046042, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B6327
       objectReference: {fileID: 0}
     - target: {fileID: 2091090657303957266, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -5730,7 +5730,7 @@ PrefabInstance:
     - target: {fileID: 2337235452498079821, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B117053
       objectReference: {fileID: 0}
     - target: {fileID: 2338116350420187452, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -8170,7 +8170,7 @@ PrefabInstance:
     - target: {fileID: 4920012691774946465, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B117048
       objectReference: {fileID: 0}
     - target: {fileID: 4924170553255017567, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -9400,7 +9400,7 @@ PrefabInstance:
     - target: {fileID: 6287962418621697820, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B117051
       objectReference: {fileID: 0}
     - target: {fileID: 6290403199011376065, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -9920,7 +9920,7 @@ PrefabInstance:
     - target: {fileID: 6972639899794082318, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B117050
       objectReference: {fileID: 0}
     - target: {fileID: 6973646920072645203, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -10010,7 +10010,7 @@ PrefabInstance:
     - target: {fileID: 7094748749354436859, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B117049
       objectReference: {fileID: 0}
     - target: {fileID: 7108802174391662056, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -10725,7 +10725,7 @@ PrefabInstance:
     - target: {fileID: 7926404066987953494, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B117054
       objectReference: {fileID: 0}
     - target: {fileID: 7933712463474780913, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -11755,7 +11755,7 @@ PrefabInstance:
     - target: {fileID: 9031983001786739040, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: B117045
       objectReference: {fileID: 0}
     - target: {fileID: 9037640457904214621, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
         type: 3}
@@ -13721,7 +13721,6 @@ MonoBehaviour:
   timelineText: {fileID: 6082200502317315971}
   progressBar: {fileID: 1546692713870786482}
   maxTrans: 0
-  targetGO: {fileID: 7202138482014822670}
 --- !u!4 &5284413206628808261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4008597092651596881, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
@@ -13737,12 +13736,6 @@ Transform:
 --- !u!4 &6374879294405916870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2778574667753583314, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 9148891123489917460}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7202138482014822670 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2090873966645046042, guid: 7927e872feb2b4468ac0e2e9e92b36a4,
     type: 3}
   m_PrefabInstance: {fileID: 9148891123489917460}
   m_PrefabAsset: {fileID: 0}
