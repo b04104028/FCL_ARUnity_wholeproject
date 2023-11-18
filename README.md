@@ -1,6 +1,8 @@
 # Interactive Data Visualization and Augmented Reality of Urban Photovoltaic
-## Introduction  
+The same repository is also backed up at ETH Arch Chair's repo: 
+https://github.com/architecture-building-systems/FCL-Exhibition-2023-ARUnity
 
+## Introduction  
 This project is an iPad mobile app created for the Future Cities Lab Exhibition 2023 at ETH Zurich, aiming to visualize influential data of photovoltaic power usage using augmented reality. It utilizes 3D printed models of two sites, Zurich and Singapore, and is composed of three key modules: energy demand(cooling and heating), mobility flow (both vehicle and non-vehicle), and social economics(energy trading within these regions). 
 By inputting these data in a specific format, the project creates a virtual overlay on the physical 3D models, providing a direct and clear view of the real situations in the designated areas.
 
